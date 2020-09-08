@@ -16,23 +16,29 @@ core.workflow(
     ),
     destination = git.destination(
         url = protocolRepo,
-        fetch = protocolRepo,
+        fetch = "master",
         push = protocolBranch,
     ),
     origin_files = glob([
         "opencannabis/**/*.proto",
         "opencannabis/**/*.build",
     ]),
+    destination_files = glob([
+        "opencannabis/**/*.proto",
+        "opencannabis/**/*.build",
+    ]),
     authoring = authoring.pass_thru(
         "Cookiebot <info+code@cookiescalifornia.com>"),
-    core.replace(
-        before = "${x}",
-        after = "",
-        multiline = True,
-        regex_groups = {
-            "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
-        },
-    ),
+    transformations = [
+        core.replace(
+            before = "${x}",
+            after = "",
+            multiline = True,
+            regex_groups = {
+                "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
+            },
+        ),
+    ],
 )
 
 core.workflow(
@@ -43,11 +49,14 @@ core.workflow(
     ),
     destination = git.destination(
         url = pythonRepo,
-        fetch = pythonRepo,
+        fetch = "master",
         push = pythonBranch,
     ),
     origin_files = glob([
         "sdk/python/**",
+    ]),
+    destination_files = glob([
+        "opencannabis/**",
     ]),
     authoring = authoring.pass_thru(
         "Cookiebot <info+code@cookiescalifornia.com>"),
