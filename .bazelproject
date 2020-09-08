@@ -1,0 +1,35 @@
+directories:
+  .github
+  .tpl
+  opencannabis
+  config
+  tools
+  external
+  -dist/
+
+build_flags:
+  --define=ocp_release_tag=latest
+
+workspace_type: java
+java_language_level: 8
+
+targets:
+  //opencannabis/...
+  //pytests/...
+  //javatests/...
+  //jstests/...
+  //config/...
+
+test_sources:
+  - */pytests/*
+  - */javatests/*
+  - */jstests/*
+  - *tests*
+
+additional_languages:
+  java
+  kotlin
+  python
+  typescript
+  go
+

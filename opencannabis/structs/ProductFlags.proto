@@ -1,0 +1,62 @@
+
+/**
+ * Enumerates the flags a product entry can have applied.
+ */
+syntax = "proto3";
+
+package opencannabis.structs;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.product.struct";
+option java_multiple_files = true;
+option java_outer_classname = "BaseStructs";
+
+
+// Flags that may be applied to an entire product entry, that govern how an independent product and all of its variants
+// or sub-products are processed or treated.
+enum ProductFlag {
+  // Default flag value. Marks a product as 'VISIBLE,' meaning it is eligible to be displayed in public circumstances.
+  // In some cases, this is interpreted to mean 'IN STOCK.' Being that this flag is a default value, the absence of this
+  // flag does not designate an item as non-visible - this is accomplished by explicitly specifying the 'HIDDEN' flag.
+  VISIBLE = 0;
+
+  // Indicates that this entire product entry should be 'HIDDEN' from public view, or considered 'OUT-OF-STOCK' in back-
+  // office systems.
+  HIDDEN = 1;
+
+  // Designates a product as 'PREMIUM,' indicating it is a top-shelf or super-high-quality product. In some cases, this
+  // flag is used to indicate items that are produced in-house.
+  PREMIUM = 2;
+
+  // Designates a product as 'FEATURED,' which makes it eligible for extra promotional display. Featured products are
+  // generally highlighted or displayed top-of-the-fold.
+  FEATURED = 3;
+
+  // Designates a product as 'EXCLUSIVE,' meaning it is only carried or produced by the owning retailer or manufacturer.
+  EXCLUSIVE = 4;
+
+  // Designates a product as 'IN-HOUSE,' indicating it is carried and produced by the same organization. In a retail
+  // context, this flag is used to indicate items manufactured by the retailer or the retailer's partners.
+  IN_HOUSE = 5;
+
+  // Indicates that a product will not be around long, or that it is running out. In retail contexts, this designates
+  // the product in a way that may trigger extra promotional UI.
+  LAST_CHANCE = 6;
+
+  // Indicates that a particular product will only be available for a limited time, or is available only in limited
+  // batches.
+  LIMITED_TIME = 7;
+
+  // Indicates that a particular product is produced locally. In retail contexts, this may trigger extra promotional UI.
+  LOCAL = 8;
+
+  // Indicates that this product was deleted and subsequently tombstoned. Items "soft deleted" in this manner can be
+  // restored by removing this flag.
+  DELETED = 9;
+
+  // Designates, in general, that a product is 'ON-SALE.' This designation SHOULD be propagated-to by implementing
+  // servers, from a product's weighted pricing sale flags. This means, if ANY product weight or variant is marked on
+  // sale, the 'ON-SALE' flag SHOULD be sent along with the top-level product information.
+  ON_SALE = 20;
+}

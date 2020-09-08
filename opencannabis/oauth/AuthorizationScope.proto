@@ -1,0 +1,29 @@
+
+/**
+ * Provides a structure for the scope of authorization.
+ */
+syntax = "proto3";
+
+package opencannabis.oauth;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.oauth";
+option java_multiple_files = true;
+
+
+// Specifies a scope of authorization that may be granted, revoked, or otherwise addressed in some way by the
+// underlying authorization system during a consent or check transaction.
+message AuthorizationScope {
+  // Unique ID for this scope.
+  string id = 1;
+
+  // Human-friendly label for this scope.
+  string label = 2;
+
+  // URL reference for this scope.
+  string uri = 3;
+
+  // Icon name for this scope. Optional.
+  string icon = 4;
+}

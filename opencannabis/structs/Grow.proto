@@ -1,0 +1,32 @@
+
+/**
+ * Enumerates grow type.
+ */
+syntax = "proto3";
+
+package opencannabis.structs;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.product.struct";
+option java_multiple_files = true;
+option java_outer_classname = "MaterialGrow";
+
+
+// Enumerates common/known types or styles of cultivation that might produce a flower for sale, or resale after
+// manufacture.
+enum Grow {
+  // Generic, or unknown, grow circumstances.
+  GENERIC = 0;
+
+  // Indoor grow circumstances, implying high-precision environment controls (temperature, humidity, light, and so on)
+  // and close monitoring and optimization.
+  INDOOR = 1;
+
+  // Greenhouse-based grow circumstances. This includes any indoor grow operation that makes use of natural light in any
+  // manner, augmenting replacing controlled indoor lighting.
+  GREENHOUSE = 2;
+
+  // Outdoor-based grow circumstances, that use entirely natural light from the sun.
+  OUTDOOR = 3;
+}

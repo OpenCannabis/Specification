@@ -1,0 +1,36 @@
+
+/**
+ * Enumerates the species of a flower.
+ */
+syntax = "proto3";
+
+package opencannabis.structs;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.product.struct";
+option java_multiple_files = true;
+option java_outer_classname = "MaterialSpecies";
+
+
+// Enumerates known cannabis species, that may be applied to products to indicate their general genetic and
+// pharmacokinetic traits.
+enum Species {
+  // Unspecified or unknown species value.
+  UNSPECIFIED = 0;
+
+  // Purely Sativa species value.
+  SATIVA = 1;
+
+  // Hybrid Indica/Sativa species value, with a focus or predominance towards Sativa.
+  HYBRID_SATIVA = 2;
+
+  // Purely hybrid Indica/Sativa species value.
+  HYBRID = 3;
+
+  // Hybrid Indica/Sativa species value, with a focus or predominance towards Indica.
+  HYBRID_INDICA = 4;
+
+  // Purely Indica species value.
+  INDICA = 5;
+}

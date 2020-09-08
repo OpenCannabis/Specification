@@ -1,0 +1,58 @@
+
+/**
+ * Currency-related enumerations and models that allow easy specification of cash amounts.
+ */
+syntax = "proto3";
+
+package opencannabis.commerce;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.currency";
+option java_multiple_files = false;
+option java_outer_classname = "CommerceCurrency";
+
+
+// Specifies known or explicitly supported currency types.
+enum CurrencyType {
+  // Fiat-based currency, such as the US Dollar.
+  FIAT = 0;
+
+  // Real currency, such as gold or other raw materials.
+  REAL = 1;
+
+  // Crypto-currency, based on unique cryptographic signatures or proof-of-work.
+  CRYPTO = 2;
+}
+
+
+// Specifies known or explicitly supported fiat currencies.
+enum FiatCurrency {
+  // Specifies 'US Dollar' as a currency.
+  USD = 0;
+
+  // Specifies 'Canadian Dollar' as a currency.
+  CAD = 1;
+
+  // Specifies 'Euro' as a currency.
+  EUR = 2;
+}
+
+
+// Specifies a value, with a particular currency specification as the unit.
+message CurrencyValue {
+  // Numeric amount value to specify.
+  float value = 1;
+
+  // Categorical or general type for the specified currency.
+  CurrencyType type = 2;
+
+  // Specification of the subject currency, by enumerated type, or custom name.
+  oneof spec {
+    // Fiat currency selection for a given currency value.
+    FiatCurrency fiat = 10;
+
+    // Custom currency, by name or symbol, for a given currency value.
+    string custom = 100;
+  }
+}

@@ -1,0 +1,29 @@
+
+/**
+ * Specifies natural language-related messages and enumerations. Also enumerates registered languages.
+ */
+syntax = "proto3";
+
+package opencannabis.base;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.base";
+option java_multiple_files = false;
+option java_outer_classname = "BaseLanguage";
+
+
+// Specifies languages available for specification, usually used as an attachment to content or media.
+enum Language {
+  // Default or unset language.
+  LANGUAGE_UNSPECIFIED = 0;
+
+  // English.
+  ENGLISH = 1;
+
+  // Spanish.
+  SPANISH = 2;
+
+  // French.
+  FRENCH = 3;
+}

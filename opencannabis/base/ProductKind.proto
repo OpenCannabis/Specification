@@ -1,0 +1,41 @@
+
+/**
+ * Enumerates types of addressable cannabis products.
+ */
+syntax = "proto3";
+
+package opencannabis.base;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.base";
+option java_multiple_files = false;
+option java_outer_classname = "BaseProductKind";
+
+
+// Enumerates types of products known to the spec.
+enum ProductKind {
+  // Traditional buds or 'flower'-based products, essentially sold in bags or jars.
+  FLOWERS = 0;
+
+  // Manufactured products that are edible, like drinks, snacks, candy, and food.
+  EDIBLES = 1;
+
+  // Manufactured products that are concentrated from flowers in some manner, such as wax or oil.
+  EXTRACTS = 2;
+
+  // Pre-rolled items, generally made from flowers, like a cigarette - this would cover joints, etc.
+  PREROLLS = 3;
+
+  // Tinctures, topicals, capsules, and other forms of manufactured cannabis.
+  APOTHECARY = 4;
+
+  // Vaporizor cartridges, batteries, and kits.
+  CARTRIDGES = 5;
+
+  // Plants sold direct, in various forms such as pre-grown (clones) or raw seeds.
+  PLANTS = 6;
+
+  // Merchandise, usually branded in-house. Also covers glassware and miscellaneous items.
+  MERCHANDISE = 7;
+}

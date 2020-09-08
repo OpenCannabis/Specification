@@ -1,0 +1,39 @@
+
+/**
+ * Provides tools and structures related to compressing data, and indicating data compression. Also enumerates
+ * registered compression algorithims.
+ */
+syntax = "proto3";
+
+package opencannabis.base;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.base";
+option java_multiple_files = false;
+option java_outer_classname = "BaseCompression";
+
+
+// Specifies enabled/disabled state and compression type, and is usually attached to arbitrary data or metadata.
+message Compression {
+  // Enumerates available types of compression, or strategies or algorithms for compressing data.
+  enum Type {
+    // No compression.
+    NO_COMPRESSION = 0;
+
+    // Gzip-based compression.
+    GZIP = 1;
+
+    // Brotli-based compression.
+    BROTLI = 2;
+
+    // Snappy-based compression.
+    SNAPPY = 3;
+  }
+
+  // Enabled/disabled flag for compression. Defaults to not being set, so, falsy.
+  bool enabled = 1;
+
+  // Type of compression in use, if any. Enumerated herein via `Compression.Type`.
+  Type type = 2;
+}

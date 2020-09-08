@@ -1,0 +1,23 @@
+
+/**
+ * Provides time-of-day-related definitions and structures.
+ */
+syntax = "proto3";
+
+package opencannabis.temporal;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.temporal";
+option java_multiple_files = false;
+option java_outer_classname = "TemporalTime";
+
+
+// Specifies a particular time of day.
+message Time {
+  // Time specification option.
+  oneof spec {
+    // ISO8601 time format.
+    string iso8601 = 1;
+  }
+}

@@ -1,0 +1,42 @@
+
+/**
+ * Enumerates potential media orientation.
+ */
+syntax = "proto3";
+
+package opencannabis.media;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.media";
+option java_multiple_files = false;
+option java_outer_classname = "MediaItemOrientation";
+
+
+// Orientation status of a piece of media. Provided by camera operations on mobile devices,
+// in some cases, and also stored along with media sometimes.
+enum MediaOrientation {
+  // Media is oriented 'up'.
+  UP = 0;
+
+  // Media is oriented 'down'.
+  DOWN = 1;
+
+  // Media is oriented 'left'.
+  LEFT = 2;
+
+  // Media is oriented 'right'.
+  RIGHT = 3;
+
+  // Media is oriented 'up,' and mirrored.
+  UP_MIRRORED = 4;
+
+  // Media is oriented 'down,' and mirrored.
+  DOWN_MIRRORED = 5;
+
+  // Media is oriented 'left,' and mirrored.
+  LEFT_MIRRORED = 6;
+
+  // Media is oriented 'right,' and mirrored.
+  RIGHT_MIRRORED = 7;
+}

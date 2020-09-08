@@ -1,0 +1,182 @@
+
+/**
+ * Provides counties in the US State of California.
+ */
+syntax = "proto3";
+
+package opencannabis.geo.usa.ca;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "BBS";
+option java_package = "io.opencannabis.schema.geo.usa";
+option java_multiple_files = false;
+option java_outer_classname = "California";
+
+
+// Enumerates counties in the US State of California.
+enum CaliforniaCounty {
+  // Unknown county backstop value.
+  UNKNOWN_COUNTY = 0;
+
+  // Alameda county.
+  ALAMEDA = 1;
+
+  // Alpine county.
+  ALPINE = 2;
+
+  // Amador county.
+  AMADOR = 3;
+
+  // Butte county.
+  BUTTE = 4;
+
+  // Calaveras county.
+  CALAVERAS = 5;
+
+  // Colusa county.
+  COLUSA = 6;
+
+  // Contra Costa county.
+  CONTRA_COSTA = 7;
+
+  // Del Norte county.
+  DEL_NORTE = 8;
+
+  // El Dorado county.
+  EL_DORADO = 9;
+
+  // Fresno county.
+  FRESNO = 10;
+
+  // Glenn county.
+  GLENN = 11;
+
+  // Humboldt county.
+  HUMBOLDT = 12;
+
+  // Imperial county.
+  IMERIAL = 13;
+
+  // Inyo county.
+  INYO = 14;
+
+  // Kern county.
+  KERN = 15;
+
+  // Kings county.
+  KINGS = 16;
+
+  // Lake county.
+  LAKE = 17;
+
+  // Lassen county.
+  LASSEN = 18;
+
+  // Los Angeles county.
+  LOS_ANGELES = 19;
+
+  // Madera county.
+  MADERA = 20;
+
+  // Marin county.
+  MARIN = 21;
+
+  // Mariposa county.
+  MARIPOSA = 22;
+
+  // Mendocino county.
+  MENDOCINO = 23;
+
+  // Merced county.
+  MERCED = 24;
+
+  // Modoc county.
+  MODOC = 25;
+
+  // Mono county.
+  MONO = 26;
+
+  // Monterey county.
+  MONTEREY = 27;
+
+  // Napa county.
+  NAPA = 28;
+
+  // Orange county.
+  ORANGE = 29;
+
+  // Placer county.
+  PLACER = 30;
+
+  // Plumas county.
+  PLUMAS = 31;
+
+  // Riverside county.
+  RIVERSIDE = 32;
+
+  // Sacramento county.
+  SACRAMENTO = 33;
+
+  // San Benito county.
+  SAN_BENITO = 34;
+
+  // San Bernadino county.
+  SAN_BERNADINO = 35;
+
+  // San Diego county.
+  SAN_DIEGO = 36;
+
+  // San Francisco county.
+  SAN_FRANCISCO = 37;
+
+  // San Joaquin county.
+  SAN_JOAQUIN = 38;
+
+  // San Luis Obispo county.
+  SAN_LUIS_OBISPO = 39;
+
+  // San Mateo county.
+  SAN_MATEO = 40;
+
+  // Santa Clara county.
+  SANTA_CLARA = 41;
+
+  // Santa Cruz county.
+  SANTA_CRUZ = 42;
+
+  // Shasta county.
+  SHASTA = 43;
+
+  // Sierra county.
+  SIERRA = 44;
+
+  // Siskiyou county.
+  SISKIYOU = 45;
+
+  // Sonoma county.
+  SONOMA = 46;
+
+  // Stanislaus county.
+  STANISLAUS = 47;
+
+  // Sutter county.
+  SUTTER = 48;
+
+  // Trinity county.
+  TRINITY = 49;
+
+  // Tulare county.
+  TULARE = 50;
+
+  // Tuolomne county.
+  TUOLOMNE = 51;
+
+  // Ventura county.
+  VENTURA = 52;
+
+  // Yolo county.
+  YOLO = 53;
+
+  // Yuba county.
+  YUBA = 54;
+}

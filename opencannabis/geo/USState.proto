@@ -1,0 +1,225 @@
+
+/**
+ * Enumerates the various States of the United States of America
+ */
+syntax = "proto3";
+
+package opencannabis.geo.usa;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.geo.usa";
+option java_multiple_files = true;
+
+
+// Enumerates United States member states and territories by their full name and abbreviation.
+enum USState {
+  option allow_alias = true;
+
+  // Default: Unspecified.
+  UNSPECIFIED = 0;
+
+  // State of Alabama.
+  AL = 1;
+  ALABAMA = 1;
+
+  // State of Alaska.
+  AK = 2;
+  ALASKA = 2;
+
+  // State of Arizona.
+  AZ = 3;
+  ARIZONA = 3;
+
+  // State of Arkansas.
+  AR = 4;
+  ARKANSAS = 4;
+
+  // State of California.
+  CA = 5;
+  CALIFORNIA = 5;
+
+  // State of Colorado.
+  CO = 6;
+  COLORADO = 6;
+
+  // State of Connecticut.
+  CT = 7;
+  CONNECTICUT = 7;
+
+  // State of Delaware.
+  DE = 8;
+  Delaware = 8;
+
+  // Washington, District of Columbia (DC).
+  DC = 9;
+  DISTRICT_OF_COLUMBIA = 9;
+
+  // State of Florida.
+  FL = 10;
+  FLORIDA = 10;
+
+  // State of Georgia.
+  GA = 11;
+  GEORGIA = 11;
+
+  // State of Hawaii.
+  HI = 12;
+  HAWAII = 12;
+
+  // State of Idaho.
+  ID = 13;
+  IDAHO = 13;
+
+  // State of Illinois.
+  IL = 14;
+  ILLINOIS = 14;
+
+  // State of Indiana.
+  IN = 15;
+  INDIANA = 15;
+
+  // State of Iowa.
+  IA = 16;
+  IOWA = 16;
+
+  // State of Kansas.
+  KS = 17;
+  KANSAS = 17;
+
+  // State of Kentucky.
+  KY = 18;
+  KENTUCKY = 18;
+
+  // State of Loisiana.
+  LA = 19;
+  LOISIANA = 19;
+
+  // State of Maine.
+  ME = 20;
+  MAINE = 20;
+
+  // State of Maryland.
+  MD = 21;
+  MARYLAND = 21;
+
+  // State of Massachusetts.
+  MA = 22;
+  MASSACHUSETTS = 22;
+
+  // State of Michigan.
+  MI = 23;
+  MICHIGAN = 23;
+
+  // State of Minnesota.
+  MN = 24;
+  MINNESOTA = 24;
+
+  // State of Mississippi.
+  MS = 25;
+  MISSISSIPPI = 25;
+
+  // State of Missouri.
+  MO = 26;
+  MISSOURI = 26;
+
+  // State of Montana.
+  MT = 27;
+  MONTANA = 27;
+
+  // State of Nebraska.
+  NE = 28;
+  NEBRASKA = 28;
+
+  // State of Nevada.
+  NV = 29;
+  NEVADA = 29;
+
+  // State of New Hampshire.
+  NH = 30;
+  NEW_HAMPSHIRE = 30;
+
+  // State of New Jersey.
+  NJ = 31;
+  NEW_JERSEY = 31;
+
+  // State of New Mexico.
+  NM = 32;
+  NEW_MEXICO = 32;
+
+  // State of New York.
+  NY = 33;
+  NEW_YORK = 33;
+
+  // State of North Carolina.
+  NC = 34;
+  NORTH_CAROLINA = 34;
+
+  // State of North Dakota.
+  ND = 35;
+  NORTH_DAKOTA = 35;
+
+  // State of Ohio.
+  OH = 36;
+  OHIO = 36;
+
+  // State of Oklahoma.
+  OK = 37;
+  OKLAHOMA = 37;
+
+  // State of Oregon.
+  OR = 38;
+  OREGON = 38;
+
+  // State of Pennsylvania.
+  PA = 39;
+  PENNSYLVANIA = 39;
+
+  // State of Rhode Island.
+  RI = 40;
+  RHODE_ISLAND = 40;
+
+  // State of South Carolina.
+  SC = 41;
+  SOUTH_CAROLINA = 41;
+
+  // State of South Dakota.
+  SD = 42;
+  SOUTH_DAKOTA = 42;
+
+  // State of Tennessee.
+  TN = 43;
+  TENNESSEE = 43;
+
+  // State of Texas.
+  TX = 44;
+  TEXAS = 44;
+
+  // State of Utah.
+  UT = 45;
+  UTAH = 45;
+
+  // State of Vermont.
+  VT = 46;
+  VERMONT = 46;
+
+  // State of Virginia.
+  VA = 47;
+  VIRGINIA = 47;
+
+  // State of Washington.
+  WA = 48;
+  WASHINGTON = 48;
+
+  // State of West Virginia.
+  WV = 49;
+  WEST_VIRGINIA = 49;
+
+  // State of Wisconsin.
+  WI = 50;
+  WISCONSIN = 50;
+
+  // State of Wyoming.
+  WYOMING = 51;
+  WY = 51;
+}
