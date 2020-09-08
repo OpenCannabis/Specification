@@ -1,4 +1,5 @@
 #!/bin/bash
 
-docker run -v ~/.ssh:/root/.ssh -v "$(pwd)":/usr/src/app -e COPYBARA_WORKFLOW='protocol' -it us.gcr.io/elide-ai/tools/copybara copybara;
+echo "Performing migration for external repo 'protocol'..."
+java -jar ~/copybara.jar migrate copy.bara.sky protocol;
 
