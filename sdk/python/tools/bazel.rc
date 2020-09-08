@@ -1,0 +1,115 @@
+
+# bazelrc file
+# bazel >= 0.18 looks for %workspace%/.bazelrc (which redirects here)
+# Older bazel versions look for %workspace%/tools/bazel.rc (this file)
+# See https://github.com/bazelbuild/bazel/issues/6319
+
+
+##
+# Base Settings
+##
+
+common --experimental_allow_incremental_repository_updates
+
+run --incompatible_restrict_string_escapes=false
+run --incompatible_strict_action_env
+run --workspace_status_command=./tools/bazel_stamp_vars.sh
+
+build --strategy=sandboxed
+build --incompatible_restrict_string_escapes=false
+build --watchfs
+build --symlink_prefix=dist/
+build --nolegacy_external_runfiles
+build --incompatible_strict_action_env
+build --interface_shared_objects
+build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_vanilla
+build --workspace_status_command=./tools/bazel_stamp_vars.sh
+
+##
+# Development
+##
+
+build --worker_sandboxing
+build --define=lib_release_tag=latest
+build --disk_cache=~/.cache/bazel-disk-cache
+build:adc --google_default_credentials=true
+build:dev --compilation_mode=dbg
+build:dev --disk_cache=~/.cache/bazel-disk-cache
+
+##
+# CI
+##
+
+common:ci --curses=no
+
+build:ci --worker_max_instances=32
+build:ci --local_cpu_resources=32
+build:ci --local_ram_resources="HOST_RAM*.8"
+build:ci --experimental_persistent_javac
+build:ci --verbose_failures
+build:ci --worker_verbose
+build:ci --repository_cache=~/.cache/bazel/repo
+build:ci --disk_cache=~/.cache/bazel/disk
+
+run:ci --worker_max_instances=32
+run:ci --local_cpu_resources=32
+run:ci --local_ram_resources="HOST_RAM*.8"
+run:ci --experimental_persistent_javac
+run:ci --verbose_failures
+run:ci --worker_verbose
+run:ci --repository_cache=~/.cache/bazel/repo
+run:ci --disk_cache=~/.cache/bazel/disk
+
+test:ci --test_output=all
+test:ci --test_verbose_timeout_warnings
+
+fetch:ci --repository_cache=~/.cache/bazel/repo
+query:ci --repository_cache=~/.cache/bazel/repo
+
+
+##
+# Release
+##
+
+build:release --compilation_mode=opt
+build:release --copt=-Wframe-larger-than=16384
+build:release --copt=-O3
+run:release --compilation_mode=opt
+run:release --copt=-Wframe-larger-than=16384
+run:release --copt=-O3
+
+##
+# Query
+##
+
+query --output=label_kind
+
+##
+# Testing
+##
+
+test --instrumentation_filter=//opencannabis/...
+test --spawn_strategy=local
+test --test_output=errors
+coverage --instrumentation_filter=//opencannabis/...
+coverage --spawn_strategy=local
+build:ci --instrument_test_targets
+build:ci --experimental_cc_coverage
+build:ci --test_output=all
+build:ci --linkopt=--coverage
+build:ci --linkopt=-lc
+build:ci --combined_report=lcov
+build:ci --cache_test_results=no
+build:ci --define=config_file=test
+test:ci --cache_test_results=no
+test:ci --define=config_file=test
+coverage:ci --instrument_test_targets
+coverage:ci --experimental_cc_coverage
+coverage:ci --test_output=all
+coverage:ci --linkopt=--coverage
+coverage:ci --linkopt=-lc
+coverage:ci --combined_report=lcov
+coverage:ci --cache_test_results=no
+coverage:ci --define=config_file=test
+
+try-import %workspace%/.bazelrc.user

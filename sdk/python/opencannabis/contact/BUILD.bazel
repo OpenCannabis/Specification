@@ -1,0 +1,21 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_module",
+)
+
+
+ocp_module(
+    name = "contact",
+    init = ":__init__.py",
+    protos = [
+        "ContactInfo",
+        "EmailAddress",
+        "PhoneNumber",
+        "Website",
+    ]
+)

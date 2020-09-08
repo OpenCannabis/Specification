@@ -1,0 +1,10 @@
+
+
+test_suite(
+    name = "tests",
+    tests = [
+        "//pytests/simple:sanity_test",
+        "//pytests/simple:module_test",
+        "//pytests/base:base_test",
+    ],
+)

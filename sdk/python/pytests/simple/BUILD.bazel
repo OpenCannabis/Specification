@@ -1,0 +1,28 @@
+
+package(
+    default_visibility = ["//visibility:private"],
+)
+
+
+load(
+    "@rules_python//python:defs.bzl",
+    "py_test",
+)
+
+py_test(
+    name = "module_test",
+    srcs = ["module_test.py"],
+    size = "small",
+    testonly = True,
+    deps = [
+        "//gust:library",
+        "//opencannabis:library",
+    ],
+)
+
+py_test(
+    name = "sanity_test",
+    srcs = ["sanity_test.py"],
+    size = "small",
+    testonly = True,
+)

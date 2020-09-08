@@ -1,0 +1,154 @@
+
+package(
+    default_visibility = ["//visibility:private"],
+)
+
+
+load(
+    "@rules_pkg//:pkg.bzl",
+    "pkg_tar",
+)
+
+load(
+    "@rules_python//python:defs.bzl",
+    "py_library",
+    "py_binary",
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_py",
+    "ocp_lib",
+)
+
+
+DEPS_LIST = [
+    "//sdk/python/gust:gust-init",
+    "//sdk/python/gust/core:core",
+    ":ocp-init",
+] + ["//sdk/python/opencannabis/%s:%s" % (path, path) for path in [
+    "accounting",
+    "base",
+    "commerce",
+    "contact",
+    "content",
+    "crypto",
+    "device",
+    "geo",
+    "inventory",
+    "media",
+    "oauth",
+    "person",
+    "products",
+    "proximity",
+    "structs",
+    "temporal",
+]] + ["//sdk/python/opencannabis/%s:%s" % (path, name) for (path, name) in [
+    ("commerce/payments", "payments"),
+    ("crypto/primitives", "primitives"),
+    ("geo/usa/ca", "ca"),
+    ("inventory/rfid", "rfid"),
+    ("products/distribution", "distribution"),
+    ("products/menu", "menu"),
+    ("regulatory/usa/ca", "ca"),
+    ("structs/labtesting", "labtesting"),
+    ("structs/pricing", "pricing"),
+]]
+
+
+## File Groups
+filegroup(
+    name = "root-py",
+    srcs = glob(["*.py"]),
+)
+
+
+## Python Libraries
+py_library(
+    name = "ocp-init",
+    srcs = ["__init__.py"],
+)
+
+py_library(
+    name = "ocp-lib",
+    deps = DEPS_LIST,
+    imports = ["gust", "opencannabis"],
+)
+
+alias(
+    name = "requirements",
+    actual = "//sdk/python:requirements.txt",
+)
+
+py_library(
+    name = "ocp-setup",
+    srcs = ["setup.py"],
+    deps = [":ocp-lib"],
+    data = [":requirements"],
+)
+
+## Python CLI Tool
+py_binary(
+    name = "ocp-bin",
+    imports = ["ocp"],
+    main = "__main__.py",
+    deps = [":ocp-init"],
+    srcs = ["__main__.py"],
+)
+
+
+## Compressed Packages
+pkg_tar(
+    name = "ocp-init-archive",
+    srcs = [":ocp-init"],
+    package_dir = "opencannabis/",
+)
+
+pkg_tar(
+    name = "ocp-setup-archive",
+    srcs = [":ocp-setup"],
+)
+
+pkg_tar(
+    name = "gust-lib-archive",
+    srcs = [":requirements"],
+    deps = [
+        "//sdk/python/gust:gust-init-archive",
+        "//sdk/python/gust/core:core-archive",
+        "//sdk/python/gust:setup-archive",
+    ],
+)
+
+pkg_tar(
+    name = "ocp-lib-archive",
+    srcs = [":requirements"],
+    deps = [("%s-archive" % i) for i in DEPS_LIST] + [
+        ":ocp-setup-archive",
+    ],
+)
+
+
+## Top-level (Public) Aliases
+alias(
+    name = "library",
+    actual = "ocp-lib",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "tool",
+    actual = "ocp-bin",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "archive",
+    actual = "ocp-lib-archive",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "shim",
+    actual = "gust-lib-archive",
+    visibility = ["//visibility:public"],
+)

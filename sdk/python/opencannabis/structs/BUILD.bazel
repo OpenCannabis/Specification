@@ -1,0 +1,23 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_module",
+)
+
+
+ocp_module(
+    name = "structs",
+    init = ":__init__.py",
+    protos = [
+        "Genetics",
+        "Grow",
+        "ProductFlags",
+        "Shelf",
+        "Species",
+        "Version",
+    ]
+)

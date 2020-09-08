@@ -1,0 +1,32 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+exports_files([
+    "README.md",
+    "requirements.txt",
+])
+
+
+## Top-level (Public) Aliases
+alias(
+    name = "library",
+    actual = "//sdk/python/opencannabis:library",
+)
+
+alias(
+    name = "tool",
+    actual = "//sdk/python/opencannabis:tool",
+)
+
+alias(
+    name = "archive",
+    actual = "//sdk/python/opencannabis:archive",
+)
+
+alias(
+    name = "shim",
+    actual = "//sdk/python/opencannabis:shim",
+    visibility = ["//visibility:public"],
+)

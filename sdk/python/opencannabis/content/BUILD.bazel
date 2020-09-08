@@ -1,0 +1,24 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_module",
+)
+
+
+ocp_module(
+    name = "content",
+    init = ":__init__.py",
+    protos = [
+        "Brand",
+        "Colors",
+        "Content",
+        "Data",
+        "MaterialsData",
+        "Name",
+        "ProductContent",
+    ]
+)

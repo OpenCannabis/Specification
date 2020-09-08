@@ -1,0 +1,25 @@
+directories:
+  .github
+  .tpl
+  opencannabis
+  config
+  gust
+  tools
+  external
+  pytests
+  -dist/
+
+build_flags:
+  --config=dev
+  --define=ocp_release_tag=latest
+
+workspace_type: python
+
+targets:
+  //opencannabis/...
+  //pytests/...
+  //config/...
+
+test_sources:
+  - */pytests/*
+

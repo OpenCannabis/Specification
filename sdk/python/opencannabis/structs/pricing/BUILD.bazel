@@ -1,0 +1,20 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_module",
+)
+
+
+ocp_module(
+    name = "pricing",
+    init = ":__init__.py",
+    package = "structs/pricing",
+    protos = [
+        "PricingDescriptor",
+        "SaleDescriptor",
+    ]
+)

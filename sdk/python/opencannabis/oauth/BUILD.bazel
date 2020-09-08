@@ -1,0 +1,20 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_module"
+)
+
+
+## Protocol Definitions
+ocp_module(
+    name = "oauth",
+    init = ":__init__.py",
+    protos = [
+        "AuthorizationScope",
+        "Client",
+    ],
+)

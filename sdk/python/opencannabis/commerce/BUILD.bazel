@@ -1,0 +1,22 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_module",
+)
+
+
+ocp_module(
+    name = "commerce",
+    init = ":__init__.py",
+    protos = [
+        "Currency",
+        "Customer",
+        "Discounts",
+        "Item",
+        "Order",
+    ],
+)

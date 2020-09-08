@@ -1,0 +1,46 @@
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_module",
+)
+
+load(
+    "@rules_python//python:defs.bzl",
+    "py_library",
+)
+
+load(
+    "@rules_pkg//:pkg.bzl",
+    "pkg_tar",
+)
+
+
+exports_files(["__init__.py"])
+
+
+py_library(
+    name = "gust-init",
+    srcs = [":__init__.py"],
+    deps = [
+        "//sdk/python/gust/core:library",
+    ],
+)
+
+alias(
+    name = "library",
+    actual = "gust-init",
+)
+
+pkg_tar(
+    name = "setup-archive",
+    srcs = [":setup-gust.py"],
+)
+
+pkg_tar(
+    name = "gust-init-archive",
+    srcs = [":__init__.py"],
+    package_dir = "gust/",
+)

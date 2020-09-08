@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Python/Pip
+        run: |
+          sudo apt-get install python python-pip
+          sudo pip install virtualenv
+
+      - name: Mount Cache
+        uses: actions/cache@v1
+        with:
+          path: "/home/runner/.cache/bazel"
+          key: bazel
+
+      - name: "Build & Test"
+        run: |
+          make test CI=yes COVERAGE=no VERBOSE=yes
+        env:
+          CC: clang-9
+
+      - name: Upload Archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: archive
+          path: "${GITHUB_WORKSPACE}/dist/bin/opencannabis/ocp-lib-archive.tar"
+
+      - name: Upload Distributions
+        uses: actions/upload-artifact@v2
+        with:
+          name: archive
+          path: "${GITHUB_WORKSPACE}/dist/bin/lib/dist/*"

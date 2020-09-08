@@ -1,0 +1,2 @@
+protobuf==3.13.0
+colorlog==4.2.1
