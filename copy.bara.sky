@@ -20,10 +20,12 @@ core.workflow(
         push = protocolBranch,
     ),
     origin_files = glob([
+        ".gitattributes",
         "opencannabis/**/*.proto",
         "opencannabis/**/*.build",
     ]),
     destination_files = glob([
+        ".gitattributes",
         "opencannabis/**/*.proto",
         "opencannabis/**/*.build",
     ]),
