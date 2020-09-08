@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://schema.ocpx.info/model/opencannabis#"
+     xml:base="https://schema.ocpx.info/model/opencannabis"
+     xmlns:ocp="https://schema.ocpx.info/model/opencannabis#ocp:"
+     xmlns:ogp="http://ogp.me/ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="https://schema.ocpx.info/model/opencannabis">
+        <owl:versionIRI rdf:resource="https://schema.ocpx.info/model/v1/opencannabis"/>
+        <owl:imports rdf:resource="http://www.w3.org/2006/vcard/ns"/>
+        <owl:imports rdf:resource="https://ogp.me/ns/ogp.me.rdf"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:product.display -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:product.display">
+        <rdfs:comment xml:lang="en-us">Defines the primary display name for a given cannabis product.</rdfs:comment>
+        <rdfs:isDefinedBy xml:lang="en-us">http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Display Name</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://ogp.me/ns#title"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:product.dosage -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:product.dosage">
+        <rdfs:comment xml:lang="en-us">Non-medical advice regarding the typical dosage range for a given cannabis product.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Dosage Advice</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:product.group -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:product.group">
+        <rdfs:comment xml:lang="en-us">The main collection name of the object as it should appear on a menu, assuming no product variance.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Product Group</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:product.name -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:product.name">
+        <rdfs:comment xml:lang="en-us">The title of the object as it should appear on a menu, assuming no product variance.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Product Name</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:product.summary -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:product.summary">
+        <rdfs:comment xml:lang="en-us">Short marketing text describing this product.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Product Summary</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://ogp.me/ns#description"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:product.variant -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:product.variant">
+        <rdfs:comment xml:lang="en-us">The variance portion of the object title as it should appear on a menu.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Product Variant</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:strain -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:strain">
+        <rdfs:comment xml:lang="en-us">Link to the strain entity which this product is composed of.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Strain Link</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:strain.name -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:strain.name">
+        <rdfs:comment xml:lang="en-us">Display name of the strain which this product is composed of.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Strain Name</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:strain.usid -->
+
+    <owl:AnnotationProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:strain.usid">
+        <rdfs:comment xml:lang="en-us">Unique identifier for the strain which this product is composed of.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Strain Identifier</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:brand -->
+
+    <owl:ObjectProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:brand">
+        <rdfs:range rdf:resource="https://schema.ocpx.info/model/opencannabis#ref"/>
+        <rdfs:comment xml:lang="en-us">Defines a link to the brand that manufactures this product.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Brand Link</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:brand.name -->
+
+    <owl:ObjectProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:brand.name">
+        <rdfs:range rdf:resource="https://schema.ocpx.info/model/opencannabis#name"/>
+        <rdfs:comment xml:lang="en-us">Specifies the name of the brand that manufactures this product.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Brand Name</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:material.grow -->
+
+    <owl:ObjectProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:material.grow">
+        <rdfs:range rdf:resource="https://schema.ocpx.info/model/opencannabis#symbol"/>
+        <rdfs:comment xml:lang="en-us">Defines the &quot;grow&quot; value for a given cannabis product, as applicable (for example, &quot;Indoor&quot; or &quot;Greenhouse&quot;).</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Material Grow</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:material.species -->
+
+    <owl:ObjectProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:material.species">
+        <rdfs:range rdf:resource="https://schema.ocpx.info/model/opencannabis#symbol"/>
+        <rdfs:comment xml:lang="en-us">Defines the species of a given cannabis product (for example, &quot;Sativa&quot; or &quot;Indica&quot;).</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Material Species</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ocp:product.category -->
+
+    <owl:ObjectProperty rdf:about="https://schema.ocpx.info/model/opencannabis#ocp:product.category">
+        <rdfs:range rdf:resource="https://schema.ocpx.info/model/opencannabis#symbol"/>
+        <rdfs:comment xml:lang="en-us">Describes the main categorical type of a given cannabis product.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Product Category</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#group -->
+
+    <owl:Class rdf:about="https://schema.ocpx.info/model/opencannabis#group">
+        <rdfs:subClassOf rdf:resource="https://schema.ocpx.info/model/opencannabis#name"/>
+    </owl:Class>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#name -->
+
+    <owl:Class rdf:about="https://schema.ocpx.info/model/opencannabis#name">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:Class>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#product -->
+
+    <owl:Class rdf:about="https://schema.ocpx.info/model/opencannabis#product">
+        <rdfs:subClassOf rdf:resource="https://schema.ocpx.info/model/opencannabis#name"/>
+    </owl:Class>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#ref -->
+
+    <owl:Class rdf:about="https://schema.ocpx.info/model/opencannabis#ref">
+        <rdfs:subClassOf rdf:resource="http://ogp.me/ns/class#url"/>
+        <rdfs:comment xml:lang="en-us">Defines a link reference to some durable entity.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Link Reference</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#strain -->
+
+    <owl:Class rdf:about="https://schema.ocpx.info/model/opencannabis#strain">
+        <rdfs:subClassOf rdf:resource="https://schema.ocpx.info/model/opencannabis#name"/>
+    </owl:Class>
+    
+
+
+    <!-- https://schema.ocpx.info/model/opencannabis#symbol -->
+
+    <owl:Class rdf:about="https://schema.ocpx.info/model/opencannabis#symbol">
+        <rdfs:subClassOf rdf:resource="https://schema.ocpx.info/model/opencannabis#name"/>
+        <rdfs:comment xml:lang="en-us">Defines a symbolic name with defined semantic meaning.</rdfs:comment>
+        <rdfs:isDefinedBy>http://ocpx.info/ns#</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en-us">Defined Symbol</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
