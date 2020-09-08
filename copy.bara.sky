@@ -55,9 +55,6 @@ core.workflow(
     origin_files = glob([
         "sdk/python/**",
     ]),
-    destination_files = glob([
-        "opencannabis/**",
-    ]),
     authoring = authoring.pass_thru(
         "Cookiebot <techteam+github@cookiescalifornia.com>"),
     transformations = [
