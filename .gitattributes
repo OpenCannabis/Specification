@@ -1,0 +1,3 @@
+*.proto linguist-language="Protocol Buffer"
+*.bzl linguist-language=Starlark
+*.build linguist-language=Starlark
