@@ -3,7 +3,7 @@ sourceRepo = "git@github.com:OpenCannabis/Specification.git"
 sourceBranch = "master"
 
 protocolRepo = "git@github.com:OpenCannabis/Protocol.git"
-protocolBranch = "beta/monorepo"
+protocolBranch = "master"
 
 pythonRepo = "git@github.com:OpenCannabis/Python.git"
 pythonBranch = "beta/monorepo"
@@ -28,7 +28,7 @@ core.workflow(
         "opencannabis/**/*.build",
     ]),
     authoring = authoring.pass_thru(
-        "Cookiebot <info+code@cookiescalifornia.com>"),
+        "Cookiebot <techteam+github@cookiescalifornia.com>"),
     transformations = [
         core.replace(
             before = "${x}",
@@ -59,7 +59,7 @@ core.workflow(
         "opencannabis/**",
     ]),
     authoring = authoring.pass_thru(
-        "Cookiebot <info+code@cookiescalifornia.com>"),
+        "Cookiebot <techteam+github@cookiescalifornia.com>"),
     transformations = [
         core.move("sdk/python/", ""),
         core.move("WORKSPACE.disabled", "WORKSPACE"),
