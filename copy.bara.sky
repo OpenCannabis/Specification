@@ -3,10 +3,10 @@ sourceRepo = "git@github.com:OpenCannabis/Specification.git"
 sourceBranch = "master"
 
 protocolRepo = "git@github.com:OpenCannabis/Protocol.git"
-protocolBranch = "master"
+protocolBranch = "ocp/upstream"
 
 pythonRepo = "git@github.com:OpenCannabis/Python.git"
-pythonBranch = "beta/monorepo"
+pythonBranch = "ocp/upstream"
 
 core.workflow(
     name = "protocol",
