@@ -56,6 +56,15 @@ core.workflow(
     ),
     origin_files = glob([
         "sdk/python/**",
+    ], exclude = [
+        "BUILD.bazel",
+        "sdk/python/tools/Makefile",
+        "sdk/python/tools/ROOT_BUILD.bzl",
+    ]),
+    destination_files = glob(["**"], exclude = [
+        "tools/Makefile",
+        "tools/ROOT_BUILD.bzl",
+        "external/ocpy.bzl",
     ]),
     authoring = authoring.pass_thru(
         "Cookiebot <techteam+github@cookiescalifornia.com>"),
@@ -63,10 +72,18 @@ core.workflow(
         core.move("sdk/python/", ""),
         core.move("WORKSPACE.disabled", "WORKSPACE"),
         core.replace(
-            before = "//sdk/python",
+            before = "//sdk/python/",
 	    after = "//",
-            paths = glob(["**/BUILD.bazel", "**/BUILD", "**/*.bzl"]),
 	),
+        core.replace(
+            before = "//sdk/python:",
+            after = "//:",
+        ),
+        core.replace(
+            before = "//opencannabis/%s",
+            after = "@ocp//opencannabis/%s",
+            paths = glob(["config/rules.bzl"]),
+        ),
         core.replace(
             before = "${x}",
             after = "",
