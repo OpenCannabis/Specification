@@ -1,0 +1,51 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "@rules_proto//proto:defs.bzl",
+    "proto_lang_toolchain",
+)
+
+load(
+    "@build_stack_rules_proto//:plugin.bzl",
+    "proto_plugin",
+)
+
+alias(
+    name = "doc_plugin",
+    actual = "//tools:protoc-gen-doc",
+)
+
+proto_plugin(
+    name = "doc.md",
+    outputs = ["{package}/{basename}.md"],
+    tool = ":doc_plugin",
+    visibility = ["//visibility:public"],
+)
+
+
+proto_lang_toolchain(
+    name = "doc_md_toolchain",
+    command_line = "--doc_out=markdown,$(OUT)",
+    plugin = ":doc_plugin",
+)
+
+proto_lang_toolchain(
+    name = "doc_html_toolchain",
+    command_line = "--doc_out=html,$(OUT)",
+    plugin = ":doc_plugin",
+)
+
+proto_lang_toolchain(
+    name = "doc_docbook_toolchain",
+    command_line = "--doc_out=docbook,$(OUT)",
+    plugin = ":doc_plugin",
+)
+
+proto_lang_toolchain(
+    name = "doc_json_toolchain",
+    command_line = "--doc_out=json,$(OUT)",
+    plugin = ":doc_plugin",
+)

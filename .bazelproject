@@ -1,9 +1,11 @@
 directories:
   .github
   .tpl
+  defs
   opencannabis
   config
   tools
+  sdk
   external
   -dist/
 
@@ -15,15 +17,10 @@ java_language_level: 8
 
 targets:
   //opencannabis/...
-  //pytests/...
-  //javatests/...
-  //jstests/...
+  //sdk/...
   //config/...
 
 test_sources:
-  - */pytests/*
-  - */javatests/*
-  - */jstests/*
   - *tests*
 
 additional_languages:

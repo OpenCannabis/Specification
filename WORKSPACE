@@ -29,6 +29,7 @@ load(
 load("@gust//defs:build.bzl", "install_dependencies")
 load("@//config:build.bzl", app_dependencies = "install_dependencies")
 load("@gust//defs:config.bzl", "CHROMIUM", "FIREFOX", "SAUCE", "GRAALVM_VERSION", "GRAALVM_JDK_VERSION", "K8S_VERSION")
+
 install_dependencies(False)
 app_dependencies(False)
 
@@ -175,4 +176,15 @@ grpc_java_repositories()
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
+
+## Go
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
+go_rules_dependencies()
+go_register_toolchains()
+gazelle_dependencies()
+
+load("@protoc_gen_doc//defs:deps.bzl", protoc_gen_doc_dependencies="go_dependencies")
+protoc_gen_doc_dependencies()
 

@@ -1,0 +1,8 @@
+
+package(default_visibility = ["//visibility:public"])
+
+
+alias(
+    name = "protoc-gen-doc",
+    actual = "@protoc_gen_doc//cmd/protoc-gen-doc:protoc-gen-doc",
+)
