@@ -134,6 +134,6 @@ $(COPYBARA_JAR): $(ENV)
 
 $(BAZELISK_BIN): $(ENV)
 	$(info Installing Bazelisk...)
-	$(RULE)$(CURL) --progress-bar $(BAZELISK_BIN_SRC) > $(BAZELISK_BIN) && $(CHMOD) +x $(BAZELISK_BIN)
+	$(RULE)$(CURL) -L --progress-bar $(BAZELISK_BIN_SRC) > $(BAZELISK_BIN) && $(CHMOD) +x $(BAZELISK_BIN)
 
 .PHONY: build test clean distclean forceclean help env
