@@ -8,6 +8,7 @@ VERSION ?= 1.9.5-alpha1
 CI ?= no
 DEBUG ?= no
 VERBOSE ?= no
+WORKFLOW ?= protocol
 
 ## Targets
 SCHEMA ?= //opencannabis:OpenCannabis
@@ -25,6 +26,9 @@ BAZELISK_ARGS ?=
 BASE_ARGS ?=
 BUILD_ARGS ?= $(BASE_ARGS)
 ENV ?= $(PWD)/.env
+
+COPYBARA_ACTION ?= migrate
+COPYBARA_FLAGS ?= --ignore-noop
 
 ## Flag Logic
 ifeq ($(VERBOSE),yes)
@@ -49,6 +53,7 @@ GIT ?= $(shell which git)
 GREP ?= $(shell which grep)
 JAVA ?= $(shell which java)
 CURL ?= $(shell which curl)
+BASH ?= $(shell which bash)
 MKDIR ?= $(shell which mkdir)
 BAZELISK ?= $(shell which bazelisk)
 
@@ -90,6 +95,9 @@ help:  ## Show this help text.
 
 env: $(ENV)  ## Bootstrap the local environment.
 
+migrate: $(COPYBARA_JAR)  ## Perform a migration via Copybara.
+	$(info Migrating '$(WORKFLOW)'...)
+	$(RULE)$(COPYBARA) $(COPYBARA_ACTION) copy.bara.sky $(WORKFLOW) $(COPYBARA_FLAGS)
 
 $(ENV):
 	$(info Building local environment...)
