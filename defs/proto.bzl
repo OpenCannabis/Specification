@@ -1,8 +1,19 @@
 
-load("@io_bazel_rules_closure//closure:defs.bzl",
-     _closure_proto_library = "closure_proto_library")
+load(
+    "@io_bazel_rules_closure//closure:defs.bzl",
+     _closure_proto_library = "closure_proto_library",
+)
 
-load("@rules_proto//proto:defs.bzl", _proto_library="proto_library")
+load(
+    "@rules_proto//proto:defs.bzl",
+    _proto_library="proto_library",
+)
+
+load(
+    "//defs:doc.bzl",
+    __declare_proto_docs="declare_proto_docs",
+    __declare_module_docs="declare_module_docs",
+)
 
 _JSPROTO_POSTFIX = "jsproto"
 _JAVAPROTO_POSTFIX = "java_proto"
@@ -59,6 +70,7 @@ def _proto(name, **kwargs):
     __declare_native(name, kwargs)
     __declare_closure_proto(name, kwargs)
     __declare_lang_protos(name, kwargs)
+    __declare_proto_docs(name, kwargs["srcs"], kwargs)
 
 
 def _module(name, **kwargs):
@@ -75,6 +87,7 @@ def _module(name, **kwargs):
     __declare_native(name, kwargs)
     __declare_closure_proto(name, kwargs)
     __declare_lang_protos(name, kwargs)
+    __declare_module_docs(name, kwargs["deps"], kwargs)
 
 
 proto = _proto

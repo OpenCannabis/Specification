@@ -1,5 +1,5 @@
 
-LOCAL       = False
-VERSION     = "b986f9a77d5b3276ddceba7104f56c9fa13850f1"
-FINGERPRINT = "f4bd1c9b09b67613f2d2c6f63972ca85f7beeea6751ba4efc0ea3e524cf9f5d6"
+LOCAL            = False
+VERSION          = "ee6d6819025a278a356ac3f984f967f90ede28b9"
+FINGERPRINT      = "8400ff3276b712b377508921e9af2ebbc5e4e119885beef6252c111edcc57e4c"
 

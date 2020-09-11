@@ -60,8 +60,21 @@ Tooling for this repo, and downstream repos, is mainly provided by Google (inclu
 to repo-specific tools. It's usually advisable to use `make`.
 
 Each repository's `Makefile` can be queried with `make help`, which lists commands at the developer's disposal (access
-permitting).
+permitting). Here is a preview of that help for this repo:
+
+```text
+OpenCannabis v1.9.5-alpha1:
+
+all                            Build and test the specification.
+build                          Build all specification targets.
+clean                          Clean built targets (safe).
+distclean                      Clean built targets and dependencies.
+forceclean                     Clean everything, then sanitize changes (DANGEROUS).
+help                           Show this help text.
+test                           Run all spec and SDK tests.
+```
 
 ## Legal
 
 Coming soon.
+
