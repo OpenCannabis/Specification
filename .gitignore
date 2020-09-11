@@ -2,3 +2,4 @@ dist/
 bazel-*
 .ijwb/
 tools/Makefile
+.env/
