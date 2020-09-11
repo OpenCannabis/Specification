@@ -122,6 +122,10 @@ env: $(ENV)  ## Bootstrap the local environment.
 
 migrate: $(COPYBARA_JAR) $(BAZELISK_BIN)  ## Perform a migration via Copybara.
 	$(info Migrating '$(WORKFLOW)'...)
+ifeq ($(CI),yes)
+	$(RULE)$(GIT) config --global user.name "Cookiebot"
+	$(RULE)$(GIT) config --global user.email "techteam+github@cookiescalifornia.com"
+endif
 	$(RULE)$(COPYBARA) $(COPYBARA_ACTION) copy.bara.sky $(WORKFLOW) $(COPYBARA_FLAGS)
 
 $(ENV):
