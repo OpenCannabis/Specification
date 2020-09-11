@@ -1,5 +1,4 @@
 #!/bin/bash
 
 echo "Validating Copybara config...";
-java -jar ~/bin/copybara.jar validate copy.bara.sky;
-
+java -jar .env/bin/copybara.jar validate copy.bara.sky;

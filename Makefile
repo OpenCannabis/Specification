@@ -9,7 +9,6 @@ CI ?= no
 DEBUG ?= no
 VERBOSE ?= no
 
-
 ## Targets
 SCHEMA ?= //opencannabis:OpenCannabis
 DOCS ?=
@@ -20,19 +19,21 @@ SDKS ?= $(PYSDK)
 
 TARGETS ?= $(SCHEMA) $(DOCS) $(SDKS)
 
-
 ## Args
 PWD ?= $(shell pwd)
 BAZELISK_ARGS ?=
 BASE_ARGS ?=
 BUILD_ARGS ?= $(BASE_ARGS)
+ENV ?= $(PWD)/.env
 
 ## Flag Logic
 ifeq ($(VERBOSE),yes)
 RULE ?=
 BUILD_ARGS += --verbose_failures
+POSIX_FLAGS ?= -v
 else
 RULE ?= @
+POSIX_FLAGS ?=
 endif
 
 ifeq ($(DEBUG),yes)
@@ -42,18 +43,28 @@ endif
 ## Tools
 GIT ?= $(shell which git)
 GREP ?= $(shell which grep)
+JAVA ?= $(shell which java)
+CURL ?= $(shell which curl)
+MKDIR ?= $(shell which mkdir)
 BAZELISK ?= $(shell which bazelisk)
+
+## Local Tools
+COPYBARA_JAR ?= $(ENV)/copybara.jar
+COPYBARA_JAR_SRC ?= https://storage.googleapis.com/cookies-runtime/software/copybara.jar
+
+LOCAL_TOOLS ?= $(COPYBARA_JAR)
 
 ## Aliases
 BAZEL ?= $(BAZELISK) $(BAZELISK_ARGS)
+COPYBARA ?= $(JAVA) -jar $(COPYBARA_JAR)
 
 
 all: build test  ## Build and test the specification.
 
-build:  ## Build all specification targets.
+build: $(LOCAL_TOOLS)  ## Build all specification targets.
 	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- $(TARGETS)
 
-test:  ## Run all spec and SDK tests.
+test: $(LOCAL_TOOLS)  ## Run all spec and SDK tests.
 	$(info Running testsuite...)
 
 clean:  ## Clean built targets (safe).
@@ -73,6 +84,16 @@ help:  ## Show this help text.
 	$(info OpenCannabis v$(VERSION):)
 	$(RULE)$(GREP) -E '^[a-z1-9A-Z_-]+:.*?## .*$$' $(PWD)/Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+env: $(ENV)  ## Bootstrap the local environment.
 
-.PHONY: build test clean distclean forceclean
 
+$(ENV):
+	$(info Building local environment...)
+	$(RULE)$(MKDIR) -p $(POSIX_FLAGS) $(ENV)
+
+$(COPYBARA_JAR): $(ENV)
+	$(info Installing Copybara...)
+	$(RULE)$(CURL) --progress-bar $(COPYBARA_JAR_SRC) > $(COPYBARA)
+
+
+.PHONY: build test clean distclean forceclean help env
