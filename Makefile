@@ -105,7 +105,7 @@ $(ENV):
 
 $(COPYBARA_JAR): $(ENV)
 	$(info Installing Copybara...)
-	$(RULE)$(CURL) --progress-bar $(COPYBARA_JAR_SRC) > $(COPYBARA)
+	$(RULE)$(CURL) --progress-bar $(COPYBARA_JAR_SRC) > $(COPYBARA_JAR)
 
 
 .PHONY: build test clean distclean forceclean help env
