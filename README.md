@@ -71,6 +71,7 @@ distclean                      Clean built targets and dependencies.
 env                            Bootstrap the local environment.
 forceclean                     Clean everything, then sanitize changes (DANGEROUS).
 help                           Show this help text.
+migrate                        Perform a migration via Copybara.
 test                           Run all spec and SDK tests.
 ```
 
