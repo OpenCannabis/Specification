@@ -76,6 +76,7 @@ JAVA ?= $(shell which java)
 CURL ?= $(shell which curl)
 BASH ?= $(shell which bash)
 MKDIR ?= $(shell which mkdir)
+CHMOD ?= $(shell which chmod)
 
 ## Local Tools
 BAZELISK_BIN ?= $(ENV)/bazelisk
@@ -133,6 +134,6 @@ $(COPYBARA_JAR): $(ENV)
 
 $(BAZELISK_BIN): $(ENV)
 	$(info Installing Bazelisk...)
-	$(RULE)$(CURL) --progress-bar $(BAZELISK_BIN_SRC) > $(BAZELISK_BIN)
+	$(RULE)$(CURL) --progress-bar $(BAZELISK_BIN_SRC) > $(BAZELISK_BIN) && $(CHMOD) +x $(BAZELISK_BIN)
 
 .PHONY: build test clean distclean forceclean help env
