@@ -40,6 +40,10 @@ ifeq ($(DEBUG),yes)
 BUILD_ARGS += --sandbox_debug
 endif
 
+ifeq ($(CI),yes)
+BUILD_ARGS += --config=ci
+endif
+
 ## Tools
 GIT ?= $(shell which git)
 GREP ?= $(shell which grep)
