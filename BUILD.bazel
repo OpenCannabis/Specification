@@ -5,3 +5,13 @@ exports_files([
   "maven_install.json",
 ])
 
+alias(
+  name = "model",
+  actual = "//opencannabis:OpenCannabis",
+)
+
+alias(
+  name = "python",
+  actual = "//sdk/python:library",
+)
+
