@@ -7,19 +7,19 @@ load("//defs:proto.bzl", "proto", "module")
 proto(
     name = "Address",
     srcs = ["Address.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
     name = "Country",
     srcs = ["Country.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
     name = "Distance",
     srcs = ["Distance.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
@@ -27,7 +27,7 @@ proto(
     srcs = ["Geohash.proto"],
     deps = [
         ":Distance",
-        "//opencannabis/core:Datamodel"],
+        "@gust//gust/core:datamodel"],
 )
 
 proto(
@@ -35,7 +35,7 @@ proto(
     srcs = ["Point.proto"],
     deps = [
         ":Distance",
-        "//opencannabis/core:Datamodel"],
+        "@gust//gust/core:datamodel"],
 )
 
 proto(
@@ -46,7 +46,7 @@ proto(
         ":Point",
         ":Distance",
         "//opencannabis/content:Name",
-        "//opencannabis/core:Datamodel"],
+        "@gust//gust/core:datamodel"],
 )
 
 proto(

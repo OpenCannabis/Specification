@@ -3,10 +3,10 @@ sourceRepo = "git@github.com:OpenCannabis/Specification.git"
 sourceBranch = "master"
 
 protocolRepo = "git@github.com:OpenCannabis/Protocol.git"
-protocolBranch = "master"
+protocolBranch = "ocp/upstream"
 
 pythonRepo = "git@github.com:OpenCannabis/Python.git"
-pythonBranch = "master"
+pythonBranch = "ocp/upstream"
 
 core.workflow(
     name = "protocol",
@@ -32,6 +32,16 @@ core.workflow(
     authoring = authoring.pass_thru(
         "Cookiebot <techteam+github@cookiescalifornia.com>"),
     transformations = [
+        core.replace(
+            before = "@gust//gust/core:datamodel",
+            after = "//opencannabis/core:Datamodel",
+            paths = glob(["**/*.bazel", "**/BUILD*"]),
+        ),
+        core.replace(
+            before = "gust/core/datamodel.proto",
+            after = "opencannabis/core/Datamodel.proto",
+            paths = glob(["**/*.proto"]),
+        ),
         core.replace(
             before = "${x}",
             after = "",

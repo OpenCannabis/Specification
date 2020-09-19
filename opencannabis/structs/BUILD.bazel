@@ -33,7 +33,7 @@ proto(
 proto(
     name = "Version",
     srcs = ["Version.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 
