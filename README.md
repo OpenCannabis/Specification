@@ -1,7 +1,7 @@
 
 ![](https://static.cookies.co/static/ocp/branding/logotype-v1.png)
 
-[![Build status](https://badge.buildkite.com/d86639c788d5af7344667e0e048a350c5bf3b0b82c33181f72.svg)](https://buildkite.com/opencannabis/specification) ![Latest release](https://img.shields.io/github/v/release/OpenCannabis/Protocol) ![Contributors](https://img.shields.io/github/contributors/OpenCannabis/RFC) ![Licensing](https://img.shields.io/github/license/OpenCannabis/Protocol)
+[![Build status](https://badge.buildkite.com/d86639c788d5af7344667e0e048a350c5bf3b0b82c33181f72.svg)](https://buildkite.com/opencannabis/specification) ![Latest release](https://img.shields.io/github/v/release/OpenCannabis/Protocol?include_prereleases) ![Contributors](https://img.shields.io/github/contributors/OpenCannabis/RFC) ![Licensing](https://img.shields.io/github/license/OpenCannabis/Protocol)
 
 ## Introduction
 
