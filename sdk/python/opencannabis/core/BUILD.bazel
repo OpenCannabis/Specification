@@ -1,0 +1,18 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//sdk/python/config:rules.bzl",
+    "ocp_module",
+)
+
+
+ocp_module(
+    name = "core",
+    init = ":__init__.py",
+    protos = [
+        "Datamodel",
+    ]
+)
