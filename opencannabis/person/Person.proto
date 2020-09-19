@@ -132,7 +132,7 @@ message Gender {
 // A person/patient and their name, legal name, nickname, etc.
 message Person {
   // Person's primary name information.
-  Name name = 1 [
+  PersonName name = 1 [
     (core.field).summary = "Person's primary name information."
   ];
 
