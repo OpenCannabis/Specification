@@ -7,19 +7,19 @@ load("//defs:proto.bzl", "proto", "module")
 proto(
     name = "EmailAddress",
     srcs = ["EmailAddress.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
     name = "PhoneNumber",
     srcs = ["PhoneNumber.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
     name = "Website",
     srcs = ["Website.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
@@ -30,7 +30,7 @@ proto(
         ":EmailAddress",
         ":Website",
         "//opencannabis/geo:Location",
-        "//opencannabis/core:Datamodel"],
+        "@gust//gust/core:datamodel"],
 )
 
 

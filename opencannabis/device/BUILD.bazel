@@ -7,7 +7,7 @@ load("//defs:proto.bzl", "proto", "module")
 proto(
     name = "Device",
     srcs = ["Device.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 

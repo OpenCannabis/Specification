@@ -25,7 +25,7 @@ proto(
     deps = [
         ":ProductKind",
         "//opencannabis/content:Name",
-        "//opencannabis/core:Datamodel"],
+        "@gust//gust/core:datamodel"],
 )
 
 

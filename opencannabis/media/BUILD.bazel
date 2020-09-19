@@ -7,13 +7,13 @@ load("//defs:proto.bzl", "proto", "module")
 proto(
     name = "MediaOrientation",
     srcs = ["MediaOrientation.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
     name = "MediaType",
     srcs = ["MediaType.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
@@ -21,7 +21,7 @@ proto(
     srcs = ["MediaKey.proto"],
     deps = [
         ":MediaType",
-        "//opencannabis/core:Datamodel"],
+        "@gust//gust/core:datamodel"],
 )
 
 proto(
@@ -32,7 +32,7 @@ proto(
         ":MediaType",
         "//opencannabis/base:ProductKey",
         "//opencannabis/temporal:Instant",
-        "//opencannabis/core:Datamodel"],
+        "@gust//gust/core:datamodel"],
 )
 
 

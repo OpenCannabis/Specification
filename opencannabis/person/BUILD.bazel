@@ -7,7 +7,7 @@ load("//defs:proto.bzl", "proto", "module")
 proto(
     name = "PersonName",
     srcs = ["PersonName.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = ["@gust//gust/core:datamodel"],
 )
 
 proto(
@@ -17,7 +17,7 @@ proto(
         ":PersonName",
         "//opencannabis/contact:ContactInfo",
         "//opencannabis/temporal:Date",
-        "//opencannabis/core:Datamodel"],
+        "@gust//gust/core:datamodel"],
 )
 
 
