@@ -1,6 +1,6 @@
 
 sourceRepo = "git@github.com:OpenCannabis/Specification.git"
-sourceBranch = "master"
+sourceBranch = "fix/core"
 
 protocolRepo = "git@github.com:OpenCannabis/Protocol.git"
 protocolBranch = "ocp/upstream"
@@ -35,12 +35,10 @@ core.workflow(
         core.replace(
             before = "@gust//gust/core:datamodel",
             after = "//opencannabis/core:Datamodel",
-            paths = glob(["**/*.bazel", "**/BUILD*"]),
         ),
         core.replace(
             before = "gust/core/datamodel.proto",
             after = "opencannabis/core/Datamodel.proto",
-            paths = glob(["**/*.proto"]),
         ),
         core.replace(
             before = "${x}",
