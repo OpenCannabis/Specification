@@ -17,7 +17,7 @@ proto(
     srcs = ["Menu.proto"],
     deps = [
         ":Section",
-        "@gust//gust/core:datamodel",
+        "//opencannabis/core:Datamodel",
         "//opencannabis/base:ProductKey",
         "//opencannabis/media:MediaKey",
         "//opencannabis/temporal:Instant",

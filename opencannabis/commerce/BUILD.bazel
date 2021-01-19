@@ -14,7 +14,7 @@ proto(
     srcs = ["Customer.proto"],
     deps = [
         "//opencannabis/person:Person",
-        "@gust//gust/core:datamodel"],
+        "//opencannabis/core:Datamodel"],
 )
 
 proto(
@@ -22,7 +22,7 @@ proto(
     srcs = ["Delivery.proto"],
     deps = [
         "//opencannabis/geo:Address",
-        "@gust//gust/core:datamodel"],
+        "//opencannabis/core:Datamodel"],
 )
 
 proto(
@@ -48,7 +48,7 @@ proto(
         ":Customer",
         "//opencannabis/commerce/payments:Payment",
         "//opencannabis/temporal:Instant",
-        "@gust//gust/core:datamodel"],
+        "//opencannabis/core:Datamodel"],
 )
 
 proto(
@@ -58,7 +58,7 @@ proto(
         ":Item",
         ":Currency",
         ":Discounts",
-        "@gust//gust/core:datamodel",
+        "//opencannabis/core:Datamodel",
         "//opencannabis/accounting:Taxes",
         "//opencannabis/crypto:Signature",
         "//opencannabis/commerce/payments:Payment",

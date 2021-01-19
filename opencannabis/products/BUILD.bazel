@@ -44,7 +44,7 @@ proto(
     name = "Flower",
     srcs = ["Flower.proto"],
     deps = [
-        "@gust//gust/core:datamodel",
+        "//opencannabis/core:Datamodel",
         "//opencannabis/base:ProductKey",
         "//opencannabis/content:MaterialsData",
         "//opencannabis/content:ProductContent"],
@@ -81,7 +81,7 @@ proto(
     srcs = ["SKU.proto"],
     deps = [
         "//opencannabis/commerce:Item",
-        "@gust//gust/core:datamodel"],
+        "//opencannabis/core:Datamodel"],
 )
 
 

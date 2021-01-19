@@ -18,7 +18,7 @@ proto(
     name = "Content",
     srcs = ["Content.proto"],
     deps = [
-        "@gust//gust/core:datamodel",
+        "//opencannabis/core:Datamodel",
         "//opencannabis/base:Language",
         "//opencannabis/base:Compression"],
 )
@@ -61,7 +61,7 @@ proto(
         "//opencannabis/temporal:Instant",
         "//opencannabis/structs/pricing:PricingDescriptor",
         "//opencannabis/structs/labtesting:TestResults",
-        "@gust//gust/core:datamodel"],
+        "//opencannabis/core:Datamodel"],
 )
 
 

@@ -3,7 +3,7 @@
 ## OpenCannabis: Specification
 #
 
-VERSION ?= 1.9.5-alpha1
+VERSION ?= 1.9.5-alpha2
 
 CI ?= no
 DEBUG ?= no
@@ -12,13 +12,14 @@ WORKFLOW ?= protocol
 
 ## Targets
 SCHEMA ?= //opencannabis:OpenCannabis
+IMAGE ?= //opencannabis:image
 DOCS ?=
 
 #### Targets: SDKs
 PYSDK ?= //sdk/python:library
 SDKS ?= $(PYSDK)
 
-TARGETS ?= $(SCHEMA) $(DOCS) $(SDKS)
+TARGETS ?= $(SCHEMA) $(IMAGE) $(DOCS) $(SDKS)
 
 ## Args
 PWD ?= $(shell pwd)

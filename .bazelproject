@@ -1,12 +1,10 @@
 directories:
   .github
-  .tpl
   defs
   opencannabis
   config
   tools
   sdk
-  external
   -dist/
 
 build_flags:

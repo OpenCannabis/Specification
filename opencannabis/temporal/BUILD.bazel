@@ -7,25 +7,25 @@ load("//defs:proto.bzl", "proto", "module")
 proto(
     name = "Date",
     srcs = ["Date.proto"],
-    deps = ["@gust//gust/core:datamodel"],
+    deps = ["//opencannabis/core:Datamodel"],
 )
 
 proto(
     name = "Duration",
     srcs = ["Duration.proto"],
-    deps = ["@gust//gust/core:datamodel"],
+    deps = ["//opencannabis/core:Datamodel"],
 )
 
 proto(
     name = "Instant",
     srcs = ["Instant.proto"],
-    deps = ["@gust//gust/core:datamodel"],
+    deps = ["//opencannabis/core:Datamodel"],
 )
 
 proto(
     name = "Interval",
     srcs = ["Interval.proto"],
-    deps = ["@gust//gust/core:datamodel"],
+    deps = ["//opencannabis/core:Datamodel"],
 )
 
 proto(
@@ -40,13 +40,13 @@ proto(
         ":Time",
         ":Instant",
         ":Interval",
-        "@gust//gust/core:datamodel"],
+        "//opencannabis/core:Datamodel"],
 )
 
 proto(
     name = "Timehash",
     srcs = ["Timehash.proto"],
-    deps = ["@gust//gust/core:datamodel"],
+    deps = ["//opencannabis/core:Datamodel"],
 )
 
 

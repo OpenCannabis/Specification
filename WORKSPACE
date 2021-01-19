@@ -9,7 +9,7 @@ load(
 )
 
 load(
-    "//config:gust.bzl",
+    "//config:elide.bzl",
     "LOCAL",
     GUST_FINGERPRINT = "FINGERPRINT",
     GUST_VERSION = "VERSION",
@@ -17,11 +17,11 @@ load(
 
 (local_repository(
     name = "gust",
-    path = "/Users/sam.g/Workspace/GUST",
+    path = "/Users/sam.g/Workspace/Elide",
 ) if LOCAL else http_archive(
     name = "gust",
-    urls = ["https://github.com/sgammon/gust/archive/%s.tar.gz" % GUST_VERSION],
-    strip_prefix = "GUST-%s" % GUST_VERSION,
+    urls = ["https://github.com/sgammon/elide/archive/%s.tar.gz" % GUST_VERSION],
+    strip_prefix = "elide-%s" % GUST_VERSION,
     sha256 = GUST_FINGERPRINT,
 ))
 
@@ -35,6 +35,7 @@ app_dependencies(False)
 
 load("@gust//defs:workspace.bzl", "setup_workspace")
 setup_workspace()
+
 
 #
 # Apple Platforms
@@ -69,6 +70,17 @@ protobuf_deps()
 #
 # Extensions
 #
+
+## JVM External (Maven)
+RULES_JVM_EXTERNAL_TAG = "4.0"
+RULES_JVM_EXTERNAL_SHA = "31701ad93dbfe544d597dbe62c9a1fdd76d81d8a9150c2bf1ecf928ecdf97169"
+
+http_archive(
+    name = "rules_jvm_external",
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+)
 
 ## NodeJS
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
@@ -187,4 +199,22 @@ gazelle_dependencies()
 
 load("@protoc_gen_doc//defs:deps.bzl", protoc_gen_doc_dependencies="go_dependencies")
 protoc_gen_doc_dependencies()
+
+## Buf
+RULES_BUF_VERSION = "a86e01e3df1d86e7ec6cd852c75999e0c9cec737"
+RULES_BUF_FINGERPRINT = "6231cfaf453b27c4639b58d683c9213e0dd61af7f4545a4cfc677e5745b45e92"
+
+(local_repository(
+    name = "rules_buf",
+    path = "/Users/sam.g/Workspace/rules_buf",
+) if LOCAL else http_archive(
+    name = "rules_buf",
+    urls = ["https://github.com/sgammon/rules_buf/archive/%s.tar.gz" % RULES_BUF_VERSION],
+    strip_prefix = "rules_buf-%s" % RULES_BUF_VERSION,
+    sha256 = RULES_BUF_FINGERPRINT,
+))
+
+
+load("@rules_buf//buf:repos.bzl", "buf_repositories")
+buf_repositories()
 
