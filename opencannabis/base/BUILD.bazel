@@ -25,7 +25,8 @@ proto(
     deps = [
         ":ProductKind",
         "//opencannabis/content:Name",
-        "@gust//gust/core:datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 
@@ -35,5 +36,6 @@ module(
         ":Compression",
         ":Language",
         ":ProductKey",
-        ":ProductKind"],
+        ":ProductKind"
+    ],
 )

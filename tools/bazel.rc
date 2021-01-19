@@ -24,6 +24,7 @@ build --incompatible_strict_action_env
 build --interface_shared_objects
 build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_vanilla
 build --workspace_status_command=./tools/bazel_stamp_vars.sh
+build --strategy=Buf=sandboxed
 
 ##
 # Development

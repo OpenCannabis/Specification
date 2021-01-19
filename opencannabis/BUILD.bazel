@@ -1,79 +1,155 @@
 
-package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "module")
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "//defs:proto.bzl",
+    "module",
+)
+
+load(
+    "@rules_buf//buf:defs.bzl",
+    "buf_image",
+)
 
 
-alias(name = "opencannabis.accounting",
-      actual = "//opencannabis/accounting:opencannabis.accounting")
+alias(
+    name = "accounting",
+    actual = "//opencannabis/accounting:opencannabis.accounting",
+)
 
-alias(name = "opencannabis.base",
-      actual = "//opencannabis/base:opencannabis.base")
+alias(
+    name = "base",
+    actual = "//opencannabis/base:opencannabis.base",
+)
 
-alias(name = "opencannabis.commerce",
-      actual = "//opencannabis/commerce:opencannabis.commerce")
+alias(
+    name = "commerce",
+    actual = "//opencannabis/commerce:opencannabis.commerce",
+)
 
-alias(name = "opencannabis.contact",
-      actual = "//opencannabis/contact:opencannabis.contact")
+alias(
+    name = "contact",
+    actual = "//opencannabis/contact:opencannabis.contact",
+)
 
-alias(name = "opencannabis.content",
-      actual = "//opencannabis/content:opencannabis.content")
+alias(
+    name = "content",
+    actual = "//opencannabis/content:opencannabis.content",
+)
 
-alias(name = "opencannabis.core",
-      actual = "//opencannabis/core:opencannabis.core")
+alias(
+    name = "core",
+    actual = "//opencannabis/core:opencannabis.core",
+)
 
-alias(name = "opencannabis.crypto",
-      actual = "//opencannabis/crypto:opencannabis.crypto")
+alias(
+    name = "crypto",
+    actual = "//opencannabis/crypto:opencannabis.crypto",
+)
 
-alias(name = "opencannabis.device",
-      actual = "//opencannabis/device:opencannabis.device")
+alias(
+    name = "device",
+    actual = "//opencannabis/device:opencannabis.device",
+)
 
-alias(name = "opencannabis.geo",
-      actual = "//opencannabis/geo:opencannabis.geo")
+alias(
+    name = "geo",
+    actual = "//opencannabis/geo:opencannabis.geo",
+)
 
-alias(name = "opencannabis.inventory",
-      actual = "//opencannabis/inventory:opencannabis.inventory")
+alias(
+    name = "inventory",
+    actual = "//opencannabis/inventory:opencannabis.inventory",
+)
 
-alias(name = "opencannabis.media",
-      actual = "//opencannabis/media:opencannabis.media")
+alias(
+    name = "media",
+    actual = "//opencannabis/media:opencannabis.media",
+)
 
-alias(name = "opencannabis.oauth",
-      actual = "//opencannabis/oauth:opencannabis.oauth")
+alias(
+    name = "oauth",
+    actual = "//opencannabis/oauth:opencannabis.oauth",
+)
 
-alias(name = "opencannabis.person",
-      actual = "//opencannabis/person:opencannabis.person")
+alias(
+    name = "person",
+    actual = "//opencannabis/person:opencannabis.person",
+)
 
-alias(name = "opencannabis.products",
-      actual = "//opencannabis/products:opencannabis.products")
+alias(
+    name = "products",
+    actual = "//opencannabis/products:opencannabis.products",
+)
 
-alias(name = "opencannabis.proximity",
-      actual = "//opencannabis/proximity:opencannabis.proximity")
+alias(
+    name = "proximity",
+    actual = "//opencannabis/proximity:opencannabis.proximity",
+)
 
-alias(name = "opencannabis.structs",
-      actual = "//opencannabis/structs:opencannabis.structs")
+alias(
+    name = "structs",
+    actual = "//opencannabis/structs:opencannabis.structs",
+)
 
-alias(name = "opencannabis.temporal",
-      actual = "//opencannabis/temporal:opencannabis.temporal")
+alias(
+    name = "temporal",
+    actual = "//opencannabis/temporal:opencannabis.temporal",
+)
 
 
 ## OpenCannabis: Models
 module(
     name = "OpenCannabis",
     deps = [
-        ":opencannabis.accounting",
-        ":opencannabis.base",
-        ":opencannabis.commerce",
-        ":opencannabis.contact",
-        ":opencannabis.content",
-        ":opencannabis.core",
-        ":opencannabis.crypto",
-        ":opencannabis.device",
-        ":opencannabis.geo",
-        ":opencannabis.inventory",
-        ":opencannabis.media",
-        ":opencannabis.oauth",
-        ":opencannabis.person",
-        ":opencannabis.products",
-        ":opencannabis.proximity",
-        ":opencannabis.structs",
-        ":opencannabis.temporal"],
+        ":accounting",
+        ":base",
+        ":commerce",
+        ":contact",
+        ":content",
+        ":core",
+        ":crypto",
+        ":device",
+        ":geo",
+        ":inventory",
+        ":media",
+        ":oauth",
+        ":person",
+        ":products",
+        ":proximity",
+        ":structs",
+        ":temporal",
+    ],
+)
+
+
+buf_image(
+    name = "image_bin",
+    out = "OpenCannabis.buf.bin",
+    config = "//tools:buf.yaml",
+    protos = [
+        ":OpenCannabis",
+    ],
+    extra_args = [
+        "--log-level=debug",
+    ],
+)
+
+buf_image(
+    name = "image_json",
+    out = "OpenCannabis.buf.json",
+    config = "//tools:buf.yaml",
+    protos = [
+        ":OpenCannabis",
+    ],
+    extra_args = [
+        "--log-level=debug",
+    ],
+)
+
+alias(
+    name = "image",
+    actual = ":image_bin",
 )

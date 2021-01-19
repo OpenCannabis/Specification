@@ -8,7 +8,7 @@ proto(
     name = "InventoryProduct",
     srcs = ["InventoryProduct.proto"],
     deps = [
-        "@gust//gust/core:datamodel",
+        "//opencannabis/core:Datamodel",
         "//opencannabis/base:ProductKey",
         "//opencannabis/temporal:Instant",
         "//opencannabis/commerce:Item",
@@ -21,7 +21,7 @@ proto(
     srcs = ["InventoryLocation.proto"],
     deps = [
         ":InventoryProduct",
-        "@gust//gust/core:datamodel",
+        "//opencannabis/core:Datamodel",
         "//opencannabis/contact:ContactInfo"],
 )
 
