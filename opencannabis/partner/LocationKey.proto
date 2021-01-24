@@ -10,8 +10,8 @@ package opencannabis.partner;
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.partner";
-option java_multiple_files = true;
-option java_outer_classname = "LocationKey";
+option java_multiple_files = false;
+option java_outer_classname = "LocationScope";
 
 import "opencannabis/core/datamodel.proto";
 import "opencannabis/partner/PartnerKey.proto";

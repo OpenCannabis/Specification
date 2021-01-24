@@ -7,5 +7,5 @@ load("//defs:proto.bzl", "proto", "module")
 module(
     name = "opencannabis.regulatory.usa",
     deps = [
-        "//sources/public/models/regulatory/usa/ca:opencannabis.regulatory.usa.ca"],
+        "//opencannabis/regulatory/usa/ca:opencannabis.regulatory.usa.ca"],
     strip_import_prefix = "/sources/public/models")
