@@ -75,6 +75,11 @@ alias(
 )
 
 alias(
+    name = "partner",
+    actual = "//opencannabis/partner:opencannabis.partner",
+)
+
+alias(
     name = "person",
     actual = "//opencannabis/person:opencannabis.person",
 )
@@ -116,6 +121,7 @@ module(
         ":inventory",
         ":media",
         ":oauth",
+        ":partner",
         ":person",
         ":products",
         ":proximity",

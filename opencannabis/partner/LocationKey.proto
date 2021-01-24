@@ -1,0 +1,34 @@
+
+/**
+ * Specifies a key that points to a location record owned by a known OpenCannabis partner organization. "Locations" in
+ * OpenCannabis represent retail stores, warehouses that carry inventory, and other concrete physical locations.
+ */
+syntax = "proto3";
+
+package opencannabis.partner;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.partner";
+option java_multiple_files = true;
+option java_outer_classname = "LocationKey";
+
+import "opencannabis/core/datamodel.proto";
+import "opencannabis/partner/PartnerKey.proto";
+
+
+// Specifies a key that references a location owned or otherwise managed by a known (and globally-assigned) OpenCannabis
+// partner organization. This may represent a retail store, inventory warehouse, farm, or any other physical location.
+message LocationKey {
+  // Specifies the OpenCannabis partner record that owns this location.
+  opencannabis.partner.PartnerKey partner = 1 [
+    (core.field).type = PARENT,
+    (core.field).summary = "Specifies the partner that owns this location."
+  ];
+
+  // Short string that uniquely identifies this location, under a given partner account.
+  string oid = 2 [
+    (core.field).type = ID,
+    (core.field).summary = "Short string that uniquely identifies this location, under a given partner account."
+  ];
+}
