@@ -3,7 +3,7 @@
 ## OpenCannabis: Specification
 #
 
-VERSION ?= 1.9.5-alpha2
+VERSION ?= 1.9.5-alpha3
 
 CI ?= no
 DEBUG ?= no
@@ -27,7 +27,7 @@ BAZELISK_ARGS ?=
 BASE_ARGS ?=
 BUILD_ARGS ?= $(BASE_ARGS)
 ENV ?= $(PWD)/.env
-BAZELISK_VERSION ?= v1.6.1
+BAZELISK_VERSION ?= v1.7.4
 
 COPYBARA_ACTION ?= migrate
 COPYBARA_FLAGS ?= --ignore-noop

@@ -1,0 +1,21 @@
+{
+  "name": "@opencannabis/specification",
+  "version": "1.9.5",
+  "description": "Central specification for the OpenCannabis Protocol.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenCannabis/Specification.git"
+  },
+  "keywords": [
+    "opencannabis",
+    "protocol",
+    "specification",
+    "protobuf",
+    "cannabis"
+  ],
+  "author": "Sam Gammon <sam@bloomworks.io>",
+  "bugs": {
+    "url": "https://github.com/OpenCannabis/Specification/issues"
+  },
+  "homepage": "https://github.com/OpenCannabis/Specification#readme"
+}
