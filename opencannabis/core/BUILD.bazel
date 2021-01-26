@@ -11,6 +11,14 @@ proto(
 )
 
 
+## OpenCannabis Annotations
+proto(
+    name = "Datamodel",
+    srcs = ["ocp.proto"],
+    deps = ["@com_google_protobuf//:descriptor_proto"],
+)
+
+
 module(
     name = "opencannabis.core",
     deps = [":Datamodel"],
