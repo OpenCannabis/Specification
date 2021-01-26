@@ -10,7 +10,7 @@ load(
 )
 
 load(
-    "//defs:doc.bzl",
+    "//tools/defs:doc.bzl",
     __declare_proto_docs="declare_proto_docs",
     __declare_module_docs="declare_module_docs",
 )
