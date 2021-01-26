@@ -15,11 +15,15 @@ proto(
     srcs = ["PricingDescriptor.proto"],
     deps = [
         ":SaleDescriptor",
-        "//opencannabis/commerce:Currency"],
+        "//opencannabis/commerce:Currency",
+    ],
 )
 
 
 module(
-    name = "opencannabis.structs.pricing",
-    deps = [":SaleDescriptor", ":PricingDescriptor"],
+    name = "pricing",
+    deps = [
+        ":SaleDescriptor",
+        ":PricingDescriptor",
+    ],
 )

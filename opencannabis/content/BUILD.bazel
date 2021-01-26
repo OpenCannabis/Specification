@@ -20,7 +20,8 @@ proto(
     deps = [
         "//opencannabis/core:Datamodel",
         "//opencannabis/base:Language",
-        "//opencannabis/base:Compression"],
+        "//opencannabis/base:Compression"
+    ],
 )
 
 proto(
@@ -36,17 +37,19 @@ proto(
         "//opencannabis/structs:Shelf",
         "//opencannabis/structs:Species",
         "//opencannabis/structs:Genetics",
-        "//opencannabis/products/distribution:DistributionChannel"],
+        "//opencannabis/products/distribution:DistributionChannel"
+    ],
 )
 
 proto(
     name = "Brand",
     srcs = ["Brand.proto"],
     deps = [
-            "//opencannabis/content:Name",
-            "//opencannabis/content:Colors",
-            "//opencannabis/content:Content",
-            "//opencannabis/media:MediaKey"],
+        "//opencannabis/content:Name",
+        "//opencannabis/content:Colors",
+        "//opencannabis/content:Content",
+        "//opencannabis/media:MediaKey"
+    ],
 )
 
 proto(
@@ -61,12 +64,13 @@ proto(
         "//opencannabis/temporal:Instant",
         "//opencannabis/structs/pricing:PricingDescriptor",
         "//opencannabis/structs/labtesting:TestResults",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel"
+    ],
 )
 
 
 module(
-    name = "opencannabis.content",
+    name = "content",
     deps = [
         ":Name",
         ":Colors",
@@ -74,5 +78,6 @@ module(
         ":Data",
         ":MaterialsData",
         ":Brand",
-        ":ProductContent"],
+        ":ProductContent"
+    ],
 )

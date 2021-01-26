@@ -31,7 +31,7 @@ proto(
 
 
 module(
-    name = "opencannabis.base",
+    name = "base",
     deps = [
         ":Compression",
         ":Language",

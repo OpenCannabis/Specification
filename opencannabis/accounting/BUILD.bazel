@@ -9,12 +9,14 @@ proto(
     srcs = ["Taxes.proto"],
     deps = [
         "//opencannabis/geo:Province",
-        "//opencannabis/geo:Country"],
+        "//opencannabis/geo:Country",
+    ],
 )
 
 
 module(
-    name = "opencannabis.accounting",
+    name = "accounting",
     deps = [
-        ":Taxes"],
+        ":Taxes",
+    ],
 )

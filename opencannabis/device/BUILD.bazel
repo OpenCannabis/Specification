@@ -13,6 +13,6 @@ proto(
 
 
 module(
-    name = "opencannabis.device",
+    name = "device",
     deps = [":Device"],
 )

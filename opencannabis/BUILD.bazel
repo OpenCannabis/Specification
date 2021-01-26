@@ -16,92 +16,92 @@ load(
 
 alias(
     name = "accounting",
-    actual = "//opencannabis/accounting:opencannabis.accounting",
+    actual = "//opencannabis/accounting",
 )
 
 alias(
     name = "base",
-    actual = "//opencannabis/base:opencannabis.base",
+    actual = "//opencannabis/base",
 )
 
 alias(
     name = "commerce",
-    actual = "//opencannabis/commerce:opencannabis.commerce",
+    actual = "//opencannabis/commerce",
 )
 
 alias(
     name = "contact",
-    actual = "//opencannabis/contact:opencannabis.contact",
+    actual = "//opencannabis/contact",
 )
 
 alias(
     name = "content",
-    actual = "//opencannabis/content:opencannabis.content",
+    actual = "//opencannabis/content",
 )
 
 alias(
     name = "core",
-    actual = "//opencannabis/core:opencannabis.core",
+    actual = "//opencannabis/core",
 )
 
 alias(
     name = "crypto",
-    actual = "//opencannabis/crypto:opencannabis.crypto",
+    actual = "//opencannabis/crypto",
 )
 
 alias(
     name = "device",
-    actual = "//opencannabis/device:opencannabis.device",
+    actual = "//opencannabis/device",
 )
 
 alias(
     name = "geo",
-    actual = "//opencannabis/geo:opencannabis.geo",
+    actual = "//opencannabis/geo",
 )
 
 alias(
     name = "inventory",
-    actual = "//opencannabis/inventory:opencannabis.inventory",
+    actual = "//opencannabis/inventory",
 )
 
 alias(
     name = "media",
-    actual = "//opencannabis/media:opencannabis.media",
+    actual = "//opencannabis/media",
 )
 
 alias(
     name = "oauth",
-    actual = "//opencannabis/oauth:opencannabis.oauth",
+    actual = "//opencannabis/oauth",
 )
 
 alias(
     name = "partner",
-    actual = "//opencannabis/partner:opencannabis.partner",
+    actual = "//opencannabis/partner",
 )
 
 alias(
     name = "person",
-    actual = "//opencannabis/person:opencannabis.person",
+    actual = "//opencannabis/person",
 )
 
 alias(
     name = "products",
-    actual = "//opencannabis/products:opencannabis.products",
+    actual = "//opencannabis/products",
 )
 
 alias(
     name = "proximity",
-    actual = "//opencannabis/proximity:opencannabis.proximity",
+    actual = "//opencannabis/proximity",
 )
 
 alias(
     name = "structs",
-    actual = "//opencannabis/structs:opencannabis.structs",
+    actual = "//opencannabis/structs",
 )
 
 alias(
     name = "temporal",
-    actual = "//opencannabis/temporal:opencannabis.temporal",
+    actual = "//opencannabis/temporal",
 )
 
 

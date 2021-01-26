@@ -28,11 +28,17 @@ proto(
         ":Terpenes",
         ":Cannabinoids",
         "//opencannabis/content:Content",
-        "//opencannabis/temporal:Instant"],
+        "//opencannabis/temporal:Instant",
+    ],
 )
 
 
 module(
-    name = "opencannabis.structs.labtesting",
-    deps = [":TestValue", ":TestResults", ":Terpenes", ":Cannabinoids"],
+    name = "labtesting",
+    deps = [
+        ":TestValue",
+        ":TestResults",
+        ":Terpenes",
+        ":Cannabinoids",
+    ],
 )

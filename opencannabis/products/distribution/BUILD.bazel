@@ -11,6 +11,6 @@ proto(
 
 
 module(
-    name = "opencannabis.products.distribution",
+    name = "distribution",
     deps = [":DistributionChannel"],
 )

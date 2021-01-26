@@ -11,6 +11,6 @@ proto(
 
 
 module(
-    name = "opencannabis.regulatory.usa.ca",
+    name = "ca",
     deps = [":CAAgency"],
 )

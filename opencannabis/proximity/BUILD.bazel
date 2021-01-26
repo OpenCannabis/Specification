@@ -10,11 +10,12 @@ proto(
     deps = [
         "//opencannabis/geo:Location",
         "//opencannabis/geo:Distance",
-        "//opencannabis/temporal:Instant"],
+        "//opencannabis/temporal:Instant",
+    ],
 )
 
 
 module(
-    name = "opencannabis.proximity",
+    name = "proximity",
     deps = [":BluetoothBeacon"],
 )

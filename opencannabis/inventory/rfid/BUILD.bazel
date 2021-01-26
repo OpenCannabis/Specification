@@ -8,7 +8,8 @@ proto(
     name = "RFID",
     srcs = ["RFID.proto"],
     deps = [
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 proto(
@@ -17,14 +18,16 @@ proto(
     deps = [
         ":RFID",
         "//opencannabis/temporal:Instant",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 
 
 module(
-    name = "opencannabis.inventory.rfid",
+    name = "rfid",
     deps = [
         ":RFID",
-        ":LLRP"],
+        ":LLRP",
+    ],
 )

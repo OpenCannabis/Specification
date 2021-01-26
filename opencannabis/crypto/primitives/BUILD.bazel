@@ -17,8 +17,9 @@ proto(
 
 
 module(
-    name = "opencannabis.crypto.primitives",
+    name = "primitives",
     deps = [
         ":Integrity",
-        ":Keys"],
+        ":Keys",
+    ],
 )

@@ -30,15 +30,17 @@ proto(
         ":EmailAddress",
         ":Website",
         "//opencannabis/geo:Location",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel"
+    ],
 )
 
 
 module(
-    name = "opencannabis.contact",
+    name = "contact",
     deps = [
         ":EmailAddress",
         ":PhoneNumber",
         ":Website",
-        ":ContactInfo"],
+        ":ContactInfo"
+    ],
 )

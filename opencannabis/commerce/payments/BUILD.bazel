@@ -11,6 +11,6 @@ proto(
 
 
 module(
-    name = "opencannabis.commerce.payments",
+    name = "payments",
     deps = [":Payment"],
 )

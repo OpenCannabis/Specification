@@ -15,13 +15,15 @@ proto(
     srcs = ["LocationKey.proto"],
     deps = [
         ":PartnerKey",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 
 module(
-    name = "opencannabis.partner",
+    name = "partner",
     deps = [
         ":PartnerKey",
-        ":LocationKey"],
+        ":LocationKey",
+    ],
 )
