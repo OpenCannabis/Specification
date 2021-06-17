@@ -3,3 +3,4 @@ bazel-*
 .ijwb/
 tools/Makefile
 .env/
+node_modules/

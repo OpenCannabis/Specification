@@ -28,10 +28,10 @@ message OCPFieldInfo {
 
 extend google.protobuf.MessageOptions {
   // Info regarding how a concrete model maps to an abstract model.
-  OCPModelInfo model = 1;
+  OCPModelInfo model = 6005;
 }
 
 extend google.protobuf.FieldOptions {
   // Describes configuration for this field when used in OpenCannabis systems.
-  OCPFieldInfo ocp = 2;
+  OCPFieldInfo ocp = 7005;
 }
