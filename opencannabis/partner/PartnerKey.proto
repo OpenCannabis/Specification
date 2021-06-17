@@ -1,0 +1,27 @@
+
+/**
+ * Specifies the structure of a key that unique describes the identity of a partner record. "Partners" in the
+ * OpenCannabis ecosystem are companies or organizations that participate in the universal data graph.
+ */
+syntax = "proto3";
+
+package opencannabis.partner;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.partner";
+option java_multiple_files = true;
+option java_outer_classname = "PartnerScope";
+
+import "opencannabis/core/datamodel.proto";
+
+
+// Specifies a key that uniquely references an implementing OpenCannabis partner. OCP partners include any organization
+// or company which adopts the OpenCannabis specification and is assigned a global ID by the OCP Initiative.
+message PartnerKey {
+  // Short globally-assigned opaque and unique string that identifies an OpenCannabis partner organization.
+  string oid = 1 [
+    (core.field).type = ID,
+    (core.field).summary = "Short and opaque string that uniquely identifies a partner organization."
+  ];
+}

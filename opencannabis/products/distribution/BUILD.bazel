@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # Product Distribution
@@ -11,6 +11,6 @@ proto(
 
 
 module(
-    name = "opencannabis.products.distribution",
+    name = "distribution",
     deps = [":DistributionChannel"],
 )

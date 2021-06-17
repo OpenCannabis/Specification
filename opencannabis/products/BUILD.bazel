@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # Products
@@ -10,7 +10,8 @@ proto(
     deps = [
         "//opencannabis/base:ProductKey",
         "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent"],
+        "//opencannabis/content:ProductContent",
+    ],
 )
 
 proto(
@@ -19,7 +20,8 @@ proto(
     deps = [
         "//opencannabis/base:ProductKey",
         "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent"],
+        "//opencannabis/content:ProductContent",
+    ],
 )
 
 proto(
@@ -28,7 +30,8 @@ proto(
     deps = [
         "//opencannabis/base:ProductKey",
         "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent"],
+        "//opencannabis/content:ProductContent",
+    ],
 )
 
 proto(
@@ -37,7 +40,8 @@ proto(
     deps = [
         "//opencannabis/base:ProductKey",
         "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent"],
+        "//opencannabis/content:ProductContent",
+    ],
 )
 
 proto(
@@ -47,7 +51,8 @@ proto(
         "//opencannabis/core:Datamodel",
         "//opencannabis/base:ProductKey",
         "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent"],
+        "//opencannabis/content:ProductContent",
+    ],
 )
 
 proto(
@@ -55,7 +60,8 @@ proto(
     srcs = ["Merchandise.proto"],
     deps = [
         "//opencannabis/base:ProductKey",
-        "//opencannabis/content:ProductContent"],
+        "//opencannabis/content:ProductContent",
+    ],
 )
 
 proto(
@@ -64,7 +70,8 @@ proto(
     deps = [
         "//opencannabis/base:ProductKey",
         "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent"],
+        "//opencannabis/content:ProductContent",
+    ],
 )
 
 proto(
@@ -73,7 +80,8 @@ proto(
     deps = [
         "//opencannabis/base:ProductKey",
         "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent"],
+        "//opencannabis/content:ProductContent",
+    ],
 )
 
 proto(
@@ -81,12 +89,13 @@ proto(
     srcs = ["SKU.proto"],
     deps = [
         "//opencannabis/commerce:Item",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 
 module(
-    name = "opencannabis.products",
+    name = "products",
     deps = [
         ":Apothecary",
         ":Cartridge",
@@ -97,6 +106,7 @@ module(
         ":Plant",
         ":Preroll",
         ":SKU",
-        "//opencannabis/products/distribution:opencannabis.products.distribution",
-        "//opencannabis/products/menu:opencannabis.products.menu"],
+        "//opencannabis/products/distribution",
+        "//opencannabis/products/menu",
+    ],
 )

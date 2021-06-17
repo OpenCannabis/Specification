@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # Structs
@@ -38,7 +38,7 @@ proto(
 
 
 module(
-    name = "opencannabis.structs",
+    name = "structs",
     deps = [
         ":Genetics",
         ":Grow",
@@ -46,6 +46,7 @@ module(
         ":Shelf",
         ":Species",
         ":Version",
-        "//opencannabis/structs/labtesting:opencannabis.structs.labtesting",
-        "//opencannabis/structs/pricing:opencannabis.structs.pricing"],
+        "//opencannabis/structs/labtesting",
+        "//opencannabis/structs/pricing",
+    ],
 )

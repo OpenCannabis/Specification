@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # OAuth
@@ -15,13 +15,15 @@ proto(
     deps = [
         ":AuthorizationScope",
         "//opencannabis/media:MediaItem",
-        "//opencannabis/temporal:Instant"],
+        "//opencannabis/temporal:Instant",
+    ],
 )
 
 
 module(
-    name = "opencannabis.oauth",
+    name = "oauth",
     deps = [
         ":AuthorizationScope",
-        ":Client"],
+        ":Client",
+    ],
 )

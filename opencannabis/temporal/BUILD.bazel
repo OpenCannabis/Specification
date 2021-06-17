@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 ## Temporal
@@ -40,7 +40,8 @@ proto(
         ":Time",
         ":Instant",
         ":Interval",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 proto(
@@ -51,7 +52,7 @@ proto(
 
 
 module(
-    name = "opencannabis.temporal",
+    name = "temporal",
     deps = [
         ":Date",
         ":Duration",
@@ -59,5 +60,6 @@ module(
         ":Interval",
         ":Time",
         ":Schedule",
-        ":Timehash"],
+        ":Timehash",
+    ],
 )

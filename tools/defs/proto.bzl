@@ -10,7 +10,7 @@ load(
 )
 
 load(
-    "//defs:doc.bzl",
+    "//tools/defs:doc.bzl",
     __declare_proto_docs="declare_proto_docs",
     __declare_module_docs="declare_module_docs",
 )
@@ -84,6 +84,8 @@ def _module(name, **kwargs):
     :returns: Nothing - defines rules instead.
     """
 
+    if "." in name:
+        fail("OCP module names cannot contain `.` (in package name '%s')" % name)
     __declare_native(name, kwargs)
     __declare_closure_proto(name, kwargs)
     __declare_lang_protos(name, kwargs)

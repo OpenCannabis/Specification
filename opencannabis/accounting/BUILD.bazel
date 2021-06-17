@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 ## Accounting
@@ -9,12 +9,14 @@ proto(
     srcs = ["Taxes.proto"],
     deps = [
         "//opencannabis/geo:Province",
-        "//opencannabis/geo:Country"],
+        "//opencannabis/geo:Country",
+    ],
 )
 
 
 module(
-    name = "opencannabis.accounting",
+    name = "accounting",
     deps = [
-        ":Taxes"],
+        ":Taxes",
+    ],
 )

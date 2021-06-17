@@ -15,10 +15,15 @@ option java_outer_classname = "CommercialOrder";
 
 import "opencannabis/core/datamodel.proto";
 
+import "opencannabis/base/ProductKind.proto";
+
 import "opencannabis/commerce/Item.proto";
 import "opencannabis/commerce/Delivery.proto";
 import "opencannabis/commerce/Customer.proto";
 import "opencannabis/commerce/payments/Payment.proto";
+
+import "opencannabis/partner/PartnerKey.proto";
+import "opencannabis/partner/LocationKey.proto";
 
 import "opencannabis/temporal/Instant.proto";
 
@@ -126,6 +131,22 @@ message OrderKey {
   string id = 1 [
     (core.field).summary = "Order ID, assigned by the server upon creation."
   ];
+
+  // Foreign order ID. Assigned by external systems (as applicable).
+  string foreign_id = 2 [
+    (core.field).summary = "ID assigned to this order by external or 2nd-party fulfillment systems."
+  ];
+
+  // Extra ID for use in fulfillment systems. If delivery or pickup systems have their own ID, it can be filled in here
+  // while preserving the `foreign_id` as the point-of-sale order ID.
+  string fulfillment_id = 3 [
+    (core.field).summary = "Extra ID for use in fulfillment systems."
+  ];
+
+  // ID assigned to the order during data processing. This is mainly meant for disambiguation across systems.
+  string pipeline_id = 4 [
+    (core.field).summary = "ID assigned to the order during data processing. Useful for disambiguation across systems."
+  ];
 }
 
 
@@ -180,20 +201,9 @@ message Order {
     (core.column).ignore = true
   ];
 
-  // When this order was created.
-  opencannabis.temporal.Instant created_at = 10 [
-    (core.opts).required = true,
-    (core.field).summary = "When this order was created."
-  ];
-
   // Order subtotal.
   double subtotal = 11 [
     (core.field).summary = "Order subtotal."
-  ];
-
-  // When this order was created.
-  opencannabis.temporal.Instant updated_at = 12 [
-    (core.column).ignore = true
   ];
 
   // Session ID that was active when this order was submitted.
@@ -204,5 +214,145 @@ message Order {
   // Payment information/metadata for this order, if applicable.
   OrderPayment payment = 14 [
     (core.field).summary = "Payment information/metadata for this order, if applicable."
+  ];
+
+  // Details about where this order came from.
+  OrderSource source = 15 [
+    (core.field).summary = "Details about where this order came from."
+  ];
+
+  // Details about the fulfillment partner assigned to this order, as applicable.
+  OrderFulfillment fulfillment = 16 [
+    (core.field).summary = "Details about the fulfillment partner assigned to this order, as applicable."
+  ];
+
+  // General stats and rolled up values associated with this order. Available during analysis.
+  OrderStats stats = 17 [
+    (core.field).summary = "General stats and rolled up values associated with this order. Available during analysis."
+  ];
+
+  // When this order was created.
+  opencannabis.temporal.Instant created_at = 98 [
+    (core.opts).required = true,
+    (core.field).stamp_create = true,
+    (core.field).summary = "When this order was created."
+  ];
+
+  // When this order was last updated.
+  opencannabis.temporal.Instant updated_at = 99 [
+    (core.field).stamp_update = true,
+    (core.field).summary = "When this order was last updated."
+  ];
+}
+
+
+// Describes information about the source of an order, including whether it came from a digital or physical property,
+// and the system the order was pulled from, as applicable.
+message OrderSource {
+  // System from which this order originates, as applicable.
+  string system = 1 [
+    (core.field).summary = "System from which this order originates, as applicable."
+  ];
+
+  // Internal location ID corresponding to the retail store or property that fulfilled or received this order.
+  string location_id = 2 [
+    (core.field).summary = "Internal location ID corresponding to the store or property that received this order."
+  ];
+
+  // Foreign ID in 2nd- or 3rd-party systems referring to the location that received this order.
+  string foreign_id = 3 [
+    (core.field).summary = "Foreign ID in 2nd- or 3rd-party systems referring to the location that received this order."
+  ];
+
+  // Specifies a reference to the partner or location which received this order, if known.
+  oneof reference {
+    // Partner key-level reference for the originating location.
+    opencannabis.partner.PartnerKey partner = 4;
+
+    // Location key-level reference for the originating location.
+    opencannabis.partner.LocationKey location = 5;
+  }
+}
+
+
+// Describes information regarding a retail cannabis order's fulfillment. This may include the fulfillment partner info,
+// as applicable, or additional coordinative or logistical information.
+message OrderFulfillment {
+  // Specifies a reference to the partner or location assigned to fulfill this order, if known.
+  oneof reference {
+    // Partner key-level reference for this fulfillment partner.
+    opencannabis.partner.PartnerKey partner = 1;
+
+    // Location key-level reference for this fulfillment partner.
+    opencannabis.partner.LocationKey location = 2;
+  }
+}
+
+
+// Holds aggregated values generated to describe an order and its constituent line items.
+message OrderStats {
+  // Key corresponding to this order. Enclosed when this stats payload is not affixed to the subject order.
+  OrderKey order_key = 1 [
+    (core.field).summary = "Key uniquely identifying this order, when needed."
+  ];
+
+  // Order total cash amount.
+  double total_cash = 10 [
+    (core.field).summary = "Total cash tendered to pay for this order."
+  ];
+
+  // Order total tax amount.
+  double total_tax = 11 [
+    (core.field).summary = "Total tax arising from this order."
+  ];
+
+  // Order total cost amount, when known. This amount is typically just `sum([item_cost * quantity] for item)`.
+  double total_cost = 12 [
+    (core.field).summary = "Total cost to fulfill an order."
+  ];
+
+  // Order total profit amount, when known. This amount typically equals `(total_cash - total_tax) - total_cost`.
+  double total_profit = 13 [
+    (core.field).summary = "Total cost to fulfill an order."
+  ];
+
+  // Total quantity of items purchased across all order line items.
+  uint32 quantity = 14 [
+    (core.field).summary = "Total quantity of items purchased across all order line items."
+  ];
+
+  // Total discount amount applied to this order, across all line items and order discounts.
+  double discount = 15 [
+    (core.field).summary = "Total discount amount applied to this order, across all line items and order discounts."
+  ];
+
+  // Set of unique categories present in this order, across all line items.
+  repeated opencannabis.base.ProductKind categories = 16 [
+    (core.field).summary = "Set of unique categories present in this order, across all line items."
+  ];
+
+  // Count of unique categories present in this order, across all line items.
+  uint32 unique_categories = 17 [
+    (core.field).summary = "Count of unique categories present in this order, across all line items."
+  ];
+
+  // Count of unique products present in this order, across all line items.
+  uint32 unique_products = 18 [
+    (core.field).summary = "Count of unique products present in this order, across all line items."
+  ];
+
+  // Largest category present in the line-items constituting this order, by revenue.
+  opencannabis.base.ProductKind largest_category = 19 [
+    (core.field).summary = "Largest category present in the line-items constituting this order, by revenue."
+  ];
+
+  // Largest individual SKU present in the line-items constituting this order, by revenue.
+  string largest_sku = 20 [
+    (core.field).summary = "Largest individual SKU present in the line-items constituting this order, by revenue."
+  ];
+
+  // Largest individual price paid for an item across the line-items constituting this order.
+  double largest_price = 21 [
+    (core.field).summary = "Largest individual price paid for an item across the line-items constituting this order."
   ];
 }

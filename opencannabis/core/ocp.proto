@@ -1,0 +1,37 @@
+
+/**
+ * Specifies structures that relate to data modeling and the structure of the data. Enumerates collection mode and field
+ * type. Overridden from the central Gust framework which defines the core of the spec.
+ */
+syntax = "proto3";
+package core;
+
+import "google/protobuf/descriptor.proto";
+
+
+// Describes info relating to OpenCannabis for a given concrete model definition.
+message OCPModelInfo {
+  // Named model which this record should inflate to.
+  string model = 1;
+}
+
+
+// Describes info relating to OpenCannabis for a given model field.
+message OCPFieldInfo {
+  // Field that corresponds to this one on the abstract version of this model, mapped via `Message.model`.
+  string map_to = 1;
+
+  // Describes the universal key path assigned to this field by the OpenCannabis Spec, as applicable.
+  string key_path = 2;
+}
+
+
+extend google.protobuf.MessageOptions {
+  // Info regarding how a concrete model maps to an abstract model.
+  OCPModelInfo model = 1;
+}
+
+extend google.protobuf.FieldOptions {
+  // Describes configuration for this field when used in OpenCannabis systems.
+  OCPFieldInfo ocp = 2;
+}

@@ -1,0 +1,29 @@
+
+package(default_visibility = ["//visibility:public"])
+load("//tools/defs:proto.bzl", "proto", "module")
+
+
+# OAuth
+proto(
+    name = "PartnerKey",
+    srcs = ["PartnerKey.proto"],
+    deps = ["//opencannabis/core:Datamodel"],
+)
+
+proto(
+    name = "LocationKey",
+    srcs = ["LocationKey.proto"],
+    deps = [
+        ":PartnerKey",
+        "//opencannabis/core:Datamodel",
+    ],
+)
+
+
+module(
+    name = "partner",
+    deps = [
+        ":PartnerKey",
+        ":LocationKey",
+    ],
+)

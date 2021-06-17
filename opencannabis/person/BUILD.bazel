@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # Person
@@ -17,13 +17,15 @@ proto(
         ":PersonName",
         "//opencannabis/contact:ContactInfo",
         "//opencannabis/temporal:Date",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 
 module(
-    name = "opencannabis.person",
+    name = "person",
     deps = [
         ":PersonName",
-        ":Person"],
+        ":Person",
+    ],
 )
