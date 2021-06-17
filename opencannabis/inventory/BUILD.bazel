@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # Inventory
@@ -13,7 +13,8 @@ proto(
         "//opencannabis/temporal:Instant",
         "//opencannabis/commerce:Item",
         "//opencannabis/products/menu:Menu",
-        "//opencannabis/structs/pricing:PricingDescriptor"],
+        "//opencannabis/structs/pricing:PricingDescriptor",
+    ],
 )
 
 proto(
@@ -22,14 +23,16 @@ proto(
     deps = [
         ":InventoryProduct",
         "//opencannabis/core:Datamodel",
-        "//opencannabis/contact:ContactInfo"],
+        "//opencannabis/contact:ContactInfo",
+    ],
 )
 
 
 module(
-    name = "opencannabis.inventory",
+    name = "inventory",
     deps = [
         ":InventoryProduct",
         ":InventoryLocation",
-        "//opencannabis/inventory/rfid:opencannabis.inventory.rfid"],
+        "//opencannabis/inventory/rfid",
+    ],
 )

@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 ## Media
@@ -21,7 +21,8 @@ proto(
     srcs = ["MediaKey.proto"],
     deps = [
         ":MediaType",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 proto(
@@ -32,15 +33,17 @@ proto(
         ":MediaType",
         "//opencannabis/base:ProductKey",
         "//opencannabis/temporal:Instant",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 
 module(
-    name = "opencannabis.media",
+    name = "media",
     deps = [
         ":MediaOrientation",
         ":MediaType",
         ":MediaKey",
-        ":MediaItem"],
+        ":MediaItem",
+    ],
 )

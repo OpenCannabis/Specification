@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 ## Core
@@ -11,7 +11,15 @@ proto(
 )
 
 
+## OpenCannabis Annotations
+proto(
+    name = "OCP",
+    srcs = ["ocp.proto"],
+    deps = ["@com_google_protobuf//:descriptor_proto"],
+)
+
+
 module(
-    name = "opencannabis.core",
+    name = "core",
     deps = [":Datamodel"],
 )

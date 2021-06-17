@@ -9,8 +9,6 @@
 # Base Settings
 ##
 
-common --experimental_allow_incremental_repository_updates
-
 run --incompatible_restrict_string_escapes=false
 run --incompatible_strict_action_env
 run --workspace_status_command=./tools/bazel_stamp_vars.sh

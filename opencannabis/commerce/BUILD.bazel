@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # Commerce
@@ -14,7 +14,8 @@ proto(
     srcs = ["Customer.proto"],
     deps = [
         "//opencannabis/person:Person",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel"
+    ],
 )
 
 proto(
@@ -22,7 +23,8 @@ proto(
     srcs = ["Delivery.proto"],
     deps = [
         "//opencannabis/geo:Address",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel"
+    ],
 )
 
 proto(
@@ -36,7 +38,8 @@ proto(
     srcs = ["Item.proto"],
     deps = [
         "//opencannabis/base:ProductKey",
-        "//opencannabis/structs/pricing:PricingDescriptor"],
+        "//opencannabis/structs/pricing:PricingDescriptor"
+    ],
 )
 
 proto(
@@ -46,9 +49,13 @@ proto(
         ":Item",
         ":Delivery",
         ":Customer",
+        "//opencannabis/base:ProductKind",
+        "//opencannabis/partner:PartnerKey",
+        "//opencannabis/partner:LocationKey",
         "//opencannabis/commerce/payments:Payment",
         "//opencannabis/temporal:Instant",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel"
+    ],
 )
 
 proto(
@@ -63,12 +70,13 @@ proto(
         "//opencannabis/crypto:Signature",
         "//opencannabis/commerce/payments:Payment",
         "//opencannabis/inventory:InventoryProduct",
-        "//opencannabis/temporal:Instant"],
+        "//opencannabis/temporal:Instant"
+    ],
 )
 
 
 module(
-    name = "opencannabis.commerce",
+    name = "commerce",
     deps = [
         ":Currency",
         ":Customer",
@@ -77,5 +85,6 @@ module(
         ":Item",
         ":Order",
         ":Purchase",
-        "//opencannabis/commerce/payments:opencannabis.commerce.payments"],
+        "//opencannabis/commerce/payments"
+    ],
 )

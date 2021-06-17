@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 ## Base
@@ -31,7 +31,7 @@ proto(
 
 
 module(
-    name = "opencannabis.base",
+    name = "base",
     deps = [
         ":Compression",
         ":Language",

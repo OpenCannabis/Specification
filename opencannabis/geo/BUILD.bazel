@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 ## Geography
@@ -27,7 +27,8 @@ proto(
     srcs = ["Geohash.proto"],
     deps = [
         ":Distance",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 proto(
@@ -35,7 +36,8 @@ proto(
     srcs = ["Point.proto"],
     deps = [
         ":Distance",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 proto(
@@ -46,7 +48,8 @@ proto(
         ":Point",
         ":Distance",
         "//opencannabis/content:Name",
-        "//opencannabis/core:Datamodel"],
+        "//opencannabis/core:Datamodel",
+    ],
 )
 
 proto(
@@ -62,7 +65,7 @@ proto(
 
 
 module(
-    name = "opencannabis.geo",
+    name = "geo",
     deps = [
         ":Address",
         ":Country",
@@ -72,5 +75,6 @@ module(
         ":Location",
         ":USState",
         ":Province",
-        "//opencannabis/geo/usa/ca:opencannabis.geo.usa.ca"],
+        "//opencannabis/geo/usa/ca",
+    ],
 )

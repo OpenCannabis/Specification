@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # California Regulatory
@@ -11,6 +11,6 @@ proto(
 
 
 module(
-    name = "opencannabis.regulatory.usa.ca",
+    name = "ca",
     deps = [":CAAgency"],
 )

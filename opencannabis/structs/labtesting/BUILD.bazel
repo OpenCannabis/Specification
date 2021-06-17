@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # Testing
@@ -28,11 +28,17 @@ proto(
         ":Terpenes",
         ":Cannabinoids",
         "//opencannabis/content:Content",
-        "//opencannabis/temporal:Instant"],
+        "//opencannabis/temporal:Instant",
+    ],
 )
 
 
 module(
-    name = "opencannabis.structs.labtesting",
-    deps = [":TestValue", ":TestResults", ":Terpenes", ":Cannabinoids"],
+    name = "labtesting",
+    deps = [
+        ":TestValue",
+        ":TestResults",
+        ":Terpenes",
+        ":Cannabinoids",
+    ],
 )

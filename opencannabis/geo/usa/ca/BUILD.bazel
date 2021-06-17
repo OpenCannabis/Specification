@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 proto(
     name = "CACounty",
@@ -10,6 +10,6 @@ proto(
 
 
 module(
-    name = "opencannabis.geo.usa.ca",
+    name = "ca",
     deps = [":CACounty"],
 )

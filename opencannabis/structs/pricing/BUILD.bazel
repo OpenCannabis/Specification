@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 # Pricing
@@ -15,11 +15,15 @@ proto(
     srcs = ["PricingDescriptor.proto"],
     deps = [
         ":SaleDescriptor",
-        "//opencannabis/commerce:Currency"],
+        "//opencannabis/commerce:Currency",
+    ],
 )
 
 
 module(
-    name = "opencannabis.structs.pricing",
-    deps = [":SaleDescriptor", ":PricingDescriptor"],
+    name = "pricing",
+    deps = [
+        ":SaleDescriptor",
+        ":PricingDescriptor",
+    ],
 )

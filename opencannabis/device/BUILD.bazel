@@ -1,6 +1,6 @@
 
 package(default_visibility = ["//visibility:public"])
-load("//defs:proto.bzl", "proto", "module")
+load("//tools/defs:proto.bzl", "proto", "module")
 
 
 ## Device
@@ -13,6 +13,6 @@ proto(
 
 
 module(
-    name = "opencannabis.device",
+    name = "device",
     deps = [":Device"],
 )
