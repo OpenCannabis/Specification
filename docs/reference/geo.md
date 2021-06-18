@@ -725,7 +725,7 @@ message YourMessage {
 | `CT` | `7` | State of Connecticut. |
 | `CONNECTICUT` | `7` |  |
 | `DE` | `8` | State of Delaware. |
-| `Delaware` | `8` |  |
+| `DELAWARE` | `8` |  |
 | `DC` | `9` | Washington, District of Columbia (DC). |
 | `DISTRICT_OF_COLUMBIA` | `9` |  |
 | `FL` | `10` | State of Florida. |

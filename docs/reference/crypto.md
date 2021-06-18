@@ -758,7 +758,7 @@ message YourMessage {
 | `RSA` | `0` | RSA keying. |
 | `ECC` | `1` | ECC (curve-based) keying. |
 | `DSA` | `2` | DSA keying. |
-| `EdDSA` | `3` | ED-DSA keying. |
+| `ED_DSA` | `3` | ED-DSA keying. |
 
 
 

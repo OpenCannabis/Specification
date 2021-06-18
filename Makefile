@@ -113,8 +113,8 @@ release: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Perform a release build, including a
 docs: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Update built docs.
 	$(info Building OpenCannabis docs...)
 	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- $(DOCS) \
-		&& $(MKDIR) -p $(DOCROOT) \
-		&& $(TAR) -xvf dist/bin/opencannabis/docs.tar -C $(DOCROOT)/ \
+		&& $(MKDIR) -p $(DOCROOT)/reference \
+		&& $(TAR) -xvf dist/bin/opencannabis/docs.tar -C $(DOCROOT)/reference/ \
 		&& echo "Docs ready in directory 'docs/'."
 
 test: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Run all spec and SDK tests.
