@@ -3,7 +3,7 @@
 ## OpenCannabis: Specification
 #
 
-VERSION ?= 1.9.5-alpha4
+VERSION ?= 2.0.0-alpha1
 
 CI ?= no
 DEBUG ?= no
