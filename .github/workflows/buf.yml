@@ -1,8 +1,6 @@
 name: "protolint"
 
-on:
-  push:
-    branches: "*"
+on: push
 
 jobs:
   proto-lint:
