@@ -68,6 +68,13 @@ description text blah blah.
 </ul><br />
 
 
+<li><code>opencannabis/commerce/Payment.proto</code></li>
+
+<ul>
+    <li><a href="#opencannabis.commerce.BillStatus"><code>BillStatus</code></a></li><li><a href="#opencannabis.commerce.DigitalPaymentNetwork"><code>DigitalPaymentNetwork</code></a></li><li><a href="#opencannabis.commerce.PaymentCardType"><code>PaymentCardType</code></a></li><li><a href="#opencannabis.commerce.PaymentMethod"><code>PaymentMethod</code></a></li><li><a href="#opencannabis.commerce.PaymentStatus"><code>PaymentStatus</code></a></li>
+</ul><br />
+
+
 <li><code>opencannabis/commerce/Purchase.proto</code></li>
 
 <ul>
@@ -994,6 +1001,182 @@ message YourMessage {
 | ---- | ------ | ----------- |
 | `ASAP` | `0` | As soon as possible. |
 | `TIMED` | `1` | Desired time. |
+
+
+<!-- end enums -->
+
+<!-- end HasExtensions -->
+
+<!-- end services -->
+
+
+_________________
+
+
+
+<a name="opencannabis/commerce/Payment.proto"></a>
+<p align="right"><a href="#top" style="text-decoration:none">🔼 Top</a></p>
+
+### `opencannabis/commerce/Payment.proto`
+
+Specifies structures and enumerates related to payments, payment information, and so on.
+
+To import this module:
+
+```proto
+import "opencannabis/commerce/Payment.proto";
+```
+
+|                  |                    |
+| ---------------- | ------------------ |
+| **Domain**       | `object.ocpx.info` |
+| **Package**      | `opencannabis.commerce`     |
+| **Bazel Target** | `//opencannabis.commerce`   |
+|                  |                    |
+
+
+<!-- end messages -->
+
+
+<a name="opencannabis.commerce.BillStatus"></a>
+
+### Enumeration: <code>BillStatus</code> (`opencannabis.commerce.BillStatus`)
+
+Enumeration for payment status of an order.
+
+```proto
+import "opencannabis/commerce/Payment.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  opencannabis.commerce.BillStatus enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `SUSPENSE` | `0` | The bill has not been paid, partially or in full. |
+| `PARTIAL` | `3` | The user has paid partially for this order. |
+| `SETTLED` | `4` | The user has settled payment for this order in full. |
+
+
+
+<a name="opencannabis.commerce.DigitalPaymentNetwork"></a>
+
+### Enumeration: <code>DigitalPaymentNetwork</code> (`opencannabis.commerce.DigitalPaymentNetwork`)
+
+Enumerates types of digital payment networks.
+
+```proto
+import "opencannabis/commerce/Payment.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  opencannabis.commerce.DigitalPaymentNetwork enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `UNSPECIFIED_NETWORK` | `0` | Unspecified or unrecognized digital payment network. |
+| `PAYPAL` | `1` | Paypal. |
+| `VENMO` | `2` | Venmo. |
+| `SQUARE` | `3` | Square or Square Cash. |
+
+
+
+<a name="opencannabis.commerce.PaymentCardType"></a>
+
+### Enumeration: <code>PaymentCardType</code> (`opencannabis.commerce.PaymentCardType`)
+
+Enumerates recognized payment methods.
+
+```proto
+import "opencannabis/commerce/Payment.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  opencannabis.commerce.PaymentCardType enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `NO_CARD_TYPE` | `0` | Payment card type is not applicable. |
+| `VISA` | `1` | Visa. |
+| `MASTERCARD` | `2` | Mastercard. |
+| `DISCOVER` | `3` | Discover. |
+| `AMEX` | `4` | American Express. |
+| `DINERS_CLUB` | `5` | Diners' Club. |
+| `MAESTRO` | `6` | Maestro. |
+
+
+
+<a name="opencannabis.commerce.PaymentMethod"></a>
+
+### Enumeration: <code>PaymentMethod</code> (`opencannabis.commerce.PaymentMethod`)
+
+Enumerates recognized payment methods.
+
+```proto
+import "opencannabis/commerce/Payment.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  opencannabis.commerce.PaymentMethod enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `CASH` | `0` | Fiat or real-value cash currency. |
+| `CHECK` | `1` | Payment by check. |
+| `DEBIT` | `2` | Debit card payment. |
+| `CREDIT` | `3` | Credit card payment. |
+| `DIGITAL` | `4` | Digital payment via something like Paypal or Venmo. |
+| `ACH` | `5` | Bank account-based payment. |
+| `WIRE` | `6` | Payment by wire transfer. |
+| `BLOCKCHAIN` | `7` | Payment via Bitcoin or some other blockchain. |
+
+
+
+<a name="opencannabis.commerce.PaymentStatus"></a>
+
+### Enumeration: <code>PaymentStatus</code> (`opencannabis.commerce.PaymentStatus`)
+
+Enumeration for status of an individual payment portion.
+
+```proto
+import "opencannabis/commerce/Payment.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  opencannabis.commerce.PaymentStatus enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `NOT_APPLICABLE` | `0` | Payment information is not applicable to this order. |
+| `WAITING` | `1` | Charge is pending fulfillment. |
+| `PREAUTHORIZED` | `2` | The user's card has been pre-authorized, pending fulfillment. |
+| `BOUNCED` | `3` | Payment for this order did not go through. |
+| `RETRIED` | `4` | Payment for this order did not go through, and was retried. |
 
 
 <!-- end enums -->
