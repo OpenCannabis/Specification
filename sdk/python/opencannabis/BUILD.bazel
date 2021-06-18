@@ -44,7 +44,6 @@ DEPS_LIST = [
     "structs",
     "temporal",
 ]] + ["//sdk/python/opencannabis/%s:%s" % (path, name) for (path, name) in [
-    ("commerce/payments", "payments"),
     ("geo/usa/ca", "ca"),
     ("inventory/rfid", "rfid"),
     ("products/distribution", "distribution"),

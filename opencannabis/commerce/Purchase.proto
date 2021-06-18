@@ -20,7 +20,7 @@ import "opencannabis/accounting/Taxes.proto";
 import "opencannabis/commerce/Item.proto";
 import "opencannabis/commerce/Currency.proto";
 import "opencannabis/commerce/Discounts.proto";
-import "opencannabis/commerce/payments/Payment.proto";
+import "opencannabis/commerce/Payment.proto";
 
 import "opencannabis/inventory/InventoryProduct.proto";
 
