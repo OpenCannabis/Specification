@@ -36,7 +36,6 @@ MODULES = [
     "person",
     "products",
     "proximity",
-#    "regulatory",
     "rfid",
     "structs",
     "temporal",

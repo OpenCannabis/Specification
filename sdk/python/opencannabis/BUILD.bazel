@@ -48,7 +48,6 @@ DEPS_LIST = [
     ("geo/usa/ca", "ca"),
     ("products/distribution", "distribution"),
     ("products/menu", "menu"),
-    ("regulatory/usa/ca", "ca"),
     ("structs/labtesting", "labtesting"),
     ("structs/pricing", "pricing"),
 ]]
