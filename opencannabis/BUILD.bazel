@@ -13,121 +13,56 @@ load(
     "buf_image",
 )
 
-
-alias(
-    name = "accounting",
-    actual = "//opencannabis/accounting",
+load(
+    "@bazel_tools//tools/build_defs/pkg:pkg.bzl",
+    "pkg_tar",
 )
 
-alias(
-    name = "base",
-    actual = "//opencannabis/base",
-)
 
-alias(
-    name = "commerce",
-    actual = "//opencannabis/commerce",
-)
+MODULES = [
+    "accounting",
+    "base",
+    "commerce",
+    "contact",
+    "content",
+    "core",
+    "crypto",
+    "device",
+    "geo",
+    "inventory",
+    "media",
+    "oauth",
+    "partner",
+    "person",
+    "products",
+    "proximity",
+    "structs",
+    "temporal",
+]
 
-alias(
-    name = "contact",
-    actual = "//opencannabis/contact",
-)
+DOC_SKIP = [
+    "inventory",
+    "products",
+]
 
-alias(
-    name = "content",
-    actual = "//opencannabis/content",
-)
 
-alias(
-    name = "core",
-    actual = "//opencannabis/core",
-)
-
-alias(
-    name = "crypto",
-    actual = "//opencannabis/crypto",
-)
-
-alias(
-    name = "device",
-    actual = "//opencannabis/device",
-)
-
-alias(
-    name = "geo",
-    actual = "//opencannabis/geo",
-)
-
-alias(
-    name = "inventory",
-    actual = "//opencannabis/inventory",
-)
-
-alias(
-    name = "media",
-    actual = "//opencannabis/media",
-)
-
-alias(
-    name = "oauth",
-    actual = "//opencannabis/oauth",
-)
-
-alias(
-    name = "partner",
-    actual = "//opencannabis/partner",
-)
-
-alias(
-    name = "person",
-    actual = "//opencannabis/person",
-)
-
-alias(
-    name = "products",
-    actual = "//opencannabis/products",
-)
-
-alias(
-    name = "proximity",
-    actual = "//opencannabis/proximity",
-)
-
-alias(
-    name = "structs",
-    actual = "//opencannabis/structs",
-)
-
-alias(
-    name = "temporal",
-    actual = "//opencannabis/temporal",
-)
+[
+    alias(
+        name = n,
+        actual = "//opencannabis/%s" % n,
+    ) for n in MODULES
+]
 
 
 ## OpenCannabis: Models
 module(
     name = "OpenCannabis",
-    deps = [
-        ":accounting",
-        ":base",
-        ":commerce",
-        ":contact",
-        ":content",
-        ":core",
-        ":crypto",
-        ":device",
-        ":geo",
-        ":inventory",
-        ":media",
-        ":oauth",
-        ":partner",
-        ":person",
-        ":products",
-        ":proximity",
-        ":structs",
-        ":temporal",
-    ],
+    deps = [":%s" % n for n in MODULES],
+)
+
+alias(
+    name = "opencannabis",
+    actual = ":OpenCannabis",
 )
 
 alias(
@@ -135,6 +70,10 @@ alias(
     actual = ":OpenCannabis",
 )
 
+pkg_tar(
+    name = "docs",
+    srcs = ["//opencannabis/%s:%s-doc" % (n, n) for n in MODULES if n not in DOC_SKIP],
+)
 
 buf_image(
     name = "image_bin",

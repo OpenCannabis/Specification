@@ -11,13 +11,14 @@ VERBOSE ?= no
 WORKFLOW ?= protocol
 
 ## Targets
-SCHEMA ?= //opencannabis:OpenCannabis
+SCHEMA ?= //opencannabis
 IMAGE ?= //opencannabis:image
-DOCS ?=
+DOCS ?= //opencannabis:docs
 
 #### Targets: SDKs
 PYSDK ?= //sdk/python:library
 SDKS ?= $(PYSDK)
+DOCROOT ?= $(shell pwd)/docs
 
 TARGETS ?= $(SCHEMA) $(IMAGE) $(DOCS) $(SDKS)
 
@@ -71,6 +72,7 @@ else
 endif
 
 ## Tools
+TAR ?= $(shell which tar)
 GIT ?= $(shell which git)
 GREP ?= $(shell which grep)
 JAVA ?= $(shell which java)
@@ -98,6 +100,13 @@ all: build test  ## Build and test the specification.
 build: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Build all specification targets.
 	$(info Building OpenCannabis...)
 	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- $(TARGETS)
+
+docs: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Update built docs.
+	$(info Building OpenCannabis docs...)
+	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- $(DOCS) \
+		&& mkdir -p $(DOCROOT) \
+		&& $(TAR) -xvf dist/bin/opencannabis/docs.tar -C $(DOCROOT)/ \
+		&& echo "Docs ready in directory 'docs/'."
 
 test: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Run all spec and SDK tests.
 	$(info Running testsuite...)
