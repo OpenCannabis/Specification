@@ -330,7 +330,21 @@ import "opencannabis/base/ProductKind.proto";
 
 ### Enumeration: <code>ProductKind</code> (`opencannabis.base.ProductKind`)
 
-Enumerates types of products known to the spec.
+Enumerates types of non-abstract products known to the spec.
+
+All [`ProductKey`](#ProductKey) records carry a `ProductKind`, which broadly identifies the type of product
+referenced by the key. In polymorphic circumstances, a `oneof` field with concrete product types may also carry an
+identifying instance of this enumeration, which allows for code re-use when decoding generic menu data.
+
+### Super kinds
+Each `ProductKind` is related to a taxonomic category by way of [`ProductSuperkind`](#ProductSuperkind). Via the
+`taxonomy` annotation, one can scan for these super-kinds and enforce constraints or apply other logic that
+effectively operates across multiple categories, based on regulatory boundaries.
+
+### Concrete sub-kinds
+Some product kinds have concrete (contextually-specific) _sub-kinds_. Examples include `FLOWER` and `EXTRACT`. These
+sub-kinds are defined within the `opencannabis.products` package, with each expressed inline with the sibling model
+which it relates to.
 
 ```proto
 import "opencannabis/base/ProductKind.proto";
@@ -347,14 +361,14 @@ message YourMessage {
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | `GENERIC` | `0` | Default value (do not use explicitly). Generic or unrecognized product kind. |
-| `FLOWERS` | `100` | Traditional buds or 'flower'-based products, essentially sold in bags or jars. |
-| `EDIBLES` | `200` | Manufactured products that are edible, like drinks, snacks, candy, and food. |
-| `EXTRACTS` | `300` | Manufactured products that are concentrated from flowers in some manner, such as wax or oil. |
-| `PREROLLS` | `400` | Pre-rolled items, generally made from flowers, like a cigarette - this would cover joints, etc. |
+| `FLOWER` | `100` | Traditional buds or 'flower'-based products, essentially sold in bags or jars. |
+| `PREROLL` | `200` | Pre-rolled items, generally made from flowers, like a cigarette - this would cover joints, etc. |
+| `EXTRACT` | `300` | Manufactured products that are concentrated from flowers in some manner, such as wax or oil. |
+| `EDIBLE` | `400` | Manufactured products that are edible, like drinks, snacks, candy, and food. |
 | `APOTHECARY` | `500` | Tinctures, topicals, capsules, and other forms of manufactured cannabis. |
-| `CARTRIDGES` | `600` | Vaporizor cartridges, batteries, and kits. |
-| `PLANTS` | `700` | Plants sold direct, in various forms such as pre-grown (clones) or raw seeds. |
-| `MERCHANDISE` | `800` | Merchandise, usually branded in-house. Also covers glassware and miscellaneous items. |
+| `VAPE` | `600` | Vaporizer cartridges, batteries, and kits. |
+| `PLANT` | `700` | Plants sold direct, in various forms such as pre-grown (clones) or raw seeds. |
+| `MERCHANDISE` | `999` | Merchandise, usually branded in-house. Also covers glassware and miscellaneous items. |
 
 
 <!-- end enums -->

@@ -25,6 +25,37 @@ message OCPFieldInfo {
   string key_path = 2;
 }
 
+// Enumerates abstract meta-types that relate to products known to the spec.
+//
+// Every [`ProductKind`](#ProductKind) instance relates to a single `ProductSuperkind`, which describes how that product
+// category fits into the taxonomic hierarchy for regulated cannabis markets. By and large, regulatory boundaries are
+// drawn at the borders between flower, extracts, CBD, and non-cannabis products. Each of those are enumerated herein,
+// and then related to a [`ProductKind`](#ProductKind) by way of annotation.
+enum ProductSuperkind {
+  // Designates a non-cannabis product category or type.
+  //
+  // Non-cannabis product categories or types classify products which contain no cannabis and no hemp product, in any
+  // way, shape, or form. Examples of non-cannabis products include t-shirts, rolling trays, stickers, and keychains.
+  NON_CANNABIS = 0;
+
+  //
+  CANNABIS_FLOWER = 110;
+
+  //
+  CANNABIS_EXTRACT = 120;
+}
+
+message KindOptions {
+  //
+  ProductSuperkind taxonomy = 1;
+}
+
+
+// Extends enumeration values with a special annotation which categories a given [`ProductKind`](#ProductKind).
+extend google.protobuf.EnumValueOptions {
+  // Taxonomy mapping for a given product kind.
+  KindOptions meta_kind = 420001;
+}
 
 extend google.protobuf.MessageOptions {
   // Info regarding how a concrete model maps to an abstract model.

@@ -14,6 +14,19 @@ description text blah blah.
 
 <ul>
 
+<li><code>opencannabis/core/ocp.proto</code></li>
+
+<ul>
+    <li><a href="#core.KindOptions"><code>KindOptions</code></a></li><li><a href="#core.OCPFieldInfo"><code>OCPFieldInfo</code></a></li><li><a href="#core.OCPModelInfo"><code>OCPModelInfo</code></a></li>
+</ul>
+<ul>
+    <li><a href="#core.ProductSuperkind"><code>ProductSuperkind</code></a></li>
+</ul>
+<ul>
+    <li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li>
+</ul><br />
+
+
 <li><code>opencannabis/core/datamodel.proto</code></li>
 
 <ul>
@@ -30,6 +43,173 @@ description text blah blah.
 </ul>
 
 
+
+
+_________________
+
+
+
+<a name="opencannabis/core/ocp.proto"></a>
+<p align="right"><a href="#top" style="text-decoration:none">🔼 Top</a></p>
+
+### `opencannabis/core/ocp.proto`
+
+Specifies structures that relate to data modeling and the structure of the data. Enumerates collection mode and field
+type. Overridden from the central Gust framework which defines the core of the spec.
+
+To import this module:
+
+```proto
+import "opencannabis/core/ocp.proto";
+```
+
+|                  |                    |
+| ---------------- | ------------------ |
+| **Domain**       | `object.ocpx.info` |
+| **Package**      | `core`     |
+| **Bazel Target** | `//core`   |
+|                  |                    |
+
+
+
+<a name="core.KindOptions"></a>
+
+### Message: <code>KindOptions</code> (`core.KindOptions`)
+
+
+
+```proto
+import "opencannabis/core/ocp.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    core.KindOptions field_name = 1;
+}
+
+```
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| `taxonomy` | [`ProductSuperkind`](#core.ProductSuperkind) | *None.* |  |
+
+
+
+
+
+
+
+<a name="core.OCPFieldInfo"></a>
+
+### Message: <code>OCPFieldInfo</code> (`core.OCPFieldInfo`)
+
+Describes info relating to OpenCannabis for a given model field.
+
+```proto
+import "opencannabis/core/ocp.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    core.OCPFieldInfo field_name = 1;
+}
+
+```
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| `map_to` | [`string`](#string) | *None.* | Field that corresponds to this one on the abstract version of this model, mapped via `Message.model`. |
+| `key_path` | [`string`](#string) | *None.* | Describes the universal key path assigned to this field by the OpenCannabis Spec, as applicable. |
+
+
+
+
+
+
+
+<a name="core.OCPModelInfo"></a>
+
+### Message: <code>OCPModelInfo</code> (`core.OCPModelInfo`)
+
+Describes info relating to OpenCannabis for a given concrete model definition.
+
+```proto
+import "opencannabis/core/ocp.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    core.OCPModelInfo field_name = 1;
+}
+
+```
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| `model` | [`string`](#string) | *None.* | Named model which this record should inflate to. |
+
+
+
+
+
+
+<!-- end messages -->
+
+
+<a name="core.ProductSuperkind"></a>
+
+### Enumeration: <code>ProductSuperkind</code> (`core.ProductSuperkind`)
+
+Enumerates abstract meta-types that relate to products known to the spec.
+
+Every [`ProductKind`](#ProductKind) instance relates to a single `ProductSuperkind`, which describes how that product
+category fits into the taxonomic hierarchy for regulated cannabis markets. By and large, regulatory boundaries are
+drawn at the borders between flower, extracts, CBD, and non-cannabis products. Each of those are enumerated herein,
+and then related to a [`ProductKind`](#ProductKind) by way of annotation.
+
+```proto
+import "opencannabis/core/ocp.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  core.ProductSuperkind enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `NON_CANNABIS` | `0` | Designates a non-cannabis product category or type.
+
+Non-cannabis product categories or types classify products which contain no cannabis and no hemp product, in any way, shape, or form. Examples of non-cannabis products include t-shirts, rolling trays, stickers, and keychains. |
+| `CANNABIS_FLOWER` | `110` |  |
+| `CANNABIS_EXTRACT` | `120` |  |
+
+
+<!-- end enums -->
+
+
+<a name="opencannabis/core/ocp.proto-extensions"></a>
+
+### File-level Extensions
+
+| Extension | Type | Base | Number | Description |
+| --------- | ---- | ---- | ------ | ----------- |
+| meta_kind | KindOptions | .google.protobuf.EnumValueOptions | 420001 | Taxonomy mapping for a given product kind. |
+| ocp | OCPFieldInfo | .google.protobuf.FieldOptions | 7005 | Describes configuration for this field when used in OpenCannabis systems. |
+| model | OCPModelInfo | .google.protobuf.MessageOptions | 6005 | Info regarding how a concrete model maps to an abstract model. |
+
+<!-- end HasExtensions -->
+
+<!-- end services -->
 
 
 _________________

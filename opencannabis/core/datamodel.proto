@@ -242,7 +242,6 @@ extend google.protobuf.FieldOptions {
   DatapointOptions opts = 7003;
 }
 
-
 extend google.protobuf.EnumValueOptions {
   // Human-readable label for a given enumeration value state. Optional, can be used by invoking code to generate labels
   // for states in forms or other UI.
