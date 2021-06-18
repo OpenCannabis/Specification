@@ -15,27 +15,30 @@ option java_outer_classname = "BaseProductKind";
 
 // Enumerates types of products known to the spec.
 enum ProductKind {
+  // Default value (do not use explicitly). Generic or unrecognized product kind.
+  GENERIC = 0 [deprecated = true];
+
   // Traditional buds or 'flower'-based products, essentially sold in bags or jars.
-  FLOWERS = 0;
+  FLOWERS = 100;
 
   // Manufactured products that are edible, like drinks, snacks, candy, and food.
-  EDIBLES = 1;
+  EDIBLES = 200;
 
   // Manufactured products that are concentrated from flowers in some manner, such as wax or oil.
-  EXTRACTS = 2;
+  EXTRACTS = 300;
 
   // Pre-rolled items, generally made from flowers, like a cigarette - this would cover joints, etc.
-  PREROLLS = 3;
+  PREROLLS = 400;
 
   // Tinctures, topicals, capsules, and other forms of manufactured cannabis.
-  APOTHECARY = 4;
+  APOTHECARY = 500;
 
   // Vaporizor cartridges, batteries, and kits.
-  CARTRIDGES = 5;
+  CARTRIDGES = 600;
 
   // Plants sold direct, in various forms such as pre-grown (clones) or raw seeds.
-  PLANTS = 6;
+  PLANTS = 700;
 
   // Merchandise, usually branded in-house. Also covers glassware and miscellaneous items.
-  MERCHANDISE = 7;
+  MERCHANDISE = 800;
 }
