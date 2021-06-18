@@ -150,4 +150,4 @@ $(BAZELISK_BIN): $(ENV)
 	$(info Installing Bazelisk...)
 	$(RULE)$(CURL) -L --progress-bar $(BAZELISK_BIN_SRC) > $(BAZELISK_BIN) && $(CHMOD) +x $(BAZELISK_BIN)
 
-.PHONY: build test clean distclean forceclean help env
+.PHONY: build test clean distclean forceclean help env docs

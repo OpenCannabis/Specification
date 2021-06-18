@@ -1,54 +1,97 @@
-# Protocol Documentation
+# `module`: Protocol Reference
 <a name="top"></a>
 
----
-Module: `module`
-Package: `opencannabis.module`
-Domain: rfc.opencannabis.info
----
+The OpenCannabis `module` module is designed to do some useful things, which are really valuable because reasons. More
+description text blah blah.
 
+|                   |                           |
+| ----------------- | ------------------------- |
+| **Module**        | `opencannabis.module`     |
+| **Bazel Package** | `//opencannabis/module`   |
+|                   |                           |
 
-## Reference Documentation
+## Table of Contents
+
+<ul>
 {{range .Files}}
-{{$file_name := .Name}}- [{{.Name}}](#{{.Name}})
-{{- if .Messages }}
-{{range .Messages}}  - [{{.LongName}}](#{{.FullName}})
-{{end}}
+<li>{{$file_name := .Name}}<code>{{.Name}}</code></li>
+{{if .Messages }}
+<ul>
+    {{range .Messages}}<li><a href="#{{.FullName}}"><code>{{.LongName}}</code></a></li>{{end}}
+</ul>
 {{- end -}}
-{{- if .Enums }}
-{{range .Enums}}  - [{{.LongName}}](#{{.FullName}})
-{{end}}
+{{if .Enums }}
+<ul>
+    {{range .Enums}}<li><a href="#{{.FullName}}"><code>{{.LongName}}</code></a></li>{{end}}
+</ul>
 {{- end -}}
-{{- if .Extensions }}
-{{range .Extensions}}  - [File-level Extensions](#{{$file_name}}-extensions)
-{{end}}
+{{if .Extensions}}
+<ul>
+    {{range .Extensions}}<li><a href="#{{$file_name}}-extensions">File-level Extensions</a></li>{{end}}
+</ul>
 {{- end -}}
-{{- if .Services }}
-{{range .Services}}  - [{{.Name}}](#{{.FullName}})
-{{end}}
+{{if .Services}}
+<ul>
+    {{range .Services}}<li><a href="#{{.FullName}}"><code>{{.LongName}}</code></a></li>{{end}}
+</ul>
 {{- end -}}
+<br />
+
 {{end}}
+</ul>
 
 
 {{range .Files}}
+
+_________________
+
 {{$file_name := .Name}}
+{{$message_pkg := .Package}}
 <a name="{{.Name}}"></a>
-<p align="right"><a href="#top">Top</a></p>
+<p align="right"><a href="#top" style="text-decoration:none">🔼 Top</a></p>
 
-## {{.Name}}
+### `{{.Name}}`
+
 {{.Description}}
+
+To import this module:
+
+```proto
+import "{{.Name}}";
+```
+
+|                  |                    |
+| ---------------- | ------------------ |
+| **Domain**       | `object.ocpx.info` |
+| **Package**      | `{{.Package}}`     |
+| **Bazel Target** | `//{{.Package}}`   |
+|                  |                    |
+
 
 {{range .Messages}}
 <a name="{{.FullName}}"></a>
 
-### {{.LongName}}
+### Message: <code>{{.LongName}}</code> (`{{$message_pkg}}.{{.LongName}}`)
+
 {{.Description}}
+
+```proto
+import "{{$file_name}}";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    {{$message_pkg}}.{{.LongName}} field_name = 1;
+}
+
+```
 
 {{if .HasFields}}
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 {{range .Fields -}}
-| {{.Name}} | [{{.LongType}}](#{{.FullType}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{nobr .Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| `{{.Name}}` | [`{{.LongType}}`](#{{.FullType}}) | {{default "*None.*" .Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{nobr .Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{end}}
 {{end}}
 
@@ -60,18 +103,32 @@ Domain: rfc.opencannabis.info
 {{end}}
 {{end}}
 
+
 {{end}}<!-- end messages -->
 
 {{range .Enums}}
 <a name="{{.FullName}}"></a>
 
-### {{.LongName}}
+### Enumeration: <code>{{.LongName}}</code> (`{{$message_pkg}}.{{.LongName}}`)
+
 {{.Description}}
+
+```proto
+import "{{$file_name}}";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  {{$message_pkg}}.{{.LongName}} enum_name = 1;
+}
+
+```
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 {{range .Values -}}
-| {{.Name}} | {{.Number}} | {{nobr .Description}} |
+| `{{.Name}}` | `{{.Number}}` | {{nobr .Description}} |
 {{end}}
 
 {{end}}<!-- end enums -->
@@ -80,6 +137,7 @@ Domain: rfc.opencannabis.info
 <a name="{{$file_name}}-extensions"></a>
 
 ### File-level Extensions
+
 | Extension | Type | Base | Number | Description |
 | --------- | ---- | ---- | ------ | ----------- |
 {{range .Extensions -}}
@@ -90,7 +148,8 @@ Domain: rfc.opencannabis.info
 {{range .Services}}
 <a name="{{.FullName}}"></a>
 
-### {{.Name}}
+### Service: <code>{{.Name}}</code> (`{{$message_pkg}}.{{.LongName}}`)
+
 {{.Description}}
 
 | Method Name | Request Type | Response Type | Description |
