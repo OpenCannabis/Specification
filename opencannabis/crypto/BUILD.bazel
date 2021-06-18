@@ -3,13 +3,26 @@ package(default_visibility = ["//visibility:public"])
 load("//tools/defs:proto.bzl", "proto", "module")
 
 
+# Cryptographic Primitives
+proto(
+    name = "Integrity",
+    srcs = ["Integrity.proto"],
+)
+
+proto(
+    name = "Keys",
+    srcs = ["Keys.proto"],
+    deps = [":Integrity"],
+)
+
+
 # Cryptography
 proto(
     name = "Signature",
     srcs = ["Signature.proto"],
     deps = [
-        "//opencannabis/crypto/primitives:Keys",
-        "//opencannabis/crypto/primitives:Integrity",
+        ":Keys",
+        ":Integrity",
     ],
 )
 
@@ -19,8 +32,8 @@ proto(
     deps = [
         "//opencannabis/base:Compression",
         "//opencannabis/content:Content",
-        "//opencannabis/crypto/primitives:Keys",
-        "//opencannabis/crypto/primitives:Integrity",
+        ":Keys",
+        ":Integrity",
     ],
 )
 
@@ -28,8 +41,9 @@ proto(
 module(
     name = "crypto",
     deps = [
-        ":Signature",
         ":Container",
-        "//opencannabis/crypto/primitives",
+        ":Integrity",
+        ":Keys",
+        ":Signature",
     ],
 )

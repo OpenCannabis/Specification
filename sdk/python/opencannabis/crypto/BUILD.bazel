@@ -13,6 +13,8 @@ ocp_module(
     name = "crypto",
     init = ":__init__.py",
     protos = [
+        "Integrity",
+        "Keys",
         "Container",
         "Signature",
     ]

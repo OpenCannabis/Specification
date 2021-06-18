@@ -31,7 +31,7 @@ proto(
         "//opencannabis/products:Plant",
         "//opencannabis/products:Preroll",
         "//opencannabis/products:SKU",
-        "//opencannabis/crypto/primitives:Integrity",
+        "//opencannabis/crypto:Integrity",
     ],
 )
 
