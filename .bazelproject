@@ -1,5 +1,6 @@
 directories:
   .github
+  docs
   opencannabis
   config
   tools
