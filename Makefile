@@ -72,6 +72,7 @@ else
 endif
 
 ## Tools
+CP ?= $(shell which cp)
 TAR ?= $(shell which tar)
 GIT ?= $(shell which git)
 GREP ?= $(shell which grep)
@@ -101,10 +102,18 @@ build: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Build all specification targets.
 	$(info Building OpenCannabis...)
 	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- $(TARGETS)
 
+release: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Perform a release build, including a doc/bin update.
+	$(info Releasing OpenCannabis...)
+	$(RULE)$(BAZEL) build $(BUILD_ARGS) --config=release -- $(DOCS) $(IMAGE) \
+		&& $(MKDIR) -p $(DOCROOT) \
+		&& echo "Doc release complete." \
+		&& $(CP) -f $(POSIX_FLAGS) dist/bin/opencannabis/OpenCannabis.buf.bin ./OpenCannabis.buf.bin \
+		&& echo "Image release complete.";
+
 docs: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Update built docs.
 	$(info Building OpenCannabis docs...)
 	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- $(DOCS) \
-		&& mkdir -p $(DOCROOT) \
+		&& $(MKDIR) -p $(DOCROOT) \
 		&& $(TAR) -xvf dist/bin/opencannabis/docs.tar -C $(DOCROOT)/ \
 		&& echo "Docs ready in directory 'docs/'."
 
