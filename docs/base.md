@@ -338,9 +338,9 @@ carry an identifying instance of this enumeration, which allows for code re-use 
 
 #### Super kinds
 Each `ProductKind` is related to a taxonomic category by way of
-[`ProductSuperkind`](../core.md#opecannabis.core.ProductSuperkind). Via the `taxonomy` annotation, one can scan for
-these super-kinds and enforce constraints or apply other logic that effectively operates across multiple categories,
-based on regulatory boundaries.
+[`ProductSuperkind`](core.md#core.ProductSuperkind). Via the `taxonomy` annotation, one can scan for these super-kind
+symbols and enforce constraints or apply other logic that effectively operates across multiple categories, based on
+regulatory boundaries.
 
 #### Concrete sub-kinds
 Some product kinds have concrete (contextually-specific) _sub-kinds_. Examples include `FLOWER` and `EXTRACT`. These
