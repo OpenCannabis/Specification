@@ -135,7 +135,7 @@ enum KeyingScheme {
   DSA = 2;
 
   // ED-DSA keying.
-  EdDSA = 3;
+  ED_DSA = 3;
 }
 
 

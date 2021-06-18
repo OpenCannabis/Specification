@@ -39,7 +39,7 @@ enum TestMethod {
   CLASSIC_PCR = 3;
 
   // Quantitative PCR is a genetic test that quantifies the amount of specific genes within a sample.
-  qPCR = 4;
+  Q_PCR = 4;
 
   // ELISA, or enzyme-linked immunosorbent assay, is an antibody based test that is used to detect and quantify
   // specific substances within the sample.
