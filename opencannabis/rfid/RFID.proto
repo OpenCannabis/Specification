@@ -5,11 +5,11 @@
  */
 syntax = "proto3";
 
-package opencannabis.inventory.rfid;
+package opencannabis.rfid;
 
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
-option java_package = "io.opencannabis.schema.inventory";
+option java_package = "io.opencannabis.schema.rfid";
 option java_multiple_files = true;
 
 import "opencannabis/core/datamodel.proto";

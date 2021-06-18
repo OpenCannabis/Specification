@@ -4,16 +4,16 @@
  */
 syntax = "proto3";
 
-package opencannabis.inventory.rfid;
+package opencannabis.rfid;
 
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
-option java_package = "io.opencannabis.schema.inventory";
+option java_package = "io.opencannabis.schema.rfid";
 option java_multiple_files = true;
 
 import "opencannabis/core/datamodel.proto";
 import "opencannabis/temporal/Instant.proto";
-import "opencannabis/inventory/rfid/RFID.proto";
+import "opencannabis/rfid/RFID.proto";
 
 
 // Describes available regulatory capabilities, each of which map to a jurisdiction or region, and relevant regulatory

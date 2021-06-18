@@ -12,7 +12,7 @@ load(
 ocp_module(
     name = "rfid",
     init = ":__init__.py",
-    package = "inventory/rfid",
+    package = "rfid",
     protos = [
         "LLRP",
         "RFID",
