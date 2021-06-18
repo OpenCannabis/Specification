@@ -1,3 +1,4 @@
+"""Declares tools for working with Protocol Buffer sources."""
 
 load(
     "@io_bazel_rules_closure//closure:defs.bzl",
@@ -36,6 +37,16 @@ def __declare_lang_protos(name, kwargs):
     )
 
 
+def __declare_filegroup(name, srcs):
+
+    """ Declare a sources filegroup. """
+
+    native.filegroup(
+        name = "%s-src" % name,
+        srcs = srcs,
+    )
+
+
 def __declare_native(name, kwargs):
 
     """ Declare a target as a native proto library. """
@@ -57,16 +68,19 @@ def __declare_closure_proto(name, kwargs):
     )
 
 def _proto(name, **kwargs):
-
     """
-    Proxy individual proto declarations to relevant native and extension rules, which need to know about each individual
-    proto. "Proto modules" are exported using the `_module` function in the same way. Keyword arguments are proxied in
-    full, with selected entries being removed where needed. Positional arguments are not supported.
+    Proxy individual proto declarations to relevant native and extension rules.
+    
+    Individual rules need to know about each individual proto. "Proto modules" are exported using the `module` function in
+    the same way. Keyword arguments are proxied in full, with selected entries being removed where needed. Positional
+    arguments are not supported.
 
+    :param name: Name of the target.
     :param kwargs: Keyword arguments to pass along.
     :returns: Nothing - defines rules instead.
     """
 
+    __declare_filegroup(name, kwargs["srcs"])
     __declare_native(name, kwargs)
     __declare_closure_proto(name, kwargs)
     __declare_lang_protos(name, kwargs)
@@ -74,12 +88,13 @@ def _proto(name, **kwargs):
 
 
 def _module(name, **kwargs):
-
     """
-    Proxy module proto declarations to relevant native and extension rules, which need to know about each grouping of
-    protos. Individual protos are exported each using the `_proto` function in the same way. Keyword arguments are
+    Proxy module proto declarations to relevant native and extension rules, which need to know about each grouping of protos.
+
+    Individual protos are exported each using the `_proto` function in the same way. Keyword arguments are
     proxied in full, with selected entries being removed where needed. Positional arguments are not supported.
 
+    :param name: Name of the target.
     :param kwargs: Keyword arguments to pass along.
     :returns: Nothing - defines rules instead.
     """

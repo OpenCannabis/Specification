@@ -1,12 +1,8 @@
+"""Provides tools for doc generation."""
 
 load(
     "@bazel_skylib//lib:new_sets.bzl",
     _sets = "sets",
-)
-
-load(
-    "@com_google_protobuf//:protobuf.bzl",
-    _proto_gen = "proto_gen",
 )
 
 _PROTOC = "$(location @com_google_protobuf//:protoc)"
@@ -94,8 +90,23 @@ def __declare_module_docs(name, modules, kwargs):
     """ Declare a doc target for module documentation. """
 
     native.filegroup(
-        name = "%s-doc" % name,
+        name = "%s-docs" % name,
         srcs = [("%s-doc" % submod) for submod in modules],
+    )
+
+    native.genrule(
+        name = "%s-doc" % (name),
+        srcs = [":%s-docs" % name] + [("%s-doc" % submod) for submod in modules],
+        outs = ["%s.%s" % (name, "md")],
+        cmd = " ".join([
+            "cat",
+            "$(locations %s-docs)" % name,
+            "> $@",
+        ]),
+        tools = [
+            "//tools:protoc-gen-doc",
+            "@com_google_protobuf//:protoc",
+        ],
     )
 
 
