@@ -84,9 +84,6 @@ buf_image(
     protos = [
         ":OpenCannabis",
     ],
-    extra_args = [
-        "--log-level=debug",
-    ],
 )
 
 buf_image(
