@@ -53,7 +53,7 @@ jobs:
   copybara-migrate-site:
     name: "Sync: Site"
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     steps:
       # 1: Pull code.
       - uses: actions/checkout@v2
@@ -87,7 +87,7 @@ jobs:
   copybara-migrate-protocol:
     name: "Sync: Site"
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     steps:
       # 1: Pull code.
       - uses: actions/checkout@v2
