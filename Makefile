@@ -86,6 +86,7 @@ BASH ?= $(shell which bash)
 YARN ?= $(shell which yarn)
 MKDIR ?= $(shell which mkdir)
 CHMOD ?= $(shell which chmod)
+GCLOUD ?= $(shell which gcloud)
 
 ## Local Tools
 BAZELISK_BIN ?= $(ENV)/bazelisk
@@ -93,8 +94,14 @@ COPYBARA_JAR ?= $(ENV)/copybara.jar
 COPYBARA_JAR_SRC ?= https://storage.googleapis.com/cookies-runtime/software/copybara.jar
 BAZELISK_BIN_SRC ?= https://github.com/bazelbuild/bazelisk/releases/download/$(BAZELISK_VERSION)/bazelisk-$(PLATFORM)-amd64
 
-
 LOCAL_TOOLS ?= $(COPYBARA_JAR)
+
+## KMS
+KMS_ARGS ?= --project=opencannabis-crypto --keyring=devops --key=keys --location=global
+
+KMS_SITE_ENV_PLAINTEXT ?= site/.env
+KMS_SITE_ENV_CIPHERTEXT ?= $(KMS_SITE_ENV_PLAINTEXT).enc
+KMS_SITE_ENV ?= --plaintext-file=$(KMS_SITE_ENV_PLAINTEXT) --ciphertext-file=$(KMS_SITE_ENV_CIPHERTEXT)
 
 ## Aliases
 BAZEL ?= $(BAZELISK_BIN) $(BAZELISK_ARGS)
@@ -103,15 +110,15 @@ COPYBARA ?= $(JAVA) -jar $(COPYBARA_JAR)
 
 all: build test  ## Build and test the specification.
 
-build: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Build specification targets via `TARGETS=` (by default, all of them).
+build: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(KEYS)  ## Build specification targets via `TARGETS=` (by default, all of them).
 	$(info Building OpenCannabis...)
 	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- $(TARGETS)
 
-run tool: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Run a tool or application, specified by `APP=`.
+run tool: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(KEYS)  ## Run a tool or application, specified by `APP=`.
 	$(info Running OpenCannabis...)
 	$(RULE)$(BAZEL) run $(BUILD_ARGS) -- $(TOOL) $(APP)
 
-site: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(NODE_MODULES) $(SITE_NODE_MODULES)  ## Run the OpenCannabis project site via Next.
+site: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(NODE_MODULES) $(SITE_NODE_MODULES) $(KEYS)  ## Run the OpenCannabis project site via Next.
 	$(info Running OpenCannabis site...)
 	$(RULE)cd site && $(YARN) run dev;
 
@@ -150,7 +157,17 @@ help:  ## Show this help text.
 	$(info OpenCannabis v$(VERSION):)
 	$(RULE)$(GREP) -E '^[a-z1-9A-Z_-]+:.*?## .*$$' $(PWD)/Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-env: $(ENV)  ## Bootstrap the local environment.
+env: $(ENV) $(KEYS)  ## Bootstrap the local environment.
+
+keys $(KEYS):  ## Decrypt key material needed for development. Requires GCP permissions.
+	$(info Decrypting key material...)
+	$(RULE)$(GCLOUD) kms decrypt $(KMS_ARGS) $(KMS_SITE_ENV)
+	@echo "Keys decrypted."
+
+encrypt:  ## Encrypt, or re-encrypt, local key material. Requires GCP permissions.
+	$(info Encrypting key material...)
+	$(RULE)$(GCLOUD) kms encrypt $(KMS_ARGS) $(KMS_SITE_ENV)
+	@echo "Keys encrypted."
 
 migrate: $(COPYBARA_JAR) $(BAZELISK_BIN)  ## Perform a migration via Copybara.
 	$(info Migrating '$(WORKFLOW)'...)
