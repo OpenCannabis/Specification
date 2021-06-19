@@ -1,2 +1,2 @@
 protobuf==3.13.0
-colorlog==4.2.1
+colorlog==4.8.0
