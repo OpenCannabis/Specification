@@ -112,7 +112,6 @@ jobs:
           gpg_key: ${{ secrets.BOT_GPG_KEY }}
           gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
           image: us.gcr.io/elide-ai/tools/copybara:latest
-          options: --force
           workflow: protocol
           command: validate
 
