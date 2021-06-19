@@ -1,0 +1,121 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "@bazel_tools//tools/build_defs/pkg:pkg.bzl",
+    "pkg_tar",
+)
+
+load(
+    "@site_npm//next:index.bzl",
+    "next",
+)
+
+exports_files([
+    "tsconfig.json",
+    "package.json",
+    "netlify.toml",
+    "next.config.js",
+    "next-env.d.ts",
+    "postcss.config.js",
+    "tailwind.config.js",
+])
+
+
+filegroup(
+    name = "configs",
+    srcs = [
+        ":tsconfig.json",
+        ":package.json",
+        ":netlify.toml",
+        ":next-env.d.ts",
+        ":next.config.js",
+        ":postcss.config.js",
+        ":tailwind.config.js",
+    ],
+)
+
+filegroup(
+    name = "styles",
+    srcs = glob([
+        "styles/*.css",
+        "styles/**/*.css",
+    ])
+)
+
+filegroup(
+    name = "lib",
+    srcs = glob([
+        "lib/*.js",
+        "lib/*.jsx",
+        "lib/*.ts",
+        "lib/*.tsx",
+        "lib/**/*.js",
+        "lib/**/*.jsx",
+        "lib/**/*.ts",
+        "lib/**/*.tsx",
+    ])
+)
+
+filegroup(
+    name = "pages",
+    srcs = glob([
+        "pages/*.js",
+        "pages/*.jsx",
+        "pages/*.ts",
+        "pages/*.tsx",
+        "pages/**/*.js",
+        "pages/**/*.jsx",
+        "pages/**/*.ts",
+        "pages/**/*.tsx",
+    ])
+)
+
+DEPS = [
+   ":configs",
+   ":styles",
+   ":lib",
+   ":pages",
+]
+
+
+next(
+    name = "site-build",
+    data = DEPS,
+    args = ["build"],
+#    visibility = ["//visibility:private"],
+)
+
+next(
+    name = "site-export",
+    data = DEPS + [":site-build"],
+    args = ["export"],
+#    visibility = ["//visibility:private"],
+)
+
+next(
+    name = "site-dev",
+    data = DEPS + [":site-build"],
+    args = [],
+#    visibility = ["//visibility:private"],
+)
+
+alias(
+    name = "export",
+    actual = "site-export",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "dev",
+    actual = "site-dev",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "site",
+    actual = "site-export",
+    visibility = ["//visibility:public"],
+)

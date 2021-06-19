@@ -5,6 +5,7 @@ directories:
   config
   tools
   sdk
+  site
   -dist/
 
 build_flags:

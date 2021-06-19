@@ -9,6 +9,8 @@ CI ?= no
 DEBUG ?= no
 VERBOSE ?= no
 WORKFLOW ?= protocol
+TOOL ?=
+APP ?=
 
 ## Targets
 SCHEMA ?= //opencannabis
@@ -32,6 +34,8 @@ BAZELISK_VERSION ?= v1.9.0
 
 COPYBARA_ACTION ?= migrate
 COPYBARA_FLAGS ?= --ignore-noop
+NODE_MODULES ?= node_modules/
+SITE_NODE_MODULES ?= site/node_modules/
 
 ## Flag Logic
 ifeq ($(VERBOSE),yes)
@@ -79,6 +83,7 @@ GREP ?= $(shell which grep)
 JAVA ?= $(shell which java)
 CURL ?= $(shell which curl)
 BASH ?= $(shell which bash)
+YARN ?= $(shell which yarn)
 MKDIR ?= $(shell which mkdir)
 CHMOD ?= $(shell which chmod)
 
@@ -98,9 +103,17 @@ COPYBARA ?= $(JAVA) -jar $(COPYBARA_JAR)
 
 all: build test  ## Build and test the specification.
 
-build: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Build all specification targets.
+build: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Build specification targets via `TARGETS=` (by default, all of them).
 	$(info Building OpenCannabis...)
 	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- $(TARGETS)
+
+run tool: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Run a tool or application, specified by `APP=`.
+	$(info Running OpenCannabis...)
+	$(RULE)$(BAZEL) run $(BUILD_ARGS) -- $(TOOL) $(APP)
+
+site: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(NODE_MODULES) $(SITE_NODE_MODULES)  ## Run the OpenCannabis project site via Next.
+	$(info Running OpenCannabis site...)
+	$(RULE)cd site && $(YARN) run dev;
 
 release: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Perform a release build, including a doc/bin update.
 	$(info Releasing OpenCannabis...)
@@ -151,6 +164,14 @@ $(ENV):
 	$(info Building local environment...)
 	$(RULE)$(MKDIR) -p $(POSIX_FLAGS) $(ENV)
 
+$(NODE_MODULES):
+	$(info Installing Node dependencies for module 'main'...)
+	$(RULE)$(YARN)
+
+$(SITE_NODE_MODULES):
+	$(info Installing Node dependencies for module 'site'...)
+	$(RULE)cd site && $(YARN)
+
 $(COPYBARA_JAR): $(ENV)
 	$(info Installing Copybara...)
 	$(RULE)$(CURL) --progress-bar $(COPYBARA_JAR_SRC) > $(COPYBARA_JAR)
@@ -159,4 +180,4 @@ $(BAZELISK_BIN): $(ENV)
 	$(info Installing Bazelisk...)
 	$(RULE)$(CURL) -L --progress-bar $(BAZELISK_BIN_SRC) > $(BAZELISK_BIN) && $(CHMOD) +x $(BAZELISK_BIN)
 
-.PHONY: build test clean distclean forceclean help env docs
+.PHONY: build test clean distclean forceclean help env docs site

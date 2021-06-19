@@ -108,7 +108,7 @@ load(
 )
 
 node_repositories(
-    package_json = ["//:package.json"],
+    package_json = ["//:package.json", "//site:package.json"],
     node_version = NODE_VERSION,
     yarn_version = YARN_VERSION,
 )
@@ -116,6 +116,13 @@ node_repositories(
 yarn_install(
     name = "npm",
     package_json = "//:package.json",
+    yarn_lock = "//:yarn.lock",
+    strict_visibility = True,
+)
+
+yarn_install(
+    name = "site_npm",
+    package_json = "//site:package.json",
     yarn_lock = "//:yarn.lock",
     strict_visibility = True,
 )

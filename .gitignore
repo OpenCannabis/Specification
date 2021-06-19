@@ -3,5 +3,8 @@ bazel-*
 .ijwb/
 tools/Makefile
 .env/
+site/.env
 node_modules/
 .DS_Store
+*.key
+site/.next/
