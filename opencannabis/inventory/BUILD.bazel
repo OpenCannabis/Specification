@@ -33,6 +33,5 @@ module(
     deps = [
         ":InventoryProduct",
         ":InventoryLocation",
-        "//opencannabis/inventory/rfid",
     ],
 )

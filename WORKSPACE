@@ -15,6 +15,18 @@ load(
     GUST_VERSION = "VERSION",
 )
 
+
+NODE_VERSION = "14.15.0"
+YARN_VERSION = "1.22.4"
+
+
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = "e589e39ef46fb2b3b476b3ca355bd324e5984cbdfac19f0e1625f0042e99c276",
+    strip_prefix = "protobuf-fde7cf7358ec7cd69e8db9be4f1fa6a5c431386a",
+    url = "https://github.com/google/protobuf/archive/fde7cf7358ec7cd69e8db9be4f1fa6a5c431386a.tar.gz",
+)
+
 (local_repository(
     name = "gust",
     path = "/Users/sam.g/Workspace/Elide",
@@ -83,26 +95,44 @@ http_archive(
 )
 
 ## NodeJS
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "6a67a8a1bf6fddc9113f73471029b819eef4575c3a936a4a01d57e411894d692",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/2.0.2/rules_nodejs-2.0.2.tar.gz"],
+    sha256 = "0fa2d443571c9e02fcb7363a74ae591bdcce2dd76af8677a95965edf329d778a",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.6.0/rules_nodejs-3.6.0.tar.gz"],
 )
 
-load("@build_bazel_rules_nodejs//:index.bzl",
-     "node_repositories",
-     "yarn_install")
+load(
+    "@build_bazel_rules_nodejs//:index.bzl",
+    "node_repositories",
+    "yarn_install",
+)
 
 node_repositories(
-    package_json = ["//:package.json"],
-    node_version = "10.13.0",
-    yarn_version = "1.12.1")
+    package_json = ["//:package.json", "//site:package.json"],
+    node_version = NODE_VERSION,
+    yarn_version = YARN_VERSION,
+)
 
 yarn_install(
     name = "npm",
     package_json = "//:package.json",
-    yarn_lock = "//:yarn.lock")
+    yarn_lock = "//:yarn.lock",
+    strict_visibility = True,
+)
+
+yarn_install(
+    name = "site_npm",
+    package_json = "//site:package.json",
+    yarn_lock = "//:yarn.lock",
+    strict_visibility = True,
+)
+
+load(
+    "@npm//@bazel/labs:package.bzl",
+    "npm_bazel_labs_dependencies",
+)
+
+npm_bazel_labs_dependencies()
 
 ## Java Repos/Deps
 load("//config:jdeps.bzl", java_setup = "java_repositories")
@@ -115,10 +145,8 @@ pinned_maven_install()
 load("@rules_python//python:repositories.bzl", "py_repositories")
 py_repositories()
 
-load("@rules_python//python:pip.bzl", "pip_repositories")
+load("@rules_python//python:pip.bzl", "pip_repositories", pip_import = "pip3_import")
 pip_repositories()
-
-load("@rules_python//python:pip.bzl", pip_import = "pip3_import")
 
 pip_import(
     name = "protobuf_py_deps",
@@ -201,8 +229,8 @@ load("@protoc_gen_doc//defs:deps.bzl", protoc_gen_doc_dependencies="go_dependenc
 protoc_gen_doc_dependencies()
 
 ## Buf
-RULES_BUF_VERSION = "a86e01e3df1d86e7ec6cd852c75999e0c9cec737"
-RULES_BUF_FINGERPRINT = "6231cfaf453b27c4639b58d683c9213e0dd61af7f4545a4cfc677e5745b45e92"
+RULES_BUF_VERSION = "7e55fac95a13c2fd126201dc1aacc5a2af04c356"
+RULES_BUF_FINGERPRINT = "736f446b4fcf929e4fffdc73779672fd25873ddaa2693f081ea35b1f342c1fd6"
 
 (local_repository(
     name = "rules_buf",
@@ -217,4 +245,3 @@ RULES_BUF_FINGERPRINT = "6231cfaf453b27c4639b58d683c9213e0dd61af7f4545a4cfc677e5
 
 load("@rules_buf//buf:repos.bzl", "buf_repositories")
 buf_repositories()
-

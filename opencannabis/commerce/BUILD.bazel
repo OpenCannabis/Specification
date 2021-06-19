@@ -52,10 +52,15 @@ proto(
         "//opencannabis/base:ProductKind",
         "//opencannabis/partner:PartnerKey",
         "//opencannabis/partner:LocationKey",
-        "//opencannabis/commerce/payments:Payment",
+        "//opencannabis/commerce:Payment",
         "//opencannabis/temporal:Instant",
         "//opencannabis/core:Datamodel"
     ],
+)
+
+proto(
+    name = "Payment",
+    srcs = ["Payment.proto"],
 )
 
 proto(
@@ -68,7 +73,7 @@ proto(
         "//opencannabis/core:Datamodel",
         "//opencannabis/accounting:Taxes",
         "//opencannabis/crypto:Signature",
-        "//opencannabis/commerce/payments:Payment",
+        "//opencannabis/commerce:Payment",
         "//opencannabis/inventory:InventoryProduct",
         "//opencannabis/temporal:Instant"
     ],
@@ -84,7 +89,7 @@ module(
         ":Discounts",
         ":Item",
         ":Order",
+        ":Payment",
         ":Purchase",
-        "//opencannabis/commerce/payments"
     ],
 )

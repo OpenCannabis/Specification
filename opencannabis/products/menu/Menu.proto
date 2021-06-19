@@ -19,7 +19,7 @@ import "opencannabis/base/ProductKey.proto";
 import "opencannabis/media/MediaKey.proto";
 import "opencannabis/temporal/Instant.proto";
 import "opencannabis/products/menu/Section.proto";
-import "opencannabis/crypto/primitives/Integrity.proto";
+import "opencannabis/crypto/Integrity.proto";
 
 import "opencannabis/products/SKU.proto";
 import "opencannabis/products/Apothecary.proto";

@@ -1,0 +1,168 @@
+# `module`: Protocol Reference
+<a name="top"></a>
+
+The OpenCannabis `module` module is designed to do some useful things, which are really valuable because reasons. More
+description text blah blah.
+
+|                   |                           |
+| ----------------- | ------------------------- |
+| **Module**        | `opencannabis.module`     |
+| **Bazel Package** | `//opencannabis/module`   |
+|                   |                           |
+
+## Table of Contents
+
+<ul>
+{{range .Files}}
+<li>{{$file_name := .Name}}<code>{{.Name}}</code></li>
+{{if .Messages }}
+<ul>
+    {{range .Messages}}<li><a href="#{{.FullName}}"><code>{{.LongName}}</code></a></li>{{end}}
+</ul>
+{{- end -}}
+{{if .Enums }}
+<ul>
+    {{range .Enums}}<li><a href="#{{.FullName}}"><code>{{.LongName}}</code></a></li>{{end}}
+</ul>
+{{- end -}}
+{{if .Extensions}}
+<ul>
+    {{range .Extensions}}<li><a href="#{{$file_name}}-extensions">File-level Extensions</a></li>{{end}}
+</ul>
+{{- end -}}
+{{if .Services}}
+<ul>
+    {{range .Services}}<li><a href="#{{.FullName}}"><code>{{.LongName}}</code></a></li>{{end}}
+</ul>
+{{- end -}}
+<br />
+
+{{end}}
+</ul>
+
+
+{{range .Files}}
+
+_________________
+
+{{$file_name := .Name}}
+{{$message_pkg := .Package}}
+<a name="{{.Name}}"></a>
+<p align="right"><a href="#top" style="text-decoration:none">🔼 Top</a></p>
+
+### `{{.Name}}`
+
+{{.Description}}
+
+To import this module:
+
+```proto
+import "{{.Name}}";
+```
+
+|                  |                    |
+| ---------------- | ------------------ |
+| **Domain**       | `object.ocpx.info` |
+| **Package**      | `{{.Package}}`     |
+| **Bazel Target** | `//{{.Package}}`   |
+|                  |                    |
+
+
+{{range .Messages}}
+<a name="{{.FullName}}"></a>
+
+### Message: <code>{{.LongName}}</code> (`{{$message_pkg}}.{{.LongName}}`)
+
+{{.Description}}
+
+```proto
+import "{{$file_name}}";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    {{$message_pkg}}.{{.LongName}} field_name = 1;
+}
+
+```
+
+{{if .HasFields}}
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+{{range .Fields -}}
+| `{{.Name}}` | [`{{.LongType}}`](#{{.FullType}}) | {{default "*None.*" .Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{nobr .Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+{{end}}
+
+{{if .HasExtensions}}
+| Extension | Type | Base | Number | Description |
+| --------- | ---- | ---- | ------ | ----------- |
+{{range .Extensions -}}
+| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{nobr .Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+{{end}}
+
+
+{{end}}<!-- end messages -->
+
+{{range .Enums}}
+<a name="{{.FullName}}"></a>
+
+### Enumeration: <code>{{.LongName}}</code> (`{{$message_pkg}}.{{.LongName}}`)
+
+{{.Description}}
+
+```proto
+import "{{$file_name}}";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  {{$message_pkg}}.{{.LongName}} enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+{{range .Values -}}
+| `{{.Name}}` | `{{.Number}}` | {{nobr .Description}} |
+{{end}}
+
+{{end}}<!-- end enums -->
+
+{{if .HasExtensions}}
+<a name="{{$file_name}}-extensions"></a>
+
+### File-level Extensions
+
+| Extension | Type | Base | Number | Description |
+| --------- | ---- | ---- | ------ | ----------- |
+{{range .Extensions -}}
+| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{nobr .Description}}{{if .DefaultValue}} Default: `{{.DefaultValue}}`{{end}} |
+{{end}}
+{{end}}<!-- end HasExtensions -->
+
+{{range .Services}}
+<a name="{{.FullName}}"></a>
+
+### Service: <code>{{.Name}}</code> (`{{$message_pkg}}.{{.LongName}}`)
+
+{{.Description}}
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+{{range .Methods -}}
+| {{.Name}} | [{{.RequestLongType}}](#{{.RequestFullType}}){{if .RequestStreaming}} stream{{end}} | [{{.ResponseLongType}}](#{{.ResponseFullType}}){{if .ResponseStreaming}} stream{{end}} | {{nobr .Description}} |
+{{end}}
+{{end}}<!-- end services -->
+{{end}}
+
+
+---
+
+Copyright &copy; 2021, OpenCannabis Authors. All rights reserved. Shared and released under
+[GNU GPLv3 License](https://www.gnu.org/licenses/gpl-3.0.en.html). For more details regarding licensing, please see the
+`LICENSE.txt` file distributed with the OpenCannabis Protocol Sources.

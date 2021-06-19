@@ -1,12 +1,47 @@
 
+cookiesRepo = "git@github.com:CookiesCo/OpenCannabis.git"
+cookiesBranch = "v2/beta1"
+
 sourceRepo = "git@github.com:OpenCannabis/Specification.git"
-sourceBranch = "fix/core"
+sourceBranch = "master"
+upstreamBranch = "ocp/sync"
 
 protocolRepo = "git@github.com:OpenCannabis/Protocol.git"
 protocolBranch = "ocp/upstream"
 
+siteRepo = "git@github.com:OpenCannabis/Site.git"
+siteBranch = "ocp/upstream"
+
 pythonRepo = "git@github.com:OpenCannabis/Python.git"
 pythonBranch = "ocp/upstream"
+
+
+core.workflow(
+    name = "upstream",
+    origin = git.origin(
+        url = cookiesRepo,
+        ref = cookiesBranch,
+    ),
+    destination = git.destination(
+        url = sourceRepo,
+        fetch = sourceBranch,
+        push = upstreamBranch,
+    ),
+    origin_files = glob(["**/*.*"]),
+    destination_files = glob(["**/*.*"]),
+    authoring = authoring.pass_thru(
+        "Cookiebot <techteam+github@cookiescalifornia.com>"),
+    transformations = [
+        core.replace(
+            before = "${x}",
+            after = "",
+            multiline = True,
+            regex_groups = {
+                "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
+            },
+        ),
+    ],
+)
 
 core.workflow(
     name = "protocol",
@@ -81,8 +116,8 @@ core.workflow(
         core.move("WORKSPACE.disabled", "WORKSPACE"),
         core.replace(
             before = "//sdk/python/",
-	    after = "//",
-	),
+	        after = "//",
+	    ),
         core.replace(
             before = "//sdk/python:",
             after = "//:",
@@ -92,6 +127,38 @@ core.workflow(
             after = "@ocp//opencannabis/%s",
             paths = glob(["config/rules.bzl"]),
         ),
+        core.replace(
+            before = "${x}",
+            after = "",
+            multiline = True,
+            regex_groups = {
+                "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
+            },
+        ),
+    ],
+)
+
+core.workflow(
+    name = "site",
+    origin = git.origin(
+        url = cookiesRepo,
+        ref = cookiesBranch,
+    ),
+    destination = git.destination(
+        url = siteRepo,
+        fetch = "master",
+        push = siteBranch,
+    ),
+    origin_files = glob([
+        "site/**/*.*",
+    ]),
+    destination_files = glob([
+        "site/**/*.*",
+    ]),
+    authoring = authoring.pass_thru(
+        "Cookiebot <techteam+github@cookiescalifornia.com>"),
+    transformations = [
+        core.move("site/", ""),
         core.replace(
             before = "${x}",
             after = "",

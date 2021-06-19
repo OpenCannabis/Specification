@@ -18,5 +18,6 @@ ocp_module(
         "Discounts",
         "Item",
         "Order",
+        "Payment",
     ],
 )

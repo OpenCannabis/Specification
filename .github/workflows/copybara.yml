@@ -1,0 +1,46 @@
+name: "copybara"
+
+on:
+  push:
+    branches:
+      - master
+      - release/*
+
+jobs:
+  copybara-migrate:
+    runs-on: ubuntu-latest
+    name: "Sync: Protocol"
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          workflow: protocol
+          command: validate
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+
+      # 3: Publish to Digital Platform as PR.
+      - name: Migration
+        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          workflow: protocol
+          command: migrate
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+

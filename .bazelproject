@@ -1,22 +1,24 @@
 directories:
   .github
-  defs
+  docs
   opencannabis
   config
   tools
   sdk
+  site
   -dist/
 
 build_flags:
   --define=ocp_release_tag=latest
 
 workspace_type: java
-java_language_level: 8
+java_language_level: 11
 
 targets:
   //opencannabis/...
   //sdk/...
   //config/...
+  -//sdk/python/pytests/...
 
 test_sources:
   - *tests*
@@ -25,6 +27,7 @@ additional_languages:
   java
   kotlin
   python
+  javascript
   typescript
   go
 

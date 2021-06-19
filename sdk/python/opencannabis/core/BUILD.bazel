@@ -13,6 +13,7 @@ ocp_module(
     name = "core",
     init = ":__init__.py",
     protos = [
+        "OCP",
         "Datamodel",
     ]
 )

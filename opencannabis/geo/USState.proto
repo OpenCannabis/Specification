@@ -49,7 +49,7 @@ enum USState {
 
   // State of Delaware.
   DE = 8;
-  Delaware = 8;
+  DELAWARE = 8;
 
   // Washington, District of Columbia (DC).
   DC = 9;

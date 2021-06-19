@@ -1,0 +1,43 @@
+name: "protolint"
+
+on: push
+
+jobs:
+  proto-lint:
+    runs-on: ubuntu-latest
+    name: "Buf: Lint"
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@v2
+
+      # 2: Setup Buf.
+      - uses: bufbuild/buf-setup-action@v0.1.0
+        with:
+          version: '0.41.0'
+
+      # 3: Run linter.
+      - uses: bufbuild/buf-lint-action@v0.2.0
+        with:
+          github_token: ${{ github.token }}
+
+  proto-breaking:
+    runs-on: ubuntu-latest
+    name: "Buf: Break Detector"
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@v2
+
+      # 2: Setup Buf.
+      - uses: bufbuild/buf-setup-action@v0.1.0
+        with:
+          version: '0.41.0'
+
+      # 3: Run break detector.
+      - uses: bufbuild/buf-breaking-action@v0.2.0
+        env:
+          BUF_INPUT_HTTPS_USERNAME: ${{ github.actor }}
+          BUF_INPUT_HTTPS_PASSWORD: ${{ github.token }}
+        with:
+          against: 'https://github.com/CookiesCo/OpenCannabis.git#branch=v2/beta1'
+          github_token: ${{ github.token }}
+

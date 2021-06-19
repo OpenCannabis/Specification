@@ -1,0 +1,25 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "@bazel_tools//tools/build_defs/pkg:pkg.bzl",
+    "pkg_tar",
+)
+
+DOC_MODULES = [
+    "architecture",
+    "reference",
+]
+
+
+filegroup(
+    name = "docs-srcs",
+    srcs = ["//docs/%s" % mod for mod in DOC_MODULES],
+)
+
+pkg_tar(
+    name = "docs",
+    srcs = [":docs-srcs"],
+)

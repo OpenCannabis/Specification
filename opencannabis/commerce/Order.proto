@@ -20,7 +20,7 @@ import "opencannabis/base/ProductKind.proto";
 import "opencannabis/commerce/Item.proto";
 import "opencannabis/commerce/Delivery.proto";
 import "opencannabis/commerce/Customer.proto";
-import "opencannabis/commerce/payments/Payment.proto";
+import "opencannabis/commerce/Payment.proto";
 
 import "opencannabis/partner/PartnerKey.proto";
 import "opencannabis/partner/LocationKey.proto";
