@@ -1,11 +1,6 @@
 name: "copybara"
 
-on:
-  push:
-    branches:
-      - master
-      - release/*
-      - site/*
+on: push
 
 jobs:
   copybara-validate-site:
