@@ -7,11 +7,25 @@ on:
       - release/*
       - site/*
 
+blocks:
+  copybara-check: &check
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/master'
+  copybara-migrate: &migrate
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/master'
+  cookiebot: &cookiebot
+    git_name: Cookiebot
+    git_email: techteam+github@cookiescalifornia.com
+    git_credentials: ${{ secrets.BOT_API_CREDS }}
+    ssh_key: ${{ secrets.BOT_SSH_KEY }}
+    ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+    gpg_key: ${{ secrets.BOT_GPG_KEY }}
+    gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+    image: us.gcr.io/elide-ai/tools/copybara:latest
+
 jobs:
-  copybara-validate-site:
-    <<: &copybara-check
-      runs-on: ubuntu-latest
-      if: github.ref != 'refs/heads/master'
+  copybara-validate-site: *check
     name: "Validate: Site"
     steps:
       # 1: Pull code.
@@ -20,21 +34,11 @@ jobs:
       # 2: Validate migration via Copybara.
       - name: Validate Migration
         uses: &image sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
-        with:
-          <<: &cookiebot
-            git_name: Cookiebot
-            git_email: techteam+github@cookiescalifornia.com
-            git_credentials: ${{ secrets.BOT_API_CREDS }}
-            ssh_key: ${{ secrets.BOT_SSH_KEY }}
-            ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
-            gpg_key: ${{ secrets.BOT_GPG_KEY }}
-            gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
-            image: us.gcr.io/elide-ai/tools/copybara:latest
+        with: *cookiebot
           workflow: site
           command: validate
 
-  copybara-validate-protocol:
-    <<: *copybara-check
+  copybara-validate-protocol: *check
     name: "Validate: Protocol"
     steps:
       # 1: Pull code.
@@ -43,15 +47,11 @@ jobs:
       # 2: Validate migration via Copybara.
       - name: Validate Migration
         uses: *image
-        with:
-          <<: *cookiebot
+        with: *cookiebot
           workflow: site
           command: validate
 
-  copybara-migrate-site:
-    <<: &copybara-migrate
-      runs-on: ubuntu-latest
-      if: github.ref != 'refs/heads/master'
+  copybara-migrate-site: *migrate
     name: "Sync: Site"
     steps:
       # 1: Pull code.
@@ -60,21 +60,18 @@ jobs:
       # 2: Validate migration via Copybara.
       - name: Validate Migration
         uses: *image
-        with:
-          <<: *cookiebot
+        with: *cookiebot
           workflow: site
           command: validate
 
       # 3: Publish to site as PR.
       - name: Migration
         uses: *image
-        with:
-          <<: *cookiebot
+        with: *cookiebot
           workflow: site
           command: migrate
 
-  copybara-migrate-protocol:
-    <<: *copybara-migrate
+  copybara-migrate-protocol: *migrate
     name: "Sync: Site"
     steps:
       # 1: Pull code.
@@ -83,15 +80,13 @@ jobs:
       # 2: Validate migration via Copybara.
       - name: Validate Migration
         uses: *image
-        with:
-          <<: *cookiebot
+        with: *cookiebot
           workflow: protocol
           command: validate
 
       # 3: Publish to protocol as PR.
       - name: Migration
         uses: *image
-        with:
-          <<: *cookiebot
+        with: *cookiebot
           workflow: site
           command: migrate
