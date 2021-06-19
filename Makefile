@@ -3,7 +3,7 @@
 ## OpenCannabis: Specification
 #
 
-VERSION ?= 2.0.0-alpha1
+VERSION ?= 2.0.0-alpha2
 
 CI ?= no
 DEBUG ?= no
@@ -20,7 +20,7 @@ DOCS ?= //opencannabis:docs
 #### Targets: SDKs
 PYSDK ?= //sdk/python:library
 SDKS ?= $(PYSDK)
-DOCROOT ?= $(shell pwd)/docs
+DOCROOT ?= $(shell pwd)/site/docs
 
 TARGETS ?= $(SCHEMA) $(IMAGE) $(DOCS) $(SDKS)
 

@@ -1,4 +1,4 @@
-name: "protolint"
+name: "proto"
 
 on: push
 
