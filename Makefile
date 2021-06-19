@@ -118,7 +118,17 @@ run tool: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(KEYS)  ## Run a tool or application, 
 	$(info Running OpenCannabis...)
 	$(RULE)$(BAZEL) run $(BUILD_ARGS) -- $(TOOL) $(APP)
 
-site: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(NODE_MODULES) $(SITE_NODE_MODULES) $(KEYS)  ## Run the OpenCannabis project site via Next.
+site: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(NODE_MODULES) $(SITE_NODE_MODULES) $(KEYS)  ## Build the OpenCannabis site.
+	$(info Building OpenCannabis site...)
+	$(RULE)cd site && $(YARN) run build;
+	@echo "Site build complete."
+
+export: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(NODE_MODULES) $(SITE_NODE_MODULES) $(KEYS)  ## Export the OpenCannabis site as a static package.
+	$(info Exporting OpenCannabis site...)
+	$(RULE)cd site && $(YARN) run export;
+	@echo "Site export complete. Targets ready in 'site/out'."
+
+dev: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(NODE_MODULES) $(SITE_NODE_MODULES) $(KEYS)  ## Run the OpenCannabis project site via Next.
 	$(info Running OpenCannabis site...)
 	$(RULE)cd site && $(YARN) run dev;
 
