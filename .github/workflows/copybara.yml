@@ -85,7 +85,7 @@ jobs:
           command: migrate
 
   copybara-migrate-protocol:
-    name: "Sync: Site"
+    name: "Sync: Protocol"
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
