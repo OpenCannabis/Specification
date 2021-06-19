@@ -32,5 +32,68 @@
     "terser": ">=4.0.0 <5.0.0",
     "typescript": "<4.3"
   },
-  "homepage": "https://github.com/OpenCannabis/Specification#readme"
+  "homepage": "https://github.com/OpenCannabis/Specification#readme",
+  "renovate": {
+    "extends": [
+      "config:base"
+    ],
+    "enabled": true,
+    "pinDigests": true,
+    "cloneSubmodules": false,
+    "fetchReleaseNotes": true,
+    "stabilityDays": 3,
+    "baseBranches": [
+      "dev"
+    ],
+    "rebaseWhen": "auto",
+    "assigneesFromCodeOwners": true,
+    "branchConcurrentLimit": 10,
+    "prConcurrentLimit": 10,
+    "postUpdateOptions": [
+      "yarnDedupeHighest"
+    ],
+    "labels": [
+      "dependencies"
+    ],
+    "dependencyDashboard": true,
+    "dependencyDashboardAutoclose": false,
+    "ignoreDeps": [
+      "io_grpc_java",
+      "com_google_protobuf",
+      "io_bazel_rules_kotlin",
+      "com_github_grpc_grpc_web"
+    ],
+    "enabledManagers": [
+      "dockerfile",
+      "github-actions",
+      "npm",
+      "swift",
+      "cocoapods",
+      "bazel",
+      "buildkite",
+      "pip_requirements"
+    ],
+    "packageRules": [
+      {
+        "packageNames": [
+          "typescript"
+        ],
+        "allowedVersions": "<4.3"
+      },
+      {
+        "packageNames": [
+          "google-protobuf"
+        ],
+        "rangeStrategy": "pin"
+      }
+    ],
+    "vulnerabilityAlerts": {
+      "labels": [
+        "security"
+      ],
+      "assignees": [
+        "@sgammon"
+      ]
+    }
+  }
 }
