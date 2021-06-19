@@ -122,5 +122,5 @@ jobs:
           gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
           image: us.gcr.io/elide-ai/tools/copybara:latest
           options: --force --ignore-noop
-          workflow: site
+          workflow: protocol
           command: migrate

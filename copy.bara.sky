@@ -153,7 +153,7 @@ core.workflow(
         "site/**/*.*",
     ]),
     destination_files = glob([
-        "site/**/*.*",
+        "**/*.*",
     ]),
     authoring = authoring.pass_thru(
         "Cookiebot <techteam+github@cookiescalifornia.com>"),
