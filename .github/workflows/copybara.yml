@@ -20,6 +20,8 @@ jobs:
       - name: Validate Migration
         uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
         with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
           git_credentials: ${{ secrets.BOT_API_CREDS }}
           ssh_key: ${{ secrets.BOT_SSH_KEY }}
           ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
@@ -41,6 +43,8 @@ jobs:
       - name: Validate Migration
         uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
         with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
           git_credentials: ${{ secrets.BOT_API_CREDS }}
           ssh_key: ${{ secrets.BOT_SSH_KEY }}
           ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
@@ -62,6 +66,8 @@ jobs:
       - name: Validate Migration
         uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
         with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
           git_credentials: ${{ secrets.BOT_API_CREDS }}
           ssh_key: ${{ secrets.BOT_SSH_KEY }}
           ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
@@ -75,6 +81,8 @@ jobs:
       - name: Migration
         uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
         with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
           git_credentials: ${{ secrets.BOT_API_CREDS }}
           ssh_key: ${{ secrets.BOT_SSH_KEY }}
           ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
@@ -96,6 +104,8 @@ jobs:
       - name: Validate Migration
         uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
         with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
           git_credentials: ${{ secrets.BOT_API_CREDS }}
           ssh_key: ${{ secrets.BOT_SSH_KEY }}
           ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
@@ -110,6 +120,8 @@ jobs:
       - name: Migration
         uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
         with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
           git_credentials: ${{ secrets.BOT_API_CREDS }}
           ssh_key: ${{ secrets.BOT_SSH_KEY }}
           ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
