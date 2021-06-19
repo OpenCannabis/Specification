@@ -1,3 +1,2 @@
 [build]
-  publish = "out"
-  command = "yarn run export"
+  command = "yarn run build && yarn run export"

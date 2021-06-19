@@ -20,7 +20,7 @@ DOCS ?= //opencannabis:docs
 #### Targets: SDKs
 PYSDK ?= //sdk/python:library
 SDKS ?= $(PYSDK)
-DOCROOT ?= $(shell pwd)/docs
+DOCROOT ?= $(shell pwd)/site/docs
 
 TARGETS ?= $(SCHEMA) $(IMAGE) $(DOCS) $(SDKS)
 
