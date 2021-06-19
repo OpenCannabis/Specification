@@ -1,6 +1,6 @@
 
 cookiesRepo = "git@github.com:CookiesCo/OpenCannabis.git"
-cookiesBranch = "v2/beta1"
+cookiesBranch = "master"
 
 sourceRepo = "git@github.com:OpenCannabis/Specification.git"
 sourceBranch = "master"

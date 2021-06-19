@@ -5,42 +5,93 @@ on:
     branches:
       - master
       - release/*
+      - site/*
 
 jobs:
-  copybara-migrate:
-    runs-on: ubuntu-latest
-    name: "Sync: Protocol"
+  copybara-validate-site:
+    <<: &copybara-check
+      runs-on: ubuntu-latest
+      if: github.ref != 'refs/heads/master'
+    name: "Validate: Site"
     steps:
       # 1: Pull code.
       - uses: actions/checkout@v2
 
       # 2: Validate migration via Copybara.
       - name: Validate Migration
-        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        uses: &image sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
         with:
-          git_name: Cookiebot
-          git_email: techteam+github@cookiescalifornia.com
-          git_credentials: ${{ secrets.BOT_API_CREDS }}
-          ssh_key: ${{ secrets.BOT_SSH_KEY }}
-          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
-          gpg_key: ${{ secrets.BOT_GPG_KEY }}
-          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          <<: &cookiebot
+            git_name: Cookiebot
+            git_email: techteam+github@cookiescalifornia.com
+            git_credentials: ${{ secrets.BOT_API_CREDS }}
+            ssh_key: ${{ secrets.BOT_SSH_KEY }}
+            ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+            gpg_key: ${{ secrets.BOT_GPG_KEY }}
+            gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+            image: us.gcr.io/elide-ai/tools/copybara:latest
+          workflow: site
+          command: validate
+
+  copybara-validate-protocol:
+    <<: *copybara-check
+    name: "Validate: Protocol"
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: *image
+        with:
+          <<: *cookiebot
+          workflow: site
+          command: validate
+
+  copybara-migrate-site:
+    <<: &copybara-migrate
+      runs-on: ubuntu-latest
+      if: github.ref != 'refs/heads/master'
+    name: "Sync: Site"
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: *image
+        with:
+          <<: *cookiebot
+          workflow: site
+          command: validate
+
+      # 3: Publish to site as PR.
+      - name: Migration
+        uses: *image
+        with:
+          <<: *cookiebot
+          workflow: site
+          command: migrate
+
+  copybara-migrate-protocol:
+    <<: *copybara-migrate
+    name: "Sync: Site"
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: *image
+        with:
+          <<: *cookiebot
           workflow: protocol
           command: validate
-          image: us.gcr.io/elide-ai/tools/copybara:latest
 
-      # 3: Publish to Digital Platform as PR.
+      # 3: Publish to protocol as PR.
       - name: Migration
-        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        uses: *image
         with:
-          git_name: Cookiebot
-          git_email: techteam+github@cookiescalifornia.com
-          git_credentials: ${{ secrets.BOT_API_CREDS }}
-          ssh_key: ${{ secrets.BOT_SSH_KEY }}
-          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
-          gpg_key: ${{ secrets.BOT_GPG_KEY }}
-          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
-          workflow: protocol
+          <<: *cookiebot
+          workflow: site
           command: migrate
-          image: us.gcr.io/elide-ai/tools/copybara:latest
-

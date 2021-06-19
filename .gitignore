@@ -9,3 +9,4 @@ node_modules/
 *.key
 site/.next/
 site/out
+yarn-error.log
