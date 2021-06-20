@@ -49,6 +49,11 @@ build --strict_java_deps=strict
 build --strict_system_includes
 build --fission=fastbuild,dbg
 
+build:rbe --remote_timeout=3600
+build:rbe --remote_executor=grpcs://cloud.buildbuddy.io
+build:rbe --disk_cache=
+build:rbe --crosstool_top=@buildbuddy_toolchain//:toolchain
+
 ## iOS-related settings
 build --experimental_use_llvm_covmap
 build --apple_platform_type=ios

@@ -27,6 +27,13 @@ http_archive(
     url = "https://github.com/google/protobuf/archive/fde7cf7358ec7cd69e8db9be4f1fa6a5c431386a.tar.gz",
 )
 
+http_archive(
+    name = "io_buildbuddy_buildbuddy_toolchain",
+    sha256 = "a2a5cccec251211e2221b1587af2ce43c36d32a42f5d881737db3b546a536510",
+    strip_prefix = "buildbuddy-toolchain-829c8a574f706de5c96c54ca310f139f4acda7dd",
+    urls = ["https://github.com/buildbuddy-io/buildbuddy-toolchain/archive/829c8a574f706de5c96c54ca310f139f4acda7dd.tar.gz"],
+)
+
 (local_repository(
     name = "gust",
     path = "/Users/sam.g/Workspace/Elide",
@@ -36,6 +43,11 @@ http_archive(
     strip_prefix = "elide-%s" % GUST_VERSION,
     sha256 = GUST_FINGERPRINT,
 ))
+
+load("@io_buildbuddy_buildbuddy_toolchain//:deps.bzl", "buildbuddy_deps")
+buildbuddy_deps()
+load("@io_buildbuddy_buildbuddy_toolchain//:rules.bzl", "buildbuddy")
+buildbuddy(name = "buildbuddy_toolchain")
 
 
 load("@gust//defs:build.bzl", "install_dependencies")
@@ -241,7 +253,6 @@ RULES_BUF_FINGERPRINT = "736f446b4fcf929e4fffdc73779672fd25873ddaa2693f081ea35b1
     strip_prefix = "rules_buf-%s" % RULES_BUF_VERSION,
     sha256 = RULES_BUF_FINGERPRINT,
 ))
-
 
 load("@rules_buf//buf:repos.bzl", "buf_repositories")
 buf_repositories()
