@@ -52,7 +52,7 @@ BUILD_ARGS += --sandbox_debug
 endif
 
 ifeq ($(CI),yes)
-BUILD_ARGS += --config=ci --config=rbe
+BUILD_ARGS += --config=ci
 endif
 
 # OS tweaks
