@@ -32,6 +32,7 @@ build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_vanilla
 build --workspace_status_command=./tools/bazel_stamp_vars.sh
 build --bes_backend=grpcs://cloud.buildbuddy.io
 build --remote_cache=grpcs://cloud.buildbuddy.io
+build --build_metadata=REPO_URL=https://github.com/CookiesCo/OpenCannabis.git
 build --bes_results_url=https://app.buildbuddy.io/invocation/
 build --remote_timeout=3600
 build --remote_header=x-buildbuddy-api-key=6R3w0oRMdKhN3cobqlIl
