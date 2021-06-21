@@ -194,21 +194,21 @@ message TagReport {
   // Timestamp describing when this tag was first seen by the RFID apparatus.
   opencannabis.temporal.Instant first_seen = 4 [
     (core.opts).required = true,
-    (core.column).bqtype = "TIMESTAMP",
+    (core.column).bqtype = TIMESTAMP,
     (core.field).summary = "Timestamp describing when this tag was first seen by the RFID apparatus."
   ];
 
   // Timestamp describing the last moment this tag was seen by the RFID apparatus.
   opencannabis.temporal.Instant last_seen = 5 [
     (core.opts).required = true,
-    (core.column).bqtype = "TIMESTAMP",
+    (core.column).bqtype = TIMESTAMP,
     (core.field).summary = "Timestamp describing the last moment this tag was seen by the RFID apparatus."
   ];
 
   // Timestamp describing when the edge engine received this reading event.
   opencannabis.temporal.Instant received = 6 [
     (core.opts).required = true,
-    (core.column).bqtype = "TIMESTAMP",
+    (core.column).bqtype = TIMESTAMP,
     (core.field).summary = "Timestamp describing when the edge engine received this reading event."
   ];
 
