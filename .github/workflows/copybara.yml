@@ -12,7 +12,7 @@ jobs:
 
       # 2: Validate migration via Copybara.
       - name: Validate Migration
-        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        uses: sgammon/copybara-action@fb5e58332d721b8044b5360ced76d6d77448d9d6
         with:
           git_name: Cookiebot
           git_email: techteam+github@cookiescalifornia.com
@@ -34,7 +34,7 @@ jobs:
 
       # 2: Validate migration via Copybara.
       - name: Validate Migration
-        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        uses: sgammon/copybara-action@fb5e58332d721b8044b5360ced76d6d77448d9d6
         with:
           git_name: Cookiebot
           git_email: techteam+github@cookiescalifornia.com
@@ -57,7 +57,7 @@ jobs:
 
       # 2: Validate migration via Copybara.
       - name: Validate Migration
-        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        uses: sgammon/copybara-action@fb5e58332d721b8044b5360ced76d6d77448d9d6
         with:
           git_name: Cookiebot
           git_email: techteam+github@cookiescalifornia.com
@@ -72,7 +72,7 @@ jobs:
 
       # 3: Publish to site as PR.
       - name: Migration
-        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        uses: sgammon/copybara-action@fb5e58332d721b8044b5360ced76d6d77448d9d6
         with:
           git_name: Cookiebot
           git_email: techteam+github@cookiescalifornia.com
@@ -96,7 +96,7 @@ jobs:
 
       # 2: Validate migration via Copybara.
       - name: Validate Migration
-        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        uses: sgammon/copybara-action@fb5e58332d721b8044b5360ced76d6d77448d9d6
         with:
           git_name: Cookiebot
           git_email: techteam+github@cookiescalifornia.com
@@ -111,7 +111,7 @@ jobs:
 
       # 3: Publish to protocol as PR.
       - name: Migration
-        uses: sgammon/copybara-action@6c67a935b499c976bc597bb24dd5143ea2082b02
+        uses: sgammon/copybara-action@fb5e58332d721b8044b5360ced76d6d77448d9d6
         with:
           git_name: Cookiebot
           git_email: techteam+github@cookiescalifornia.com
