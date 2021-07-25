@@ -18,7 +18,7 @@
     "url": "https://github.com/OpenCannabis/Specification/issues"
   },
   "devDependencies": {
-    "@bazel/bazelisk": "1.9.0",
+    "@bazel/bazelisk": "1.10.1",
     "@bazel/jasmine": "3.7.0",
     "@bazel/labs": "3.7.0",
     "@bazel/rollup": "3.7.0",
