@@ -6,11 +6,11 @@
  */
 syntax = "proto3";
 
-package opencannabis.structs.labtesting;
+package opencannabis.labtesting;
 
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
-option java_package = "io.opencannabis.schema.product.struct.testing";
+option java_package = "io.opencannabis.schema.labtesting";
 option java_multiple_files = true;
 option java_outer_classname = "TerpeneCompounds";
 

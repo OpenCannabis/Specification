@@ -17,26 +17,26 @@ description text blah blah.
 <li><code>opencannabis/core/ocp.proto</code></li>
 
 <ul>
-    <li><a href="#core.KindOptions"><code>KindOptions</code></a></li><li><a href="#core.OCPFieldInfo"><code>OCPFieldInfo</code></a></li><li><a href="#core.OCPModelInfo"><code>OCPModelInfo</code></a></li>
+    <li><a href="#core.KindOptions"><code>KindOptions</code></a></li><li><a href="#core.OCPFieldInfo"><code>OCPFieldInfo</code></a></li><li><a href="#core.OCPModelInfo"><code>OCPModelInfo</code></a></li><li><a href="#core.RecordOptions"><code>RecordOptions</code></a></li>
 </ul>
 <ul>
     <li><a href="#core.ProductSuperkind"><code>ProductSuperkind</code></a></li>
 </ul>
 <ul>
-    <li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li>
+    <li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/ocp.proto-extensions">File-level Extensions</a></li>
 </ul><br />
 
 
 <li><code>opencannabis/core/datamodel.proto</code></li>
 
 <ul>
-    <li><a href="#core.DatapointOptions"><code>DatapointOptions</code></a></li><li><a href="#core.FieldPersistenceOptions"><code>FieldPersistenceOptions</code></a></li><li><a href="#core.ObjectMapping"><code>ObjectMapping</code></a></li><li><a href="#core.PersistenceOptions"><code>PersistenceOptions</code></a></li><li><a href="#core.SubmessageOptions"><code>SubmessageOptions</code></a></li><li><a href="#core.TableFieldOptions"><code>TableFieldOptions</code></a></li><li><a href="#core.TableOptions"><code>TableOptions</code></a></li>
+    <li><a href="#core.BigQueryOptions"><code>BigQueryOptions</code></a></li><li><a href="#core.DatapointOptions"><code>DatapointOptions</code></a></li><li><a href="#core.FieldPersistenceOptions"><code>FieldPersistenceOptions</code></a></li><li><a href="#core.ObjectMapping"><code>ObjectMapping</code></a></li><li><a href="#core.PersistenceOptions"><code>PersistenceOptions</code></a></li><li><a href="#core.SpannerOptions"><code>SpannerOptions</code></a></li><li><a href="#core.SubmessageOptions"><code>SubmessageOptions</code></a></li><li><a href="#core.TableFieldOptions"><code>TableFieldOptions</code></a></li><li><a href="#core.TableOptions"><code>TableOptions</code></a></li>
 </ul>
 <ul>
-    <li><a href="#core.CollectionMode"><code>CollectionMode</code></a></li><li><a href="#core.FieldType"><code>FieldType</code></a></li><li><a href="#core.FieldVisibility"><code>FieldVisibility</code></a></li><li><a href="#core.Visibility"><code>Visibility</code></a></li>
+    <li><a href="#core.BigQueryOptions.BigQueryType"><code>BigQueryOptions.BigQueryType</code></a></li><li><a href="#core.CollectionMode"><code>CollectionMode</code></a></li><li><a href="#core.DatapointType"><code>DatapointType</code></a></li><li><a href="#core.EnumeratedType"><code>EnumeratedType</code></a></li><li><a href="#core.FieldType"><code>FieldType</code></a></li><li><a href="#core.FieldVisibility"><code>FieldVisibility</code></a></li><li><a href="#core.SpannerOptions.SpannerType"><code>SpannerOptions.SpannerType</code></a></li><li><a href="#core.Visibility"><code>Visibility</code></a></li>
 </ul>
 <ul>
-    <li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li>
+    <li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li><li><a href="#opencannabis/core/datamodel.proto-extensions">File-level Extensions</a></li>
 </ul><br />
 
 
@@ -159,6 +159,35 @@ message YourMessage {
 
 
 
+
+<a name="core.RecordOptions"></a>
+
+### Message: <code>RecordOptions</code> (`core.RecordOptions`)
+
+
+
+```proto
+import "opencannabis/core/ocp.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    core.RecordOptions field_name = 1;
+}
+
+```
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| `anchor` | [`bool`](#bool) | *None.* | Treat this record as an anchor/root record when loading data. |
+
+
+
+
+
+
 <!-- end messages -->
 
 
@@ -204,8 +233,9 @@ Non-cannabis product categories or types classify products which contain no cann
 | Extension | Type | Base | Number | Description |
 | --------- | ---- | ---- | ------ | ----------- |
 | meta_kind | KindOptions | .google.protobuf.EnumValueOptions | 420001 | Taxonomy mapping for a given product kind. |
-| ocp | OCPFieldInfo | .google.protobuf.FieldOptions | 7005 | Describes configuration for this field when used in OpenCannabis systems. |
-| model | OCPModelInfo | .google.protobuf.MessageOptions | 6005 | Info regarding how a concrete model maps to an abstract model. |
+| ocp | OCPFieldInfo | .google.protobuf.FieldOptions | 420004 | Describes configuration for this field when used in OpenCannabis systems. |
+| model | OCPModelInfo | .google.protobuf.MessageOptions | 420002 | Info regarding how a concrete model maps to an abstract model. |
+| record | RecordOptions | .google.protobuf.MessageOptions | 420003 |  |
 
 <!-- end HasExtensions -->
 
@@ -222,7 +252,7 @@ _________________
 ### `opencannabis/core/datamodel.proto`
 
 Specifies structures that relate to data modeling and the structure of the data. Enumerates collection mode and field
-type. Overridden from the central Gust framework which defines the core of the spec.
+type, required status, and so on. Also includes field metadata (like summaries, descriptions, and so on).
 
 To import this module:
 
@@ -236,6 +266,30 @@ import "opencannabis/core/datamodel.proto";
 | **Package**      | `core`     |
 | **Bazel Target** | `//core`   |
 |                  |                    |
+
+
+
+<a name="core.BigQueryOptions"></a>
+
+### Message: <code>BigQueryOptions</code> (`core.BigQueryOptions`)
+
+Defines options structures that relate to Google BigQuery.
+
+```proto
+import "opencannabis/core/datamodel.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    core.BigQueryOptions field_name = 1;
+}
+
+```
+
+
+
+
 
 
 
@@ -295,7 +349,6 @@ message YourMessage {
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `type` | [`FieldType`](#core.FieldType) | *None.* | Field type, for special-case fields. |
-| `description` | [`string`](#string) | *None.* | String description of this field included in schemas. |
 | `summary` | [`string`](#string) | *None.* | Summary for this field, which provides a narrative description. It should be suitable for use in external circumstances, like documentation. |
 | `stamp_update` | [`bool`](#bool) | *None.* | This item is a timestamp, and we would like it to be automatically updated each time the model that contains it is modified in underlying storage. The field should be read-only. |
 | `stamp_create` | [`bool`](#bool) | *None.* | This item is a timestamp, and we would like it to be automatically set when the model is created. After that point, we would like this field to be read-only. |
@@ -303,6 +356,7 @@ message YourMessage {
 | `immutable` | [`bool`](#bool) | *None.* | This field should allow writes when the model that contains it is written, but then, henceforth, the model should not allow this field to be mutated. |
 | `explicit` | [`bool`](#bool) | *None.* | This field should always be explicitly listed with a value, even if it is set to the default value. This function is especially useful for enums with default values, when there is a desire to have consistent indexes. |
 | `visibility` | [`FieldVisibility`](#core.FieldVisibility) | *None.* | Describes the visibility level of a given field in a tree of fields. This value applies recursively under message fields on which it is applied. Depending on the visibility level active when data is deserialized or serialized, certain data may be withheld corresponding to the invoking user or system's access level. |
+| `description` | [`string`](#string) | *None.* | **Deprecated.** Provided for backwards compatibility. Do not use. |
 
 
 
@@ -371,6 +425,30 @@ message YourMessage {
 
 
 
+<a name="core.SpannerOptions"></a>
+
+### Message: <code>SpannerOptions</code> (`core.SpannerOptions`)
+
+Defines options structures that relate to Google Cloud Spanner.
+
+```proto
+import "opencannabis/core/datamodel.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    core.SpannerOptions field_name = 1;
+}
+
+```
+
+
+
+
+
+
+
 <a name="core.SubmessageOptions"></a>
 
 ### Message: <code>SubmessageOptions</code> (`core.SubmessageOptions`)
@@ -426,7 +504,12 @@ message YourMessage {
 | ----- | ---- | ----- | ----------- |
 | `require` | [`bool`](#bool) | *None.* | Marks this field as `REQUIRED` in tabular schemas. |
 | `ignore` | [`bool`](#bool) | *None.* | Marks this field as ignored for serialization in tabular circumstances. |
-| `bqtype` | [`string`](#string) | *None.* | Overrides the BigQuery type associated with the exported form of this message. |
+| `bqtype` | [`BigQueryOptions.BigQueryType`](#core.BigQueryOptions.BigQueryType) | *None.* | Overrides the BigQuery type associated with the exported form of this message field. |
+| `sptype` | [`SpannerOptions.SpannerType`](#core.SpannerOptions.SpannerType) | *None.* | Overrides the Spanner type associated with the exported form of this message field. |
+| `repeated` | [`bool`](#bool) | *None.* | Converts this field into a `REPEATED`-mode field in BigQuery. |
+| `size` | [`uint32`](#uint32) | *None.* | Size of the field. Pass `0` (the default) for maximum width. |
+| `name` | [`string`](#string) | *None.* | Name of the field in columnar circumstances. |
+| `id` | [`string`](#string) | *None.* | Unique ID or path assigned to this field in a universally specified data model. |
 
 
 
@@ -467,6 +550,45 @@ message YourMessage {
 <!-- end messages -->
 
 
+<a name="core.BigQueryOptions.BigQueryType"></a>
+
+### Enumeration: <code>BigQueryOptions.BigQueryType</code> (`core.BigQueryOptions.BigQueryType`)
+
+Specifies types applicable to BigQuery property translation.
+
+```proto
+import "opencannabis/core/datamodel.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  core.BigQueryOptions.BigQueryType enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `UNSPECIFIED_TYPE` | `0` | Unspecified type for Spanner fields. |
+| `STRING` | `1` | Default concrete type for BigQuery columns: `STRING`. |
+| `NUMERIC` | `2` | `NUMERIC` type. |
+| `FLOAT` | `3` | `FLOAT` type. |
+| `FLOAT64` | `4` | `FLOAT64` type. |
+| `INTEGER` | `5` | `INTEGER` type. |
+| `INT64` | `6` | `INT64` type. |
+| `BYTES` | `7` | `BYTES` type. |
+| `RECORD` | `8` | `RECORD` type. |
+| `BOOLEAN` | `9` | `BOOLEAN` type. |
+| `GEOGRAPHY` | `10` | `GEOGRAPHY` type. |
+| `TIME` | `11` | `TIME` type. |
+| `DATE` | `12` | `DATE` type. |
+| `DATETIME` | `13` | `DATETIME` type. |
+| `TIMESTAMP` | `14` | `TIMESTAMP` type. |
+| `JSON` | `99` | `JSON` (special type). |
+
+
+
 <a name="core.CollectionMode"></a>
 
 ### Enumeration: <code>CollectionMode</code> (`core.CollectionMode`)
@@ -493,6 +615,62 @@ message YourMessage {
 
 
 
+<a name="core.DatapointType"></a>
+
+### Enumeration: <code>DatapointType</code> (`core.DatapointType`)
+
+Specifies the types an object may use when defining special objects. These types govern how an object is treated,
+listed, and adapted throughout its lifecycle.
+
+```proto
+import "opencannabis/core/datamodel.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  core.DatapointType enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `OBJECT` | `0` | The datamodel represents an object record. |
+| `OBJECT_KEY` | `1` | Specifies that this datapoint type is a record key. |
+| `EVENT` | `2` | The datamodel represents an event type. |
+| `TABLE` | `3` | The datamodel represents a table. |
+| `WIRE` | `4` | The datamodel represents a wire object. |
+| `HASH` | `5` | The datamodel represents a hash pre-image. |
+
+
+
+<a name="core.EnumeratedType"></a>
+
+### Enumeration: <code>EnumeratedType</code> (`core.EnumeratedType`)
+
+Specifies a special role, if applicable, for a given enumerated type. Each selection governs some special behavior
+related to defined enums with APIs, databases, and so on.
+
+```proto
+import "opencannabis/core/datamodel.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  core.EnumeratedType enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `GENERIC_ENUMERATION` | `0` | Specifies a generic enumeration structure. |
+| `ERRORS` | `1` | Specifies a structure which enumerates error states. |
+
+
+
 <a name="core.FieldType"></a>
 
 ### Enumeration: <code>FieldType</code> (`core.FieldType`)
@@ -515,13 +693,14 @@ message YourMessage {
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | `STANDARD` | `0` | This is a standard field (default value). |
-| `KEY` | `1` | This is a key field (a primary key submessage) for a GROUP or COLLECTION-mode message. |
+| `KEY` | `1` | This is a key field (a primary key sub-message) for a GROUP or COLLECTION-mode message. |
 | `ID` | `2` | This is an ID field that should be used as the final name of this document. |
 | `TAGS` | `3` | This is a tags-style field. |
 | `FLAGS` | `4` | Store this object as a special flags-style mapping. |
 | `REFERENCE` | `5` | This key is a foreign reference. |
 | `TIMESTAMP` | `6` | This item is a timestamp. |
 | `PARENT` | `7` | This field represents a key for this item's parent. |
+| `PATH` | `8` | This field represents a full key path in hierarchical storage. |
 
 
 
@@ -550,6 +729,39 @@ message YourMessage {
 | `AUTHORIZED` | `2` | Denotes data that should only be exposed to authorized users. |
 | `OWNER` | `3` | Denotes data that should only be exposed to users authorized by the owner. |
 | `INTERNAL` | `4` | Denotes data that should only be exposed internally. |
+
+
+
+<a name="core.SpannerOptions.SpannerType"></a>
+
+### Enumeration: <code>SpannerOptions.SpannerType</code> (`core.SpannerOptions.SpannerType`)
+
+Specifies types applicable to Spanner property translation.
+
+```proto
+import "opencannabis/core/datamodel.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  core.SpannerOptions.SpannerType enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `UNSPECIFIED_TYPE` | `0` | Unspecified type for Spanner fields. |
+| `STRING` | `1` | `STRING` type. |
+| `NUMERIC` | `2` | `NUMERIC` type. |
+| `FLOAT64` | `3` | `FLOAT64` type. |
+| `INT64` | `4` | `INT64` type. |
+| `BYTES` | `5` | `BYTES` type. |
+| `BOOL` | `6` | `BOOL` type. |
+| `DATE` | `7` | `DATE` type. |
+| `TIMESTAMP` | `8` | `TIMESTAMP` type. |
+| `JSON` | `9` | `JSON` (special type). |
 
 
 
@@ -591,17 +803,21 @@ message YourMessage {
 
 | Extension | Type | Base | Number | Description |
 | --------- | ---- | ---- | ------ | ----------- |
+| enum_role | EnumeratedType | .google.protobuf.EnumOptions | 9000 | Specifies a special role, if applicable, for a given enumerated type. |
 | enumeration | DatapointOptions | .google.protobuf.EnumOptions | 9001 | Settings that specify state for this enum value, including validation settings, as applicable. |
+| alias | string | .google.protobuf.EnumValueOptions | 8005 | Aliases when decoding values of this type. |
 | label | string | .google.protobuf.EnumValueOptions | 8003 | Human-readable label for a given enumeration value state. Optional, can be used by invoking code to generate labels for states in forms or other UI. |
 | value | DatapointOptions | .google.protobuf.EnumValueOptions | 8007 | Settings that specify state for this enum value, including validation settings, as applicable. |
-| collection | SubmessageOptions | .google.protobuf.FieldOptions | 7002 | Specifies options related to storage of a submessage-typed field. |
+| collection | SubmessageOptions | .google.protobuf.FieldOptions | 7002 | Specifies options related to storage of a sub-message-typed field. |
 | column | TableFieldOptions | .google.protobuf.FieldOptions | 7001 | Specifies options related to storage of this field in a tabular-style data engine. |
 | field | FieldPersistenceOptions | .google.protobuf.FieldOptions | 7000 | Database engine persistence options specific to an individual document field. |
+| id | string | .google.protobuf.FieldOptions | 7004 | Unique ID or path assigned to this field in a universally specified data model. |
 | opts | DatapointOptions | .google.protobuf.FieldOptions | 7003 | Settings that specify state for this field, including validation settings, as applicable. |
-| db | PersistenceOptions | .google.protobuf.MessageOptions | 6000 | Settings specific to how a particular message entity is stored in the underlying persistence engine. For Bloombox, this generally means Cloud Firestore. |
-| map | ObjectMapping | .google.protobuf.MessageOptions | 6002 | Settings that determine meta-mappings between this message object and enumerated states, declared in a foreign structure. Foreign structure mappings are contextually defined by the invoking application. |
-| msg | DatapointOptions | .google.protobuf.MessageOptions | 6003 | Settings that specify state for this message, which may include settings related to visibility or handling, and validation of this object in various circumstances. |
-| table | TableOptions | .google.protobuf.MessageOptions | 6001 | Table-specific configuration for this message. Kicks in when engines are in play that observe or couch data in a table/row-style pattern. Usually used for integration with BigQuery. |
+| db | PersistenceOptions | .google.protobuf.MessageOptions | 6001 | Settings specific to how a particular message entity is stored in the underlying persistence engine. |
+| map | ObjectMapping | .google.protobuf.MessageOptions | 6003 | Settings that determine meta-mappings between this message object and enumerated states, declared in a foreign structure. Foreign structure mappings are contextually defined by the invoking application. |
+| msg | DatapointOptions | .google.protobuf.MessageOptions | 6004 | Settings that specify state for this message, which may include settings related to visibility or handling, and validation of this object in various circumstances. |
+| role | DatapointType | .google.protobuf.MessageOptions | 6000 | Specifies the type of datapoint represented by a given message entity. This can be `RECORD` (generally used for arbitrary datamodel objects), `EVENT` (specialized telemetry event records), `TABLE` (tabular data, generally used for analytics events / BigQuery). |
+| table | TableOptions | .google.protobuf.MessageOptions | 6002 | Table-specific configuration for this message. Kicks in when engines are in play that observe or couch data in a table/row-style pattern. Usually used for integration with BigQuery. |
 
 <!-- end HasExtensions -->
 

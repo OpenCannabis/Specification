@@ -13,7 +13,10 @@ proto(
 proto(
     name = "MediaType",
     srcs = ["MediaType.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = [
+        "//opencannabis/core:Datamodel",
+        "//opencannabis/core:OCP",
+    ],
 )
 
 proto(
@@ -22,6 +25,7 @@ proto(
     deps = [
         ":MediaType",
         "//opencannabis/core:Datamodel",
+        "//opencannabis/core:OCP",
     ],
 )
 
@@ -34,6 +38,7 @@ proto(
         "//opencannabis/base:ProductKey",
         "//opencannabis/temporal:Instant",
         "//opencannabis/core:Datamodel",
+        "//opencannabis/core:OCP",
     ],
 )
 

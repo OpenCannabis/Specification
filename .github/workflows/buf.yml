@@ -38,6 +38,6 @@ jobs:
           BUF_INPUT_HTTPS_USERNAME: ${{ github.actor }}
           BUF_INPUT_HTTPS_PASSWORD: ${{ github.token }}
         with:
-          against: 'https://github.com/CookiesCo/OpenCannabis.git#branch=master'
+          against: 'https://github.com/CookiesCo/OpenCannabis.git#branch=std/coa-txfer'
           github_token: ${{ github.token }}
 

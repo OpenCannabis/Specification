@@ -13,6 +13,7 @@ option java_multiple_files = false;
 option java_outer_classname = "TemporalInstant";
 
 import "opencannabis/core/datamodel.proto";
+import "opencannabis/core/ocp.proto";
 
 
 // Specifies a particular moment in time.
@@ -21,12 +22,14 @@ message Instant {
   oneof spec {
   	// ISO8601-formatted timestamp.
     string iso8601 = 1 [
-      (core.field).summary = "ISO8601-formatted timestamp."
+      (core.field).summary = "ISO8601-formatted timestamp.",
+      (core.ocp).key_path = "iso8601"
     ];
 
     // Unix epoch timestamp, at millisecond resolution.
     uint64 timestamp = 2 [
-      (core.field).summary = "Unix epoch timestamp, at millisecond resolution."
+      (core.field).summary = "Unix epoch timestamp, at millisecond resolution.",
+      (core.ocp).key_path = "timestamp"
     ];
   }
 }

@@ -36,6 +36,7 @@ DEPS_LIST = [
     "device",
     "geo",
     "inventory",
+    "labtesting",
     "media",
     "oauth",
     "person",
@@ -48,7 +49,6 @@ DEPS_LIST = [
     ("geo/usa/ca", "ca"),
     ("products/distribution", "distribution"),
     ("products/menu", "menu"),
-    ("structs/labtesting", "labtesting"),
     ("structs/pricing", "pricing"),
 ]]
 

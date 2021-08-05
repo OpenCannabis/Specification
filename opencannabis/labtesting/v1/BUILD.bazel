@@ -1,0 +1,152 @@
+
+package(default_visibility = ["//visibility:public"])
+load("//tools/defs:proto.bzl", "proto", "module")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@com_google_googleapis_imports//:imports.bzl", "proto_library_with_info")
+
+
+proto_library(
+    name = "labservices_proto",
+    srcs = ["labservices.proto"],
+    deps = [
+        "@com_google_protobuf//:empty_proto",
+        "@com_google_protobuf//:timestamp_proto",
+        "@com_google_protobuf//:field_mask_proto",
+        "@com_google_googleapis//google/api:annotations_proto",
+        "@com_google_googleapis//google/api:client_proto",
+        "@com_google_googleapis//google/api:field_behavior_proto",
+        "@com_google_googleapis//google/api:resource_proto",
+    ],
+    visibility = [
+        "//visibility:private",
+    ],
+)
+
+proto_library_with_info(
+    name = "labservices_proto_with_info",
+    deps = [
+        ":labservices_proto",
+        "@com_google_googleapis//google/cloud:common_resources_proto",
+    ],
+)
+
+module(
+    name = "labservices",
+    deps = [
+        ":labservices_proto",
+    ],
+)
+
+alias(
+    name = "v1",
+    actual = "labservices",
+)
+
+
+##############################################################################
+# Lab Services v1: Java SDK
+##############################################################################
+load(
+    "@com_google_googleapis_imports//:imports.bzl",
+    "java_gapic_assembly_gradle_pkg",
+    "java_gapic_library",
+    "java_gapic_test",
+    "java_grpc_library",
+    "java_proto_library",
+)
+
+java_proto_library(
+    name = "labservices_java_proto",
+    deps = [":labservices_proto"],
+)
+
+java_grpc_library(
+    name = "labservices_java_grpc",
+    srcs = [":labservices_proto"],
+    deps = [":labservices_java_proto"],
+)
+
+java_gapic_library(
+    name = "labservices_java_gapic",
+    srcs = [":labservices_proto_with_info"],
+    gapic_yaml = "labservices.gapic.yaml",
+    service_yaml = "labservices.api.yaml",
+    transport = "grpc+rest",
+    grpc_service_config = "labservices_grpc_service_config.json",
+    test_deps = [
+        ":labservices_java_grpc",
+    ],
+    deps = [
+        ":labservices_java_proto",
+    ],
+)
+
+# Open Source Packages
+java_gapic_assembly_gradle_pkg(
+    name = "opencannabis-labservices-v1-java",
+    deps = [
+        ":labservices_java_gapic",
+        ":labservices_java_grpc",
+        ":labservices_java_proto",
+        ":labservices_proto",
+    ],
+)
+
+alias(
+    name = "java-client",
+    actual = "opencannabis-labservices-v1-java",
+)
+
+
+##############################################################################
+# Lab Services v1: Python SDK
+##############################################################################
+load(
+    "@com_google_googleapis_imports//:imports.bzl",
+    "py_gapic_assembly_pkg",
+    "py_gapic_library",
+)
+
+py_gapic_library(
+    name = "labservices_py_gapic",
+    srcs = [":labservices_proto"],
+    grpc_service_config = "labservices_grpc_service_config.json",
+    opt_args = ["python-gapic-namespace=io.opencannabis"],
+)
+
+py_gapic_assembly_pkg(
+    name = "labservices-v1-py",
+    deps = [
+        ":labservices_py_gapic",
+    ],
+)
+
+
+##############################################################################
+# Lab Services v1: Node.js SDK
+##############################################################################
+load(
+    "@com_google_googleapis_imports//:imports.bzl",
+    "nodejs_gapic_assembly_pkg",
+    "nodejs_gapic_library",
+)
+
+nodejs_gapic_library(
+    name = "labservices_nodejs_gapic",
+    package_name = "@opencannabis/labservices",
+    src = ":labservices_proto_with_info",
+    extra_protoc_parameters = ["metadata"],
+    grpc_service_config = "labservices_grpc_service_config.json",
+    main_service = "labservices",
+    package = "opencannabis.labtesting.v1`",
+    service_yaml = "labservices.api.yaml",
+    deps = [],
+)
+
+nodejs_gapic_assembly_pkg(
+    name = "labservices-v1-nodejs",
+    deps = [
+        ":labservices_nodejs_gapic",
+        ":labservices_proto",
+    ],
+)

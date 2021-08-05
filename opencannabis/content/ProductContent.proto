@@ -23,7 +23,7 @@ import "opencannabis/temporal/Instant.proto";
 import "opencannabis/media/MediaKey.proto";
 
 import "opencannabis/structs/ProductFlags.proto";
-import "opencannabis/structs/labtesting/TestResults.proto";
+import "opencannabis/labtesting/TestResults.proto";
 import "opencannabis/structs/pricing/PricingDescriptor.proto";
 
 
@@ -71,7 +71,7 @@ message ProductContent {
   opencannabis.structs.pricing.ProductPricing pricing = 7;
 
   // Lab testing information concerning this product.
-  opencannabis.structs.labtesting.TestResults tests = 8;
+  opencannabis.labtesting.TestResults tests = 8;
 
   // Product flags attached to this content.
   repeated opencannabis.structs.ProductFlag flags = 9;

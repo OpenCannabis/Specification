@@ -1,0 +1,48 @@
+type: google.api.Service
+config_version: 3
+name: labservices.opencannabis.dev
+title: Lab Services API
+
+apis:
+  - name: opencannabis.labtesting.v1.LabResultsFetchServiceV1
+  - name: opencannabis.labtesting.v1.LabResultsIngestServiceV1
+
+types:
+  - name: google.container.v1beta1.UpgradeEvent
+
+authentication:
+  rules:
+    - selector: opencannabis.labtesting.v1.LabResultsFetchServiceV1
+      oauth:
+        canonical_scopes: https://scope.opencannabis.dev/labservices/read,
+          https://scope.opencannabis.dev/labservices/consumer
+
+http:
+  rules:
+    - selector: opencannabis.labtesting.v1.LabResultsFetchServiceV1.LabResultStatus
+      get: '/v1/{sample_key=batches/*/samples/*}:status'
+      additional_bindings:
+        - get: '/v1/tenants/{tenant}/{sample_key=batches/*/samples/*}:status'
+    - selector: opencannabis.labtesting.v1.LabResultsFetchServiceV1.LabResultFetch
+      get: '/v1/labresults/fetch'
+      additional_bindings:
+        - get: '/v1/tenants/{tenant}/{sample_key=batches/*/samples/*}/labresults:status'
+    - selector: opencannabis.labtesting.v1.LabResultsIngestServiceV1.LabResultNotify
+      post: '/v1/partners/{partner}/{sample_key=batches/*/samples/*}:notify'
+      body: '*'
+    - selector: opencannabis.labtesting.v1.LabResultsIngestServiceV1.LabResultIngest
+      post: '/v1/partners/{partner}/{delivery_id}:notify'
+      body: '*'
+
+documentation:
+  summary:
+    OpenCannabis Lab Services APIs provide interfaces which enable seamless and secure exchange of certified cannabis
+    laboratory COA (_Certificates of Authenticity_) data between labs and supply chain trading partners, including
+    manufacturers/brands and distributors.
+
+    As part of this interface, there is both a _pull_-style API which enables consumption of lab data _by_ trading
+    partners _from_ labs, and a _push_-style-API enabling real-time delivery of lab data _from_ labs _to_ trading
+    partners.
+
+    Proper use of these interfaces is defined in the OpenCannabis Specification `7/OCS-L v1.0`, along with flat file
+    transfer formats and API access procedures.

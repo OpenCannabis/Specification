@@ -13,6 +13,8 @@ option java_multiple_files = false;
 option java_outer_classname = "MediaItemKey";
 
 import "opencannabis/core/datamodel.proto";
+import "opencannabis/core/ocp.proto";
+
 import "opencannabis/media/MediaType.proto";
 
 
@@ -22,7 +24,8 @@ message MediaKey {
   // Unique ID for this media item.
   string id = 1 [
     (core.field).type = ID,
-    (core.field).description = "Unique ID for this media item."
+    (core.field).description = "Unique ID for this media item.",
+    (core.ocp).key_path = "id"
   ];
 }
 
@@ -34,16 +37,19 @@ message MediaReference {
   // Key for the media item.
   MediaKey key = 1 [
     (core.field).type = KEY,
-    (core.field).description = "Key being referenced as this media item."
+    (core.field).description = "Key being referenced as this media item.",
+    (core.ocp).key_path = "key"
   ];
 
   // URI at which the media item can be consumed/downloaded.
   string uri = 2 [
-    (core.field).description = "URI at which the media item can be consumed/downloaded."
+    (core.field).description = "URI at which the media item can be consumed/downloaded.",
+    (core.ocp).key_path = "uri"
   ];
 
   // Specifies the type of media being referenced.
   opencannabis.media.MediaType type = 3 [
-    (core.field).description = "Specifies the type of media being referenced."
+    (core.field).description = "Specifies the type of media being referenced.",
+    (core.ocp).key_path = "type"
   ];
 }

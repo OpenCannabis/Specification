@@ -5,6 +5,8 @@ directories:
   tools
   sdk
   site
+  tests
+  rfc
   -dist/
 
 build_flags:

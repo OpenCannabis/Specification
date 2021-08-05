@@ -7,7 +7,10 @@ load("//tools/defs:proto.bzl", "proto", "module")
 proto(
     name = "Date",
     srcs = ["Date.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = [
+        "//opencannabis/core:Datamodel",
+        "//opencannabis/core:OCP",
+    ],
 )
 
 proto(
@@ -19,7 +22,10 @@ proto(
 proto(
     name = "Instant",
     srcs = ["Instant.proto"],
-    deps = ["//opencannabis/core:Datamodel"],
+    deps = [
+        "//opencannabis/core:Datamodel",
+        "//opencannabis/core:OCP",
+    ],
 )
 
 proto(

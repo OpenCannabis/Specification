@@ -12,7 +12,7 @@ load(
 ocp_module(
     name = "labtesting",
     init = ":__init__.py",
-    package = "structs/labtesting",
+    package = "labtesting",
     protos = [
         "Cannabinoids",
         "Terpenes",

@@ -5,20 +5,22 @@
  */
 syntax = "proto3";
 
-package opencannabis.structs.labtesting;
+package opencannabis.labtesting;
 
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
-option java_package = "io.opencannabis.schema.product.struct.testing";
+option java_package = "io.opencannabis.schema.labtesting";
 option java_multiple_files = true;
 option java_outer_classname = "LabTesting";
+
+import "opencannabis/core/ocp.proto";
 
 import "opencannabis/content/Content.proto";
 import "opencannabis/temporal/Instant.proto";
 
-import "opencannabis/structs/labtesting/Terpenes.proto";
-import "opencannabis/structs/labtesting/Cannabinoids.proto";
-import "opencannabis/structs/labtesting/TestValue.proto";
+import "opencannabis/labtesting/Terpenes.proto";
+import "opencannabis/labtesting/Cannabinoids.proto";
+import "opencannabis/labtesting/TestValue.proto";
 
 
 // Specific test methods used to quantify or qualify certain properties or components of cannabis.
@@ -44,6 +46,25 @@ enum TestMethod {
   // ELISA, or enzyme-linked immunosorbent assay, is an antibody based test that is used to detect and quantify
   // specific substances within the sample.
   ELISA = 5;
+}
+
+
+// Describes the process that was performed to arrive at a given test result, including the testing method, default
+// test type, and default test error or variance. Most use contexts for this record involve setting defaults which may
+// be overridden by individual tests.
+message TestProcess {
+  // Method employed for testing. Establishes a default for all test results, and can be overridden on an individual
+  // test level.
+  TestMethod method = 1;
+
+  // Type of value produced by this testing process. Establishes a default for all test results, and can be overridden
+  // on an individual test level.
+  TestValueType type = 2;
+
+  // Describes the range or breadth of error capable from a given test process or method, as it relates to a specific
+  // test result or body of results. Establishes a default for all test results, and can be overridden on an individual
+  // test level.
+  TestError error = 3;
 }
 
 
@@ -80,6 +101,26 @@ message TestSuite {
 }
 
 
+// Describes notable timestamps for a given test run and related set of test results.
+message TestTimestamps {
+  // Last-updated value for these lab test results. Updated each time the record is updated.
+  opencannabis.temporal.Instant last_updated = 1 [(core.ocp).key_path = "lastUpdated"];
+
+  // Precise moment that these results were considered 'sealed' and returned. Once this timestamp is set, a given set of
+  // test results (unique by their coordinates) is considered immutable.
+  opencannabis.temporal.Instant sealed = 2 [(core.ocp).key_path = "sealed"];
+
+  // Describes the timestamp indicating when test results were initially issued.
+  opencannabis.temporal.Instant issued = 3 [(core.ocp).key_path = "issued"];
+
+  // Describes the timestamp indicating when the test was actually physically performed.
+  opencannabis.temporal.Instant performed = 4 [(core.ocp).key_path = "performed"];
+
+  // Describes the timestamp indicating when the test was actually physically completed.
+  opencannabis.temporal.Instant completed = 5 [(core.ocp).key_path = "completed"];
+}
+
+
 // Lab testing results for a given product. Includes cannabinoid, terpene, pesticide, moisture, and subjective testing
 // properties. Only cannabinoid testing is considered required.
 message TestResults {
@@ -90,16 +131,12 @@ message TestResults {
   // specifying test results, and so on.
   repeated TestMedia media = 2;
 
-  // Last-updated value for these lab test results. Updated each time the record is updated.
-  opencannabis.temporal.Instant last_updated = 3;
-
-  // Precise moment that these results were considered 'sealed' and returned. Once this timestamp is set, a given set of
-  // test results (unique by their coordinates) is considered immutable.
-  opencannabis.temporal.Instant sealed = 4;
+  // Describes timestamps which relate to this test run or related set of test results.
+  TestTimestamps timestamps = 3;
 
   // Coordinate, or ID values, for this set of test results. When specified at the top-level of a set of lab tests,
   // indicates the coordinates for the active set of test results.
-  TestCoordinates coordinates = 5;
+  TestCoordinates coordinates = 4;
 
   // Standard cannabinoid testing, with reading results at least for THC and CBD, and optionally additional cannabinoid
   // compounds.
@@ -114,15 +151,8 @@ message TestResults {
   // Moisture rating and test results.
   Moisture moisture = 33;
 
-  // Results from subjective testing - i.e, opinionated human evaluation.
-  Subjective subjective = 34;
-
-  // Computed taste notes for this product, based on the combination of terpene testing and subjective testing, if
-  // available.
-  repeated TasteNote aroma = 35;
-
   // Raw test result data, stored under a master set of test results. Only one level of nesting is allowed.
-  repeated TestResults data = 36;
+  repeated TestResults data = 34;
 }
 
 
@@ -130,18 +160,27 @@ message TestResults {
 // made up of 'batches' (i.e. rooms, sections), containing 'lots' (i.e. rows, trays) of individual plants or products.
 message TestCoordinates {
   // Specifies the 'zone' value for a set of test results. This is usually used as/by a floor or greenhouse ID.
-  string zone = 1;
+  string zone = 1 [(core.ocp).key_path = "zone"];
 
   // Specifies the 'lot' value for a set of test results. This is usually used as/by a room or section ID.
-  string lot = 2;
+  string lot = 2 [(core.ocp).key_path = "lot"];
 
   // Specifies the 'batch' value for a set of test results. This is usually used as/by a row or tray ID for individual
   // plants or test sample products.
-  string batch = 3;
+  string batch = 3 [(core.ocp).key_path = "batch"];
+
+  // Assigned region code, as a three-character ISO notation, plus a region enumeration instance.
+  string region = 4 [(core.ocp).key_path = "region"];
 
   // Unique ID given to the sample that was tested. This may represent individual plants or products, grouped lots or
   // batches, or even random selections from entire zones.
-  string sample_id = 4;
+  string sample_id = 5 [(core.ocp).key_path = "sampleId"];
+
+  // Assigned name for the sample, which generally includes the strain name.
+  string sample_name = 6 [(core.ocp).key_path = "sampleName"];
+
+  // Assigned ID for the certificate of authenticity which corresponds with this set of results.
+  string certificate_id = 7 [(core.ocp).key_path = "coaId"];
 }
 
 
@@ -154,130 +193,24 @@ message Cannabinoids {
     Cannabinoid cannabinoid = 1;
 
     // Measurement value for this individual result.
-    TestValue measurement = 3;
+    TestValue measurement = 3 [(core.ocp).key_path = "test"];
   }
 
   // THC testing value.
-  TestValue thc = 1;
+  TestValue thc = 1 [(core.ocp).key_path = "thc"];
 
   // CBD testing value.
-  TestValue cbd = 2;
+  TestValue cbd = 2 [(core.ocp).key_path = "cbd"];
 
   // Individual results payloads for other cannabinoids.
   repeated Result results = 3;
 
+  // Mapped measurement values, where each key is a member of the `Cannabinoid` enumeration instance. Each value is an
+  // individual test result which relates to the cannabinoid selected as a key.
+  map<string, TestValue> measurements = 4 [(core.ocp).key_path = "[`opencannabis.labtesting.Cannabinoid`]"];
+
   // Overall THC to CBD ratio, calculated if underlying data is available.
-  CannabinoidRatio ratio = 4;
-
-  // Calculated potency estimate, based on this product's type/kind and test results.
-  PotencyEstimate potency = 5;
-}
-
-
-// Enumerates symptomatic/experiential feeling results from subjective product testing. Feeling states are not designed
-// to be scientific or interpreted as medical advice.
-enum Feeling {
-  // No feeling preference or value.
-  NO_FEELING_PREFERENCE = 0;
-
-  // "Grounding" feeling.
-  GROUNDING = 1;
-
-  // "Sleepy" feeling.
-  SLEEP = 2;
-
-  // "Calming" feeling.
-  CALMING = 3;
-
-  // "Stimulating" feeling.
-  STIMULATING = 4;
-
-  // "Funny" feeling.
-  FUNNY = 5;
-
-  // "Focus" feeling.
-  FOCUS = 6;
-
-  // "Passion" feeling.
-  PASSION = 7;
-}
-
-
-// Enumerates taste or aroma notes, either based on subjective product testing or quantitative/empirical terpene
-// compound testing.
-enum TasteNote {
-  // No particular taste or aroma preference or value.
-  NO_TASTE_PREFERENCE = 0;
-
-  // "Sweet" taste/aroma note.
-  SWEET = 1;
-
-  // "Sour" taste/aroma note.
-  SOUR = 2;
-
-  // "Spice" taste/aroma note.
-  SPICE = 3;
-
-  // "Smooth" taste/aroma note.
-  SMOOTH = 4;
-
-  // "Citrus" taste/aroma note.
-  CITRUS = 5;
-
-  // "Pine" taste/aroma note.
-  PINE = 6;
-
-  // "Fruit" taste/aroma note.
-  FRUIT = 7;
-
-  // "Tropics" taste/aroma note.
-  TROPICS = 8;
-
-  // "Floral" taste/aroma note.
-  FLORAL = 9;
-
-  // "Herbal" taste/aroma note.
-  HERB = 10;
-
-  // "Earthy" taste/aroma note.
-  EARTH = 11;
-}
-
-
-// Generic potency estimate enumeration, either based on subjective product testing or calculated against some metric
-// for the user's tolerance level.
-enum PotencyEstimate {
-  // Light potency.
-  LIGHT = 0;
-
-  // Medium potency.
-  MEDIUM = 1;
-
-  // Heavy potency.
-  HEAVY = 2;
-
-  // Top/super potency.
-  SUPER = 3;
-}
-
-
-// Specifies the structure of "subjective testing" results, wherein a consumer or user has tried the product and
-// evaluated its subjective effects.
-message Subjective {
-  // Subjective description of using this product.
-  content.Content description = 1;
-
-  // Subjective description of the taste of this product.
-  content.Content taste = 2;
-
-  // Subjective potency estimate for this product.
-  PotencyEstimate potency = 3;
-
-  // Subjective feeling tags for this product.
-  repeated Feeling feeling = 4;
-
-  // Subjective taste or aroma notes for this product.
-  repeated TasteNote aroma = 5;
+  CannabinoidRatio ratio = 5 [(core.ocp).key_path = "ratio"];
 }
 
 
@@ -334,18 +267,16 @@ message Terpenes {
     Terpene terpene = 1;
 
     // Measured value of the terpene in question for the subject product.
-    TestValue measurement = 2;
+    TestValue measurement = 2 [(core.ocp).key_path = "value"];
   }
 
   // Flag indicating whether terpene testing is available yet or not.
-  bool available = 1;
+  bool available = 1 [(core.ocp).key_path = "available"];
 
   // Individual terpene testing results.
   repeated Result terpene = 10;
 
-  // Enumerates computed feeling notes, based on the specified terpene results.
-  repeated Feeling feeling = 2;
-
-  // Enumerates computed aroma/flavor notes.
-  repeated TasteNote aroma = 3;
+  // Mapped measurement values, where each key is a member of the `Terpene` enumeration instance. Each value is an
+  // individual test result which relates to the terpene compound selected as a key.
+  map<string, Result> measurements = 11 [(core.ocp).key_path = "[`opencannabis.labtesting.Terpene`]"];
 }

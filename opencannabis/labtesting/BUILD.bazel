@@ -15,9 +15,25 @@ proto(
 )
 
 proto(
+    name = "COA",
+    srcs = ["COA.proto"],
+    deps = [
+        "//opencannabis/labtesting:Cannabinoids",
+        "//opencannabis/labtesting:Terpenes",
+        "//opencannabis/labtesting:TestResults",
+        "//opencannabis/base:ProductKey",
+        "//opencannabis/core:OCP",
+        "//opencannabis/media:MediaKey",
+    ],
+)
+
+proto(
     name = "TestValue",
     srcs = ["TestValue.proto"],
-    deps = ["//opencannabis/media:MediaItem"],
+    deps = [
+        "//opencannabis/media:MediaItem",
+        "//opencannabis/core:OCP",
+    ],
 )
 
 proto(
@@ -29,6 +45,7 @@ proto(
         ":Cannabinoids",
         "//opencannabis/content:Content",
         "//opencannabis/temporal:Instant",
+        "//opencannabis/core:OCP",
     ],
 )
 
@@ -36,6 +53,7 @@ proto(
 module(
     name = "labtesting",
     deps = [
+        ":COA",
         ":TestValue",
         ":TestResults",
         ":Terpenes",

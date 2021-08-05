@@ -1,0 +1,90 @@
+
+/**
+ * Laboratory testing documentation records which correspond with Certificates of Authenticity (abbreviated as "COA").
+ * COAs are commonplace and are usually certified by state regulators.
+ */
+syntax = "proto3";
+
+package opencannabis.labtesting;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.labtesting";
+option java_multiple_files = true;
+option java_outer_classname = "LabTesting";
+
+import "opencannabis/core/ocp.proto";
+
+import "opencannabis/base/ProductKey.proto";
+import "opencannabis/media/MediaKey.proto";
+
+import "opencannabis/labtesting/TestResults.proto";
+
+
+// Unique key that identifies a registered and sanctioned cannabis testing laboratory.
+message TestingLabKey {
+  // Assigned OID, if known.
+  fixed64 oid = 1 [(core.ocp).key_path = "oid"];
+
+  // Identifying domain.
+  string domain = 2 [(core.ocp).key_path = "domain"];
+}
+
+
+// Record that describes a known/registered and sanctioned cannabis testing laboratory. Each lab is identified by a
+// unique key which carries their OID and/or domain.
+message TestingLab {
+  // Key uniquely identifying this testing lab.
+  TestingLabKey key = 1 [(core.ocp).key_path = "key"];
+
+  // Human-readable label which uniquely identifies this testing lab.
+  string name = 2 [(core.ocp).key_path = "name"];
+}
+
+
+// Identifiers carried by a Certificate of Authenticity.
+message CertificateIdentifiers {
+  // Code or ID assigned to the sample that was tested.
+  string sample_code = 1 [(core.ocp).key_path = "sampleCode"];
+
+  // Name assigned to the sample that was tested.
+  string sample_name = 2 [(core.ocp).key_path = "sampleName"];
+
+  // ID assigned to the batch which produced the material which was tested.
+  string batch_id = 3 [(core.ocp).key_path = "batchId"];
+
+  // ID assigned to this issuance of a COA.
+  string certificate_id = 4 [(core.ocp).key_path = "coaId"];
+}
+
+
+// Record which describes the structure of a Certificate of Authenticity from a cannabis testing laboratory. COAs carry
+// information about the material tested, the testing process, the test results, and the lab that performed the testing.
+message LabCertificate {
+  // Testing lab which performed the testing, and issued this COA.
+  TestingLab lab = 1 [(core.ocp).key_path = "lab"];
+
+  // Unique identifiers assigned to this COA.
+  TestCoordinates identifiers = 2 [(core.ocp).key_path = "id"];
+
+  // Key uniquely identifying the product which was tested as part of this run.
+  opencannabis.base.ProductKey product = 3 [(core.ocp).key_path = "product"];
+
+  // Describes timestamps relevant to this individual test run and related certificate.
+  TestTimestamps stamp = 4 [(core.ocp).key_path = "stamp"];
+
+  // Media reference to the document issued to certify this set of test results. The COA document is usually in PDF form
+  // and sealed from modification after issuance.
+  opencannabis.media.MediaKey certificate = 5 [(core.ocp).key_path = "certificate"];
+
+  // Describes the process, method, and default set of type configuration
+  TestProcess method = 6 [(core.ocp).key_path = "process"];
+
+  // Cannabinoid test results, describing levels or percentages of THC, CBD, etc., present or not present, and if so,
+  // potentially with a value described by the testing type.
+  Cannabinoids cannabinoids = 10 [(core.ocp).key_path = "cannabinoids"];
+
+  // Terpene test results, describing levels of aromatic compounds present or not present, and if so, potentially with a
+  // value described by the testing type.
+  Terpenes terpenes = 20 [(core.ocp).key_path = "terpenes"];
+}

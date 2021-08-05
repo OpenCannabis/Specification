@@ -1,0 +1,7 @@
+artifact_type: GAPIC
+proto_deps:
+  - google-common-protos
+api_name: labservices
+api_version: v1
+organization_name: OpenCannabis
+proto_path: opencannabis/labtesting/v1

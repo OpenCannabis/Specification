@@ -29,6 +29,7 @@ proto(
         ":ProductKind",
         "//opencannabis/content:Name",
         "//opencannabis/core:Datamodel",
+        "//opencannabis/core:OCP"
     ],
 )
 

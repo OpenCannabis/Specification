@@ -30,6 +30,7 @@ MODULES = [
     "device",
     "geo",
     "inventory",
+    "labtesting",
     "media",
     "oauth",
     "partner",
@@ -79,7 +80,7 @@ pkg_tar(
 buf_image(
     name = "image_bin",
     out = "OpenCannabis.buf.bin",
-    config = "//tools:buf.yaml",
+    config = "//:buf.yaml",
     protos = [
         ":OpenCannabis",
     ],
@@ -88,7 +89,7 @@ buf_image(
 buf_image(
     name = "image_json",
     out = "OpenCannabis.buf.json",
-    config = "//tools:buf.yaml",
+    config = "//:buf.yaml",
     protos = [
         ":OpenCannabis",
     ],

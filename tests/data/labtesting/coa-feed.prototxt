@@ -1,0 +1,91 @@
+lab {
+  key {
+    oid: 1234
+    domain: "labco.com"
+  }
+  coordinates {
+    zone: "Z123"
+    lot: "L1234"
+    batch: "BATCH12345"
+    region: "USA-CA"
+    sampleId: "ABC1234"
+    sampleName: "LPC75 Pre-Roll"
+    certificateId: "COA12345"
+  }
+  product {
+    id: "C12345"
+    kind: "FLOWER"
+  }
+  certificate {
+    uri: "https://labco.com/coa-download/COA12345.pdf"
+    type {
+        kind: DOCUMENT
+        documentType: PDF
+    }
+  }
+  process {
+    method: GCMS
+    type: PERCENTAGE
+    error {
+        type: RELATIVE
+        value: 1.2
+    }
+  }
+  cannabinoids {
+    measurements {
+        THC {
+            value: 34.51237
+        }
+        CBD {
+            value: 12.28116
+        }
+        THC_A {
+            value: 2.21291
+        }
+        THC_V {
+            value: 1.84027
+        }
+        CBN {
+            value: 0.82171
+        }
+    }
+  }
+  terpenes {
+    measurements {
+        CAMPHENE {
+            value: 34.51237
+        }
+        LIMONENE {
+            value: 0.39108
+        }
+        MYRCENE {
+            value: 0.28177
+        }
+        ALPHA_PINENE {
+            value: 0.12122
+        }
+    }
+  }
+}
+
+
+id: "4G8Y4M7ckdUPVpQyhsZUO0"
+slug: "cookies-x-slang"
+title: "Cookies x Slang"
+graphic {
+  key {
+    id: "brand/cookies/site/blog/arhhgqlngxbexuotowcl"
+  }
+}
+summary: "Cookies is coming to Colorado via Slang Worldwide"
+tweet: "Cookies x Slang: Buy Cookies products in Colorado"
+linked_url: "https://www.newswire.ca/news-releases/slang-worldwide-expands-leading-cannabis-brand-portfolio-through-exclusive-partnership-with-cookies-in-the-colorado-market-897203430.html"
+redirect: true
+published_at {
+  seconds: 1602207275
+  nanos: 64000000
+}
+updated_at {
+  seconds: 1602207275
+  nanos: 64000000
+}

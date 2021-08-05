@@ -25,6 +25,97 @@ message OCPFieldInfo {
   string key_path = 2;
 }
 
+
+// Specifies available release tracks for service interfaces defined via specifications.
+enum ServiceReleaseTrack {
+  // Unused.
+  RELEASE_TIER_UNDEFINED = 0 [deprecated = true];
+
+  // The service is alpha-quality.
+  ALPHA = 1;
+
+  // The service is beta-quality.
+  BETA = 2;
+
+  // The service has reached general availability, and any related specifications have been ratified.
+  GA = 3;
+
+  // The service has been deprecated, which signals prevention of new implementations.
+  SUNSET = 4;
+
+  // The service has been archived, signaling full end-of-life.
+  ARCHIVED = 5;
+}
+
+
+// Describes the statuses which an OpenCannabis Specification can inhabit, throughout its entire lifecycle as a shared
+// and living document.
+enum SpecStatus {
+  // Unused.
+  STATUS_UNKNOWN = 0 [deprecated = true];
+
+  // The specification has not yet seen review or ratification.
+  RAW = 1;
+
+  // The specification has reached a stable point and transitioned to review.
+  DRAFT = 2;
+
+  // The specification has been ratified, adopted, accepted, or implemented, after review has concluded.
+  STABLE = 3;
+
+  // The specification is in sunset mode, also known as deprecation.
+  DEPRECATED = 4;
+
+  // The specification has been fully retired from use.
+  RETIRED = 5;
+}
+
+
+// Specifies information related to a specified service interface, with registered details or other criteria. These
+// fields also connect a given service directly to an ID-addresses specification for proper use.
+message OCPServiceInfo {
+  // Specifies the globally-unique identifier assigned to this service, referred to as an OpenCannabis ID, or "OID".
+  string oid = 1;
+
+  // Specifies the specification code which details use of a given service interface, as a reference to an OpenCannabis
+  // Specification document ID.
+  string spec = 2;
+
+  // Specifies the version for the service. Should match the service name and any URL mappings applied to the service
+  // for use by configurable proxies.
+  uint32 version = 3;
+
+  // Specifies the release track at which the service currently resides.
+  ServiceReleaseTrack track = 4;
+
+  // Specifies the specification status of this API interface.
+  SpecStatus status = 5;
+
+  // Consumer role types related to this service. This specifies the intended audience types for a given API interface,
+  // which should also be listed in the accompanying specification.
+  repeated string consumer = 6;
+
+  // Provider role types related to this service. This specifies the intended data producer types for a given API
+  // interface, which should also be listed in the accompanying specification.
+  repeated string provider = 7;
+
+  // Alternative service interfaces which relate to this one.
+  repeated string alternatives = 8;
+}
+
+
+// Specifies information related to a specified service method, with registered details or other criteria. These fields
+// also connect a method directly to an ID-addresses specification for proper use.
+message OCPMethodInfo {
+  // Indicates that, for implementors of this service, this method is considered "required by specification," and thus
+  // establishes an expectation that it will always be implemented.
+  bool optional = 1;
+
+  // Alternative method interfaces which relate to this one.
+  repeated string alternatives = 8;
+}
+
+
 // Enumerates abstract meta-types that relate to products known to the spec.
 //
 // Every [`ProductKind`](#ProductKind) instance relates to a single `ProductSuperkind`, which describes how that product
@@ -38,31 +129,66 @@ enum ProductSuperkind {
   // way, shape, or form. Examples of non-cannabis products include t-shirts, rolling trays, stickers, and keychains.
   NON_CANNABIS = 0;
 
+  // Designates a cannabis flower product category or type.
   //
+  // Cannabis flower categories or types encompass kinds like flower, pre-rolls, blunts, and anything else derived
+  // directly from cannabis buds or flowers, without further extraction or preparation that results in a change of form
+  // factor.
   CANNABIS_FLOWER = 110;
 
+  // Designates a cannabis extract product category or type.
   //
+  // Cannabis extract categories or types encompass kinds like extracts, vape cartridges, edibles, beverages, tinctures,
+  // capsules, and any other product derived from extracted cannabis flower. Extraction-based products imply a process
+  // used to extract the cannabis material.
   CANNABIS_EXTRACT = 120;
 }
 
+
+// Specifies taxonomic options related to a given product category, type, kind, etc.
 message KindOptions {
-  //
+  // Specifies the super-kind for a given product category or type.
   ProductSuperkind taxonomy = 1;
 }
+
+
+// Specifies options that apply when treating an object as a flattened record.
+message RecordOptions {
+  // Treat this record as an anchor/root record when loading data.
+  bool anchor = 1;
+}
+
 
 
 // Extends enumeration values with a special annotation which categories a given [`ProductKind`](#ProductKind).
 extend google.protobuf.EnumValueOptions {
   // Taxonomy mapping for a given product kind.
-  KindOptions meta_kind = 420001;
+  KindOptions meta_kind = 420010;
 }
+
 
 extend google.protobuf.MessageOptions {
   // Info regarding how a concrete model maps to an abstract model.
-  OCPModelInfo model = 6005;
+  OCPModelInfo model = 420020;
+
+  // Specifies options that apply when treating an object as a flattened record.
+  RecordOptions record = 420021;
 }
+
 
 extend google.protobuf.FieldOptions {
   // Describes configuration for this field when used in OpenCannabis systems.
-  OCPFieldInfo ocp = 7005;
+  OCPFieldInfo ocp = 420030;
+}
+
+
+extend google.protobuf.ServiceOptions {
+  // Describes specification-related information for a given service interface.
+  OCPServiceInfo ocp_service = 420040;
+}
+
+
+extend google.protobuf.ServiceOptions {
+  // Describes specification-related information for a given method on a specified service interface.
+  OCPServiceInfo ocp_method = 420050;
 }

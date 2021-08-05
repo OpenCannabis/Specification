@@ -17,8 +17,10 @@ info --java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
 info --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
 build --java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
 build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
+build --protocopt=--experimental_allow_proto3_optional
 
 build --strategy=sandboxed
+build --enable_platform_specific_config
 build --incompatible_restrict_string_escapes=false
 build --watchfs
 build --symlink_prefix=dist/

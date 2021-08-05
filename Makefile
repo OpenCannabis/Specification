@@ -19,10 +19,14 @@ DOCS ?= //opencannabis:docs
 
 #### Targets: SDKs
 PYSDK ?= //sdk/python:library
-SDKS ?= $(PYSDK)
+JAVASDK ?= //sdk/java
+
+SDKS ?= $(PYSDK) $(JAVASDK)
 DOCROOT ?= $(shell pwd)/site/docs
 
-TARGETS ?= $(SCHEMA) $(IMAGE) $(DOCS) $(SDKS)
+TARGETS ?= $(SCHEMA) $(IMAGE) $(SDKS)
+DISABLED_TARGETS ?= $(DOCS)
+RELEASE_TARGETS ?= $(SDKS) $(IMAGE)
 
 ## Args
 PWD ?= $(shell pwd)
@@ -108,7 +112,7 @@ BAZEL ?= $(BAZELISK_BIN) $(BAZELISK_ARGS)
 COPYBARA ?= $(JAVA) -jar $(COPYBARA_JAR)
 
 
-all: build test  ## Build and test the specification.
+all: build test sdk-java  ## Build and test the specification.
 
 build: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(KEYS)  ## Build specification targets via `TARGETS=` (by default, all of them).
 	$(info Building OpenCannabis...)
@@ -134,7 +138,7 @@ dev: $(BAZELISK_BIN) $(LOCAL_TOOLS) $(NODE_MODULES) $(SITE_NODE_MODULES) $(KEYS)
 
 release: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Perform a release build, including a doc/bin update.
 	$(info Releasing OpenCannabis...)
-	$(RULE)$(BAZEL) build $(BUILD_ARGS) --config=release -- $(DOCS) $(IMAGE) \
+	$(RULE)$(BAZEL) build $(BUILD_ARGS) --config=release -- $(RELEASE_TARGETS) \
 		&& $(MKDIR) -p $(DOCROOT) \
 		&& echo "Doc release complete." \
 		&& $(CP) -f $(POSIX_FLAGS) dist/bin/opencannabis/OpenCannabis.buf.bin ./OpenCannabis.buf.bin \
@@ -173,6 +177,28 @@ keys $(KEYS):  ## Decrypt key material needed for development. Requires GCP perm
 	$(info Decrypting key material...)
 	$(RULE)$(GCLOUD) kms decrypt $(KMS_ARGS) $(KMS_SITE_ENV)
 	@echo "Keys decrypted."
+
+sdk-java: $(ENV) $(KEYS)  ## Build the full OpenCannabis SDK for Java.
+	$(info Building OpenCannabis for Java...)
+	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- //sdk/java //sdk/java:labservices \
+		&& echo "Cleaning library distroot..." \
+		&& rm -fr ./sdk/java/dist \
+		&& echo "Exporting libraries to 'sdk/java/dist'..." \
+		&& mkdir -p ./sdk/java/dist \
+		&& cp -fv dist/bin/opencannabis/labtesting/v1/opencannabis-labservices-v1-java.tar.gz ./sdk/java/dist \
+		&& cp -fv dist/bin/sdk/java/OpenCannabisSDK-pkg.tar ./sdk/java/dist/opencannabis-protocol-v1-java.tar \
+		&& gzip --best ./sdk/java/dist/opencannabis-protocol-v1-java.tar \
+		&& echo "Unpacking library..." \
+		&& pushd ./sdk/java/dist \
+		&& tar -xzvf opencannabis-labservices-v1-java.tar.gz \
+		&& echo "Building Java SDK with Gradle..." \
+		&& cd opencannabis-labservices-v1-java \
+		 	&& ./gradlew -q projects \
+		 	&& ./gradlew assemble -x test \
+		&& echo "Build complete. Cleaning up..." \
+		&& cd .. && rm -fr ./opencannabis-labservices-v1-java \
+		&& du -h ./*.tar.gz \
+		&& echo "SDK release ready.";
 
 encrypt:  ## Encrypt, or re-encrypt, local key material. Requires GCP permissions.
 	$(info Encrypting key material...)

@@ -1,1 +1,23 @@
-tools/buf.yaml
+version: v1beta1
+name: buf.build/ocpx/protocol
+deps:
+  - buf.build/elide/gust:main
+  - buf.build/elide/safe-html-types:main
+  - buf.build/beta/googleapis:main
+build:
+  roots:
+    - .
+lint:
+  use:
+    - BASIC
+  except:
+    - FILE_LOWER_SNAKE_CASE
+    - ENUM_NO_ALLOW_ALIAS
+    - IMPORT_NO_PUBLIC
+    - PACKAGE_AFFINITY
+    - PACKAGE_DIRECTORY_MATCH
+    - PACKAGE_SAME_DIRECTORY
+    - DIRECTORY_SAME_PACKAGE
+breaking:
+  use:
+    - FILE

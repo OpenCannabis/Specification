@@ -3,6 +3,7 @@ package(default_visibility = ["//visibility:public"])
 
 exports_files([
   "maven_install.json",
+  "buf.yaml",
 ])
 
 alias(

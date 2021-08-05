@@ -51,7 +51,10 @@ description text blah blah.
 <li><code>opencannabis/content/MaterialsData.proto</code></li>
 
 <ul>
-    <li><a href="#opencannabis.content.MaterialsData"><code>MaterialsData</code></a></li>
+    <li><a href="#opencannabis.content.MaterialsData"><code>MaterialsData</code></a></li><li><a href="#opencannabis.content.SubjectiveTesting"><code>SubjectiveTesting</code></a></li>
+</ul>
+<ul>
+    <li><a href="#opencannabis.content.Feeling"><code>Feeling</code></a></li><li><a href="#opencannabis.content.PotencyEstimate"><code>PotencyEstimate</code></a></li><li><a href="#opencannabis.content.TasteNote"><code>TasteNote</code></a></li>
 </ul><br />
 
 
@@ -610,6 +613,41 @@ message YourMessage {
 | `grow` | [`opencannabis.structs.Grow`](#opencannabis.structs.Grow) | *None.* | Specifies how this item was grown. |
 | `shelf` | [`opencannabis.structs.Shelf`](#opencannabis.structs.Shelf) | *None.* | Shelf status of this product. |
 | `channel` | [`opencannabis.products.distribution.DistributionPolicy`](#opencannabis.products.distribution.DistributionPolicy) | repeated | Specifies distribution policy for this particular subject material. |
+| `subjective_tests` | [`SubjectiveTesting`](#opencannabis.content.SubjectiveTesting) | *None.* | Describes subjective test results, including tasting notes, feelings, etc. |
+
+
+
+
+
+
+
+<a name="opencannabis.content.SubjectiveTesting"></a>
+
+### Message: <code>SubjectiveTesting</code> (`opencannabis.content.SubjectiveTesting`)
+
+Specifies the structure of "subjective testing" results, wherein a consumer or user has tried the product and
+evaluated its subjective effects.
+
+```proto
+import "opencannabis/content/MaterialsData.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+    // Example below.
+    opencannabis.content.SubjectiveTesting field_name = 1;
+}
+
+```
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| `description` | [`Content`](#opencannabis.content.Content) | *None.* | Subjective description of using this product. |
+| `taste` | [`Content`](#opencannabis.content.Content) | *None.* | Subjective description of the taste of this product. |
+| `potency` | [`PotencyEstimate`](#opencannabis.content.PotencyEstimate) | *None.* | Subjective potency estimate for this product. |
+| `feeling` | [`Feeling`](#opencannabis.content.Feeling) | repeated | Subjective feeling tags for this product. |
+| `aroma` | [`TasteNote`](#opencannabis.content.TasteNote) | repeated | Subjective taste or aroma notes for this product. |
 
 
 
@@ -617,6 +655,102 @@ message YourMessage {
 
 
 <!-- end messages -->
+
+
+<a name="opencannabis.content.Feeling"></a>
+
+### Enumeration: <code>Feeling</code> (`opencannabis.content.Feeling`)
+
+Enumerates symptomatic/experiential feeling results from subjective product testing. Feeling states are not designed
+to be scientific or interpreted as medical advice.
+
+```proto
+import "opencannabis/content/MaterialsData.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  opencannabis.content.Feeling enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `NO_FEELING_PREFERENCE` | `0` | No feeling preference or value. |
+| `GROUNDING` | `1` | "Grounding" feeling. |
+| `SLEEP` | `2` | "Sleepy" feeling. |
+| `CALMING` | `3` | "Calming" feeling. |
+| `STIMULATING` | `4` | "Stimulating" feeling. |
+| `FUNNY` | `5` | "Funny" feeling. |
+| `FOCUS` | `6` | "Focus" feeling. |
+| `PASSION` | `7` | "Passion" feeling. |
+
+
+
+<a name="opencannabis.content.PotencyEstimate"></a>
+
+### Enumeration: <code>PotencyEstimate</code> (`opencannabis.content.PotencyEstimate`)
+
+Generic potency estimate enumeration, either based on subjective product testing or calculated against some metric
+for the user's tolerance level.
+
+```proto
+import "opencannabis/content/MaterialsData.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  opencannabis.content.PotencyEstimate enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `LIGHT` | `0` | Light potency. |
+| `MEDIUM` | `1` | Medium potency. |
+| `HEAVY` | `2` | Heavy potency. |
+| `SUPER` | `3` | Top/super potency. |
+
+
+
+<a name="opencannabis.content.TasteNote"></a>
+
+### Enumeration: <code>TasteNote</code> (`opencannabis.content.TasteNote`)
+
+Enumerates taste or aroma notes, either based on subjective product testing or quantitative/empirical terpene
+compound testing.
+
+```proto
+import "opencannabis/content/MaterialsData.proto";
+// ...
+
+// Code sample.
+message YourMessage {
+  // Example below.
+  opencannabis.content.TasteNote enum_name = 1;
+}
+
+```
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `NO_TASTE_PREFERENCE` | `0` | No particular taste or aroma preference or value. |
+| `SWEET` | `1` | "Sweet" taste/aroma note. |
+| `SOUR` | `2` | "Sour" taste/aroma note. |
+| `SPICE` | `3` | "Spice" taste/aroma note. |
+| `SMOOTH` | `4` | "Smooth" taste/aroma note. |
+| `CITRUS` | `5` | "Citrus" taste/aroma note. |
+| `PINE` | `6` | "Pine" taste/aroma note. |
+| `FRUIT` | `7` | "Fruit" taste/aroma note. |
+| `TROPICS` | `8` | "Tropics" taste/aroma note. |
+| `FLORAL` | `9` | "Floral" taste/aroma note. |
+| `HERB` | `10` | "Herbal" taste/aroma note. |
+| `EARTH` | `11` | "Earthy" taste/aroma note. |
+
 
 <!-- end enums -->
 
@@ -809,7 +943,7 @@ message YourMessage {
 | `dosage` | [`Content`](#opencannabis.content.Content) | *None.* | Dosage advice about this product, either from the manufacturer or retailer. |
 | `media` | [`opencannabis.media.MediaReference`](#opencannabis.media.MediaReference) | repeated | Product media, including images, videos, and so on. |
 | `pricing` | [`opencannabis.structs.pricing.ProductPricing`](#opencannabis.structs.pricing.ProductPricing) | *None.* | Pricing specification for this product, regardless of pricing type (i.e. weighted or unit-style pricing). |
-| `tests` | [`opencannabis.structs.labtesting.TestResults`](#opencannabis.structs.labtesting.TestResults) | *None.* | Lab testing information concerning this product. |
+| `tests` | [`opencannabis.labtesting.TestResults`](#opencannabis.labtesting.TestResults) | *None.* | Lab testing information concerning this product. |
 | `flags` | [`opencannabis.structs.ProductFlag`](#opencannabis.structs.ProductFlag) | repeated | Product flags attached to this content. |
 | `ts` | [`ProductTimestamps`](#opencannabis.content.ProductTimestamps) | *None.* | Timestamps for this product. |
 

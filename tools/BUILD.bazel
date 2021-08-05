@@ -3,11 +3,6 @@ package(
     default_visibility = ["//visibility:public"],
 )
 
-
-exports_files([
-    "buf.yaml",
-])
-
 alias(
     name = "protoc-gen-doc",
     actual = "@protoc_gen_doc//cmd/protoc-gen-doc:protoc-gen-doc",
