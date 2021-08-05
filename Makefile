@@ -193,7 +193,7 @@ sdk-java: $(ENV) $(KEYS)  ## Build the full OpenCannabis SDK for Java.
 		&& cp -fv dist/bin/sdk/java/OpenCannabisSDK-pkg.tar ./sdk/java/dist/opencannabis-protocol-v1-java.tar \
 		&& gzip --best ./sdk/java/dist/opencannabis-protocol-v1-java.tar \
 		&& echo "Unpacking library..." \
-		&& pushd ./sdk/java/dist \
+		&& cd ./sdk/java/dist \
 		&& tar -xzvf opencannabis-labservices-v1-java.tar.gz \
 		&& echo "Building Java SDK with Gradle..." \
 		&& cd opencannabis-labservices-v1-java \
