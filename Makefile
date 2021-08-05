@@ -197,8 +197,8 @@ sdk-java: $(ENV) $(KEYS)  ## Build the full OpenCannabis SDK for Java.
 		&& tar -xzvf opencannabis-labservices-v1-java.tar.gz \
 		&& echo "Building Java SDK with Gradle..." \
 		&& cd opencannabis-labservices-v1-java \
-		 	&& ./gradlew -q projects \
-		 	&& ./gradlew assemble -x test \
+		 	&& ./gradlew --no-daemon -q projects \
+		 	&& ./gradlew --no-daemon assemble -x test \
 		&& echo "Build complete. Cleaning up..." \
 		&& cd .. && rm -fr ./opencannabis-labservices-v1-java \
 		&& du -h ./*.tar.gz \
