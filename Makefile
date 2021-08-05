@@ -140,7 +140,7 @@ release: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Perform a release build, including a
 	$(info Releasing OpenCannabis...)
 	$(RULE)$(BAZEL) build $(BUILD_ARGS) --config=release -- $(RELEASE_TARGETS) \
 		&& $(MKDIR) -p $(DOCROOT) \
-		&& echo "Doc release complete." \
+		&& echo "Library release complete." \
 		&& $(CP) -f $(POSIX_FLAGS) dist/bin/opencannabis/OpenCannabis.buf.bin ./OpenCannabis.buf.bin \
 		&& echo "Image release complete.";
 
@@ -154,7 +154,11 @@ docs: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Update built docs.
 test: $(BAZELISK_BIN) $(LOCAL_TOOLS)  ## Run all spec and SDK tests.
 	$(info Running testsuite...)
 
-clean: $(BAZELISK_BIN)  ## Clean built targets (safe).
+clean-env:  ## Refresh the local codebase environment (safe).
+	$(info Dropping env...)
+	$(RULE)rm -fr $(ENV)
+
+clean: clean-env $(BAZELISK_BIN)  ## Clean built targets (safe).
 	$(info Cleaning...)
 	$(RULE)$(BAZEL) clean
 
