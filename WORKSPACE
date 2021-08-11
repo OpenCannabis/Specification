@@ -15,11 +15,14 @@ load(
     GUST_VERSION = "VERSION",
 )
 
+load(
+    "//config:versions.bzl",
+    "PROTOBUF_VERSION",
+    "GRPC_VERSION",
+    "NODE_VERSION",
+    "YARN_VERSION",
+)
 
-PROTOBUF_VERSION = "3.15.3"
-GRPC_VERSION = "1.38.1"
-NODE_VERSION = "14.15.0"
-YARN_VERSION = "1.22.4"
 
 http_archive(
     name = "com_google_protobuf",
@@ -267,6 +270,11 @@ load("@gapic_generator_java//:repository_rules.bzl", "gapic_generator_java_prope
 gapic_generator_java_properties(
     name = "gapic_generator_java_properties",
     file = "@gapic_generator_java//:dependencies.properties",
+)
+
+com_google_api_gax_java_properties(
+    name = "co_cookies_sdk_properties",
+    file = "//sdk/java:ocp.properties",
 )
 
 load("@gapic_generator_java//:repositories.bzl", "gapic_generator_java_repositories")

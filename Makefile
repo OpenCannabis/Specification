@@ -12,9 +12,14 @@ WORKFLOW ?= protocol
 TOOL ?=
 APP ?=
 
+UNGATED ?= no
+SDK_VERSION = "v2"
+SDK_REVISION = "r1"
+SDK_DEPLOY_PROFILE = "default"
+
 ## Targets
 SCHEMA ?= //opencannabis
-IMAGE ?= //opencannabis:image
+#IMAGE ?= //opencannabis:image
 DOCS ?= //opencannabis:docs
 
 #### Targets: SDKs
@@ -183,26 +188,56 @@ keys $(KEYS):  ## Decrypt key material needed for development. Requires GCP perm
 	@echo "Keys decrypted."
 
 sdk-java: $(ENV) $(KEYS)  ## Build the full OpenCannabis SDK for Java.
-	$(info Building OpenCannabis for Java...)
-	$(RULE)$(BAZEL) build $(BUILD_ARGS) -- //sdk/java //sdk/java:labservices \
-		&& echo "Cleaning library distroot..." \
-		&& rm -fr ./sdk/java/dist \
-		&& echo "Exporting libraries to 'sdk/java/dist'..." \
+	@echo "Cleaning Java SDK build root..."
+	$(RULE)$(RM) -rf ./sdk/java/java-sdk-v2.tar.gz
+	$(RULE)bash ./sdk/java/build.sh
+
+sdk-java-publish:  ## Publish the OpenCannabis SDK for Java.
+	$(info Publishing OpenCannabis SDK for Java...)
+	@echo "Active deploy profile: '$(SDK_DEPLOY_PROFILE)'"
+	$(RULE)echo "Unpacking SDK..." \
 		&& mkdir -p ./sdk/java/dist \
-		&& cp -fv dist/bin/opencannabis/labtesting/v1/opencannabis-labservices-v1-java.tar.gz ./sdk/java/dist \
-		&& cp -fv dist/bin/sdk/java/OpenCannabisSDK-pkg.tar ./sdk/java/dist/opencannabis-protocol-v1-java.tar \
-		&& gzip --best ./sdk/java/dist/opencannabis-protocol-v1-java.tar \
-		&& echo "Unpacking library..." \
 		&& cd ./sdk/java/dist \
-		&& tar -xzvf opencannabis-labservices-v1-java.tar.gz \
-		&& echo "Building Java SDK with Gradle..." \
-		&& cd opencannabis-labservices-v1-java \
-		 	&& ./gradlew --no-daemon -q projects \
-		 	&& ./gradlew --no-daemon assemble -x test \
-		&& echo "Build complete. Cleaning up..." \
-		&& cd .. && rm -fr ./opencannabis-labservices-v1-java \
-		&& du -h ./*.tar.gz \
-		&& echo "SDK release ready.";
+		&& cp $(POSIX_FLAGS) -f ../java-sdk-$(SDK_VERSION).tar.gz ./java-sdk.tar.gz \
+		&& tar $(POSIX_FLAGS) -xzf java-sdk.tar.gz \
+		&& echo "Unpacking library 'proto-opencannabis-base-$(SDK_VERSION)'..." \
+		&& tar $(POSIX_FLAGS) -xzf ./proto-opencannabis-base-$(SDK_VERSION).pkg.tar.gz \
+		&& echo "Publishing 'proto-opencannabis-base-$(SDK_VERSION).tar.gz'..." \
+		&& ../publish_$(SDK_DEPLOY_PROFILE).sh ./proto-opencannabis-base-$(SDK_VERSION)-pom.xml ./proto-opencannabis-base-$(SDK_VERSION).jar $(SDK_VERSION)$(SDK_REVISION) $(SDK_DEPLOY_PROFILE) \
+		&& echo "Published 'proto-opencannabis-base-$(SDK_VERSION).tar.gz.";
+	@echo "Cleaning up..."
+	$(RULE)rm $(POSIX_FLAGS) -fr ./sdk/java/dist
+	@echo "Finished publish cycle for Java SDK $(SDK_VERSION) (deploy profile: '$(SDK_DEPLOY_PROFILE)')."
+
+sdk-java-release:  ## Publish the OpenCannabis SDK for Java to all production repositories.
+	$(RULE)$(MAKE) sdk-java RELEASE=yes
+	@echo "\nPublishing to Artifact Registry..."
+	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=default;
+	@echo "\nPublishing to mirror: 'Cookies'..."
+	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=cookies;
+	@echo "\nPublishing to GitHub..."
+	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=github;
+ifeq ($(SNAPSHOT),yes)
+	@echo "\n\nCAUTION: Deploying to Maven Snapshots. You have 10 seconds to cancel...\n\n";
+	@sleep 10;
+	@echo "\nDeploying to Maven Snapshots...";
+	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=snapshot;
+endif
+ifeq ($(UNGATED),yes)
+	@echo "\n\nCAUTION: Deploying to Maven Central. You have 10 seconds to cancel...\n\n";
+	@sleep 10;
+	@echo "\nDeploying to Maven Central...";
+	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=stage;
+endif
+
+#		&& echo "Building Java SDK with Gradle..." \
+#		&& cd java-sdk-v2 \
+#		 	&& ./gradlew --no-daemon -q projects \
+#		 	&& ./gradlew --no-daemon assemble -x test \
+#		&& echo "Build complete. Cleaning up..." \
+#		&& cd ../.. && rm -fr dist \
+#		&& du -h ./*.tar.gz \
+#		&& echo "SDK release ready.";
 
 encrypt:  ## Encrypt, or re-encrypt, local key material. Requires GCP permissions.
 	$(info Encrypting key material...)

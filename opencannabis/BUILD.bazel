@@ -59,7 +59,8 @@ DOC_SKIP = [
 ## OpenCannabis: Models
 module(
     name = "OpenCannabis",
-    deps = [":%s" % n for n in MODULES],
+    deps = [],  # No direct dependencies.
+    exports = [":%s" % n for n in MODULES],
 )
 
 alias(

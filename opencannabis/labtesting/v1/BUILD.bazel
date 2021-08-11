@@ -78,6 +78,7 @@ java_gapic_library(
     ],
     deps = [
         ":labservices_java_proto",
+        "//opencannabis:OpenCannabis",
     ],
 )
 
