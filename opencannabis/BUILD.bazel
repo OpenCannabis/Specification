@@ -60,7 +60,9 @@ DOC_SKIP = [
 module(
     name = "OpenCannabis",
     deps = [],  # No direct dependencies.
-    exports = [":%s" % n for n in MODULES],
+    exports = [
+        ("//opencannabis/%s:%s" % (n, n)) for n in MODULES
+    ],
 )
 
 alias(

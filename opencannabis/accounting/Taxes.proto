@@ -5,7 +5,7 @@
  */
 syntax = "proto3";
 
-package opencannabis.taxes;
+package opencannabis.accounting;
 
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";

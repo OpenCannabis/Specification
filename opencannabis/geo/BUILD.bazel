@@ -75,6 +75,5 @@ module(
         ":Location",
         ":USState",
         ":Province",
-        "//opencannabis/geo/usa/ca",
     ],
 )

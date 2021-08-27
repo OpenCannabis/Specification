@@ -1,0 +1,11 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+
+## Top-level (Public) Aliases
+alias(
+    name = "library",
+    actual = "//opencannabis:OpenCannabis-ts_proto",
+)

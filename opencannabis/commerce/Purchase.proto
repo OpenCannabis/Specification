@@ -122,7 +122,7 @@ message BillOfCharges {
   BillStatus status = 1;
 
   // Tax entries applied to this item or ticket.
-  repeated opencannabis.taxes.Tax tax = 2;
+  repeated opencannabis.accounting.Tax tax = 2;
 
   // Discount entries applied to this item or ticket.
   repeated opencannabis.commerce.Discount discount = 3;
