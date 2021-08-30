@@ -11,12 +11,12 @@ jobs:
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
 
       # 2: Setup Buf.
-      - uses: bufbuild/buf-setup-action@0dd784af7743db43acc2987ba79804deb21047d4 # renovate: tag=v0.1.0
+      - uses: bufbuild/buf-setup-action@v0.3.1
         with:
-          version: '0.41.0'
+          version: '0.54.1'
 
       # 3: Run linter.
-      - uses: bufbuild/buf-lint-action@e3093cd1a7b04535b82f17b82cfc04a1fb7205c8 # renovate: tag=v0.2.0
+      - uses: bufbuild/buf-lint-action@v0.3.0
         with:
           github_token: ${{ github.token }}
 
@@ -28,12 +28,12 @@ jobs:
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
 
       # 2: Setup Buf.
-      - uses: bufbuild/buf-setup-action@0dd784af7743db43acc2987ba79804deb21047d4 # renovate: tag=v0.1.0
+      - uses: bufbuild/buf-setup-action@v0.3.1
         with:
-          version: '0.41.0'
+          version: '0.54.1'
 
       # 3: Run break detector.
-      - uses: bufbuild/buf-breaking-action@231a240bfbfbf4bc8d5beb4fe56aef41ff4ddeef # renovate: tag=v0.2.0
+      - uses: bufbuild/buf-breaking-action@v0.3.0
         env:
           BUF_INPUT_HTTPS_USERNAME: ${{ github.actor }}
           BUF_INPUT_HTTPS_PASSWORD: ${{ github.token }}
