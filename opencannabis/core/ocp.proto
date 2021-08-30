@@ -6,6 +6,11 @@
 syntax = "proto3";
 package core;
 
+option optimize_for = SPEED;
+option cc_enable_arenas = true;
+option java_multiple_files = true;
+option java_string_check_utf8 = true;
+
 import "google/protobuf/descriptor.proto";
 
 

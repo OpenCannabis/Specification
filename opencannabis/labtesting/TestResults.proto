@@ -15,7 +15,6 @@ option java_outer_classname = "LabTesting";
 
 import "opencannabis/core/ocp.proto";
 
-import "opencannabis/content/Content.proto";
 import "opencannabis/temporal/Instant.proto";
 
 import "opencannabis/labtesting/Terpenes.proto";

@@ -43,7 +43,6 @@ proto(
         ":TestValue",
         ":Terpenes",
         ":Cannabinoids",
-        "//opencannabis/content:Content",
         "//opencannabis/temporal:Instant",
         "//opencannabis/core:OCP",
     ],

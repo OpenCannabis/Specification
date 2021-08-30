@@ -20,11 +20,9 @@ package opencannabis.labtesting.v1;
 
 import "google/api/annotations.proto";
 import "google/api/client.proto";
-import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 
 import "google/protobuf/empty.proto";
-import "google/protobuf/timestamp.proto";
 
 
 option (google.api.resource_definition) = {
