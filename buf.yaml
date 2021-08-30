@@ -5,8 +5,10 @@ deps:
   - buf.build/elide/safe-html-types:main
   - buf.build/beta/googleapis:main
 build:
-  roots:
-    - .
+  excludes:
+    - bazel-out
+    - dist
+    - node_modules
 lint:
   use:
     - BASIC
