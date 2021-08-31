@@ -26,8 +26,8 @@
     "@bazel/terser": "3.8.0",
     "@bazel/typescript": "3.8.0",
     "@bazel/worker": "3.8.0",
-    "jasmine": "3.8.0",
-    "jasmine-core": "3.8.0",
+    "jasmine": "3.9.0",
+    "jasmine-core": "3.9.0",
     "rollup": "2.53.3",
     "terser": "4.8.0",
     "typescript": "4.2.4"
