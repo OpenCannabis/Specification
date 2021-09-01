@@ -2,6 +2,11 @@
 cookiesRepo = "git@github.com:CookiesCo/OpenCannabis.git"
 cookiesBranch = "master"
 
+platformRepo = "git@github.com:CookiesCo/platform.git"
+platformBase = "dev"
+platformBranch = "satellite/opencannabis"
+platformHttp = "https://github.com/CookiesCo/platform.git"
+
 sourceRepo = "git@github.com:OpenCannabis/Specification.git"
 sourceBranch = "master"
 upstreamBranch = "ocp/sync"
@@ -169,3 +174,42 @@ core.workflow(
         ),
     ],
 )
+
+core.workflow(
+    name = "platform",
+    origin = git.origin(
+        url = cookiesRepo,
+        ref = cookiesBranch,
+    ),
+    destination = git.github_pr_destination(
+        url = platformHttp,
+        pr_branch = platformBranch,
+        destination_ref = platformBase,
+        title = "po8 OpenCannabis Update",
+        update_description = True,
+        body = "Update `platform` with the latest definitions from the [OpenCannabis Spec](https://github.com/CookiesCo/OpenCannabis).",
+        integrates = [],
+    ),
+    origin_files = glob([
+        "opencannabis/**/*.proto",
+    ]),
+    destination_files = glob([
+        "opencannabis/**/*.proto",
+    ]),
+    authoring = authoring.pass_thru(
+        "Cookiebot <techteam+github@cookiescalifornia.com>"),
+    transformations = [
+        metadata.save_author(),
+        metadata.expose_label("COPYBARA_INTEGRATE_REVIEW"),
+        metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = " #"),
+        core.replace(
+            before = "${x}",
+            after = "",
+            multiline = True,
+            regex_groups = {
+                "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
+            },
+        ),
+    ],
+)
+
