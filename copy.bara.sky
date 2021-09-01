@@ -191,15 +191,23 @@ core.workflow(
         body = "Update `platform` with the latest definitions from the [OpenCannabis Spec](https://github.com/CookiesCo/OpenCannabis).",
         integrates = [],
     ),
-    origin_files = glob([
+    origin_files = [
+        "buf.yaml",
+        "buf.lock",
+        "OpenCannabis.buf.bin",
+    ] + glob([
+        "opencannabis/*.*",
+        "opencannabis/**/*.*",
+    ]),
+    destination_files = [
+        "buf.yaml",
+        "buf.lock",
+        "OpenCannabis.buf.bin",
+    ] + glob([
         "opencannabis/*.*",
         "opencannabis/**/*.*",
     ], exclude = [
         "opencannabis/core/BUILD.bazel",
-    ]),
-    destination_files = glob([
-        "opencannabis/*.*",
-        "opencannabis/**/*.*",
     ]),
     authoring = authoring.allowed(
         default = "Cookiebot <engineering@cookiescalifornia.com>",
@@ -212,6 +220,7 @@ core.workflow(
             "jordan.t@cookiescalifornia.com",
             "marvin@cookies.co",
             "marvin@cookiescalifornia.com",
+            "engineering@cookiescalifornia.com",
         ],
     ),
     transformations = [
@@ -225,6 +234,10 @@ core.workflow(
             regex_groups = {
                 "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
             },
+        ),
+        core.move(
+            before = "",
+            after = "opencannabis/",
         ),
         core.move(
             before = "opencannabis/core/datamodel.proto",
