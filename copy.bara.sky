@@ -233,10 +233,9 @@ core.workflow(
                 "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
             },
         ),
-        core.move(
-            before = "",
-            after = "opencannabis/",
-        ),
+        core.move(before = "buf.yaml", after = "opencannabis/buf.yaml"),
+        core.move(before = "buf.lock", after = "opencannabis/buf.lock"),
+        core.move(before = "OpenCannabis.buf.bin", after = "opencannabis/OpenCannabis.buf.bin"),
         core.move(
             before = "opencannabis/core/datamodel.proto",
             after = "opencannabis/core/stub/datamodel.proto",
