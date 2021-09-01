@@ -192,13 +192,28 @@ core.workflow(
         integrates = [],
     ),
     origin_files = glob([
-        "opencannabis/**/*.proto",
+        "opencannabis/*.*",
+        "opencannabis/**/*.*",
+    ], exclude = [
+        "opencannabis/core/BUILD.bazel",
     ]),
     destination_files = glob([
-        "opencannabis/**/*.proto",
+        "opencannabis/*.*",
+        "opencannabis/**/*.*",
     ]),
-    authoring = authoring.pass_thru(
-        "Cookiebot <techteam+github@cookiescalifornia.com>"),
+    authoring = authoring.allowed(
+        default = "Cookiebot <engineering@cookiescalifornia.com>",
+        allowlist = [
+            "sam.g@cookies.co",
+            "sam.g@cookiescalifornia.com",
+            "noah@cookies.co",
+            "noah@cookiescalifornia.com",
+            "jordan.t@cookies.co",
+            "jordan.t@cookiescalifornia.com",
+            "marvin@cookies.co",
+            "marvin@cookiescalifornia.com",
+        ],
+    ),
     transformations = [
         metadata.save_author(),
         metadata.expose_label("COPYBARA_INTEGRATE_REVIEW"),
@@ -209,6 +224,18 @@ core.workflow(
             multiline = True,
             regex_groups = {
                 "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
+            },
+        ),
+        core.move(
+            before = "opencannabis/core/datamodel.proto",
+            after = "opencannabis/core/stub/datamodel.proto",
+        ),
+        core.replace(
+            before = "",
+            after = "",
+            multiline = False,
+            regex_groups = {
+                "x": "",
             },
         ),
     ],
