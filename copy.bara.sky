@@ -201,9 +201,6 @@ core.workflow(
         "opencannabis/core/BUILD.bazel",
     ]),
     destination_files = glob([
-        "buf.yaml",
-        "buf.lock",
-        "OpenCannabis.buf.bin",
         "opencannabis/*.*",
         "opencannabis/**/*.*",
     ], exclude = [
@@ -248,4 +245,3 @@ core.workflow(
         ),
     ],
 )
-
