@@ -1,6 +1,7 @@
 
 cookiesRepo = "git@github.com:CookiesCo/OpenCannabis.git"
 cookiesBranch = "master"
+cookiesLatest = "dev"
 
 platformRepo = "git@github.com:CookiesCo/platform.git"
 platformBase = "dev"
@@ -179,7 +180,7 @@ core.workflow(
     name = "platform",
     origin = git.origin(
         url = cookiesRepo,
-        ref = cookiesBranch,
+        ref = cookiesLatest,
     ),
     destination = git.github_pr_destination(
         url = platformHttp,
