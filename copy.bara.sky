@@ -191,19 +191,17 @@ core.workflow(
         body = "Update `platform` with the latest definitions from the [OpenCannabis Spec](https://github.com/CookiesCo/OpenCannabis).",
         integrates = [],
     ),
-    origin_files = [
+    origin_files = glob([
         "buf.yaml",
         "buf.lock",
         "OpenCannabis.buf.bin",
-    ] + glob([
         "opencannabis/*.*",
         "opencannabis/**/*.*",
     ]),
-    destination_files = [
+    destination_files = glob([
         "buf.yaml",
         "buf.lock",
         "OpenCannabis.buf.bin",
-    ] + glob([
         "opencannabis/*.*",
         "opencannabis/**/*.*",
     ], exclude = [
