@@ -186,7 +186,7 @@ core.workflow(
         url = platformHttp,
         pr_branch = platformBranch,
         destination_ref = platformBase,
-        title = "po8 OpenCannabis Update",
+        title = "🏛️ OpenCannabis Update",
         update_description = True,
         body = "Update `platform` with the latest definitions from the [OpenCannabis Spec](https://github.com/CookiesCo/OpenCannabis).",
         integrates = [],
