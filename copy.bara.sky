@@ -231,12 +231,8 @@ core.workflow(
             after = "opencannabis/core/stub/datamodel.proto",
         ),
         core.replace(
-            before = "",
-            after = "",
-            multiline = False,
-            regex_groups = {
-                "x": "",
-            },
+            before = "import \"opencannabis/core/datamodel.proto\"",
+            after = "import \"gust/core/datamodel.proto\";\"",
         ),
     ],
 )
