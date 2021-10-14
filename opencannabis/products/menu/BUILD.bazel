@@ -20,6 +20,8 @@ proto(
         ":Section",
         "//opencannabis/core:Datamodel",
         "//opencannabis/base:ProductKey",
+        "//opencannabis/content:ProductContent",
+        "//opencannabis/content:MaterialsData",
         "//opencannabis/media:MediaKey",
         "//opencannabis/temporal:Instant",
         "//opencannabis/products:Apothecary",
