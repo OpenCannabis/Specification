@@ -115,7 +115,7 @@ switched_rules_by_language(
     go = False,
     grpc = True,
     java = True,
-    nodejs = True,
+    nodejs = False,
     php = False,
     python = True,
     ruby = False,
