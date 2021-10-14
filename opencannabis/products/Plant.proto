@@ -31,18 +31,9 @@ message Plant {
     CLONE = 2;
   }
 
-  // Product key uniquely identifying this cannabis plant item.
-  opencannabis.base.ProductKey key = 1;
-
   // Specific subcategory for this plant item.
-  Type type = 2;
+  Type type = 1;
 
   // Menu products made from this raw plant product.
-  repeated opencannabis.base.ProductReference origin = 3;
-
-  // Product content attached to this cannabis plant item.
-  opencannabis.content.ProductContent product = 4;
-
-  // Handling and materials data regarding this cannabis plant item.
-  opencannabis.content.MaterialsData material = 5;
+  repeated opencannabis.base.ProductReference origin = 2;
 }

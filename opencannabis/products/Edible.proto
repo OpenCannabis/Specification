@@ -94,21 +94,12 @@ message Edible {
     LOCAL = 6;
   }
 
-  // Product key that uniquely identifies this edible item.
-  opencannabis.base.ProductKey key = 1;
-
   // Specifies the subcategory of this edible product, if known and applicable.
-  Type type = 2;
+  Type type = 1;
 
   // Specifies flags attached to this edible product.
-  repeated Flag flags = 3;
-
-  // Product content related to/about this edible item.
-  opencannabis.content.ProductContent product = 4;
-
-  // Materials and handling information about this cartridge product.
-  opencannabis.content.MaterialsData material = 5;
+  repeated Flag flags = 2;
 
   // Specifies the ingredients for a product, when/if it is composed of ingredients (i.e. edibles).
-  repeated EdibleIngredient ingredients = 6;
+  repeated EdibleIngredient ingredients = 3;
 }

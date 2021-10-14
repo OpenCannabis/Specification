@@ -65,15 +65,9 @@ message Merchandise {
     PAPERS = 9;
   }
 
-  // Product key uniquely identifying this merchandise item.
-  opencannabis.base.ProductKey key = 1;
-
   // Sub-category for this merchandise item, if known.
-  Type type = 2;
+  Type type = 1;
 
   // Flags for this merchandise item.
-  repeated MerchandiseFlag flags = 3;
-
-  // Content about this merchandise item.
-  opencannabis.content.ProductContent product = 4;
+  repeated MerchandiseFlag flags = 2;
 }

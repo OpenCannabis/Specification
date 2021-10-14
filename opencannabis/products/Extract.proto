@@ -65,21 +65,12 @@ message Extract {
     SUGAR = 10;
   }
 
-  // Product key that uniquely identifies this cannabis extract item.
-  opencannabis.base.ProductKey key = 1;
-
   // Specific type of extract being described.
-  Type type = 2;
+  Type type = 1;
 
   // Specifies flags that may specifically be applied to this extracted cannabis item.
-  repeated Flag flag = 3;
+  repeated Flag flag = 2;
 
   // Flower that was used to produce this extract.
-  opencannabis.base.ProductReference flower = 4;
-
-  // Product content about this extracted cannabis item.
-  opencannabis.content.ProductContent product = 5;
-
-  // Materials and handling data attached to this extracted cannabis item.
-  opencannabis.content.MaterialsData material = 6;
+  opencannabis.base.ProductReference flower = 3;
 }
