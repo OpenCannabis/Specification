@@ -20,11 +20,11 @@ import "opencannabis/core/ocp.proto";
 message MediaType {
   // Enumerates, in generic terms, the kinds of media that can be attached or described.
   enum Kind {
-    // Web link, or URI.
-    LINK = 0;
-
     // Image or photograph.
-    IMAGE = 1;
+    IMAGE = 0;
+
+    // Web link, or URI.
+    LINK = 1;
 
     // Document or text data.
     DOCUMENT = 2;
