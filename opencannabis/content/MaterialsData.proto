@@ -19,6 +19,8 @@ import "opencannabis/structs/Shelf.proto";
 import "opencannabis/structs/Species.proto";
 import "opencannabis/structs/Genetics.proto";
 
+import "opencannabis/labtesting/TestResults.proto";
+
 import "opencannabis/products/distribution/DistributionChannel.proto";
 
 
@@ -148,4 +150,7 @@ message MaterialsData {
 
   // Describes subjective test results, including tasting notes, feelings, etc.
   SubjectiveTesting subjective_tests = 6;
+
+  // Quantitative/qualitative tests performed by a certified lab.
+  opencannabis.labtesting.TestResults lab_tests = 7;
 }
