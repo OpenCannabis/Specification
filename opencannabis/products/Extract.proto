@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.product";
 option java_multiple_files = false;
 option java_outer_classname = "ExtractProduct";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/products";
 
 import "opencannabis/base/ProductKey.proto";
 import "opencannabis/content/MaterialsData.proto";
@@ -65,12 +66,21 @@ message Extract {
     SUGAR = 10;
   }
 
+  // Product key that uniquely identifies this cannabis extract item.
+  opencannabis.base.ProductKey key = 1;
+
   // Specific type of extract being described.
-  Type type = 1;
+  Type type = 2;
 
   // Specifies flags that may specifically be applied to this extracted cannabis item.
-  repeated Flag flag = 2;
+  repeated Flag flag = 3;
 
   // Flower that was used to produce this extract.
-  opencannabis.base.ProductReference flower = 3;
+  opencannabis.base.ProductReference flower = 4;
+
+  // Product content about this extracted cannabis item.
+  opencannabis.content.ProductContent product = 5;
+
+  // Materials and handling data attached to this extracted cannabis item.
+  opencannabis.content.MaterialsData material = 6;
 }

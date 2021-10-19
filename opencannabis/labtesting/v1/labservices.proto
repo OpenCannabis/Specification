@@ -15,6 +15,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.services.labtesting.v1";
 option java_multiple_files = true;
 option java_outer_classname = "LabServicesV1";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/labtesting/v1";
 
 package opencannabis.labtesting.v1;
 

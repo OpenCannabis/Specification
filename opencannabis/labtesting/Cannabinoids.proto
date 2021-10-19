@@ -13,6 +13,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.labtesting";
 option java_multiple_files = true;
 option java_outer_classname = "CannabinoidCompounds";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/labtesting";
 
 
 // Enumerates available cannabinoid compounds, that generally show up in test results related to cannabis.

@@ -10,6 +10,7 @@ option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.crypto";
 option java_multiple_files = true;
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/crypto";
 
 import "opencannabis/crypto/Integrity.proto";
 

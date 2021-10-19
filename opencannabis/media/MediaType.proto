@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.media";
 option java_multiple_files = false;
 option java_outer_classname = "MediaItemType";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/labtesting";
 
 import "opencannabis/core/datamodel.proto";
 import "opencannabis/core/ocp.proto";
@@ -20,11 +21,11 @@ import "opencannabis/core/ocp.proto";
 message MediaType {
   // Enumerates, in generic terms, the kinds of media that can be attached or described.
   enum Kind {
-    // Image or photograph.
-    IMAGE = 0;
-
     // Web link, or URI.
-    LINK = 1;
+    LINK = 0;
+
+    // Image or photograph.
+    IMAGE = 1;
 
     // Document or text data.
     DOCUMENT = 2;

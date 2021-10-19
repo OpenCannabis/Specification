@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.product";
 option java_multiple_files = false;
 option java_outer_classname = "PrerollProduct";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/products";
 
 import "opencannabis/base/ProductKey.proto";
 
@@ -43,15 +44,24 @@ message Preroll {
     CONTAINS_TOBACCO = 5;
   }
 
+  // Product key that uniquely identifies this pre-rolled cannabis product.
+  opencannabis.base.ProductKey key = 1;
+
   // Specifies the flowers used to produce this product, if known.
-  opencannabis.base.ProductReference flower = 1;
+  opencannabis.base.ProductReference flower = 2;
 
   // Specifies the measured length of this prerolled item, if known.
-  double length = 2;
+  double length = 3;
 
   // Specifies the measured thickness of this prerolled item, if known.
-  double thickness = 3;
+  double thickness = 4;
 
   // Specifies flags that may be applied specifically to this prerolled item.
-  repeated Flag flags = 4;
+  repeated Flag flags = 5;
+
+  // Specifies product content attached to this prerolled item.
+  opencannabis.content.ProductContent product = 6;
+
+  // Specifies handling and materials data associated with this prerolled item.
+  opencannabis.content.MaterialsData material = 7;
 }

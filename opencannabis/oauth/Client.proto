@@ -12,6 +12,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.oauth";
 option java_multiple_files = true;
 option java_outer_classname = "OAuthClient";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/oauth";
 
 import "opencannabis/media/MediaItem.proto";
 import "opencannabis/temporal/Instant.proto";

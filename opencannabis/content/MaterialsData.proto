@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.content";
 option java_multiple_files = false;
 option java_outer_classname = "MaterialsContent";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/content";
 
 import "opencannabis/content/Content.proto";
 
@@ -18,8 +19,6 @@ import "opencannabis/structs/Grow.proto";
 import "opencannabis/structs/Shelf.proto";
 import "opencannabis/structs/Species.proto";
 import "opencannabis/structs/Genetics.proto";
-
-import "opencannabis/labtesting/TestResults.proto";
 
 import "opencannabis/products/distribution/DistributionChannel.proto";
 
@@ -150,7 +149,4 @@ message MaterialsData {
 
   // Describes subjective test results, including tasting notes, feelings, etc.
   SubjectiveTesting subjective_tests = 6;
-
-  // Quantitative/qualitative tests performed by a certified lab.
-  opencannabis.labtesting.TestResults lab_tests = 7;
 }

@@ -13,6 +13,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.labtesting";
 option java_multiple_files = true;
 option java_outer_classname = "TerpeneCompounds";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/labtesting";
 
 
 // Enumerates known terpene compounds. Terpenes are volatile chemical compounds that define the taste and aroma (flavor,
