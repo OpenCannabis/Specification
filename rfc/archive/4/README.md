@@ -2,7 +2,7 @@
 domain: rfc.opencannabis.info
 shortname: 4/OCS-M
 name: OpenCannabis Media Extension
-status: raw
+status: retired
 editor: Sam Gammon <sam@bloombox.io>
 contributors:
   - Randal Stevens <randy@bloombox.io>
@@ -12,7 +12,7 @@ contributors:
 
 # OpenCannabis: Media Extension
 - Version `1.0`
-- Status: `RAW`
+- Status: `RETIRED`
 
 ### Status of this Memo
 

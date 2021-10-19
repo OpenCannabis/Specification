@@ -2,7 +2,7 @@
 domain: rfc.opencannabis.info
 shortname: 5/OCS-N
 name: OpenCannabis Menu Extension
-status: raw
+status: retired
 editor: Randal Stevens <randy@bloombox.io>
 contributors:
 - Sam Gammon <sam@bloombox.io>
@@ -10,7 +10,7 @@ contributors:
 
 # OpenCannabis: Menu Extension
 - Version `1.0`
-- Status: `RAW`
+- Status: `RETIRED`
 <a name="top"></a>
 
 ### Status of this Memo

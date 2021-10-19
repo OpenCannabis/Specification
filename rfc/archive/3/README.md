@@ -2,7 +2,7 @@
 domain: rfc.opencannabis.info
 shortname: 3/OCS
 name: OpenCannabis Specification
-status: raw
+status: retired
 editor: Sam Gammon <sam@bloombox.io>
 contributors:
   - Randal Stevens <randy@bloombox.io>
@@ -15,7 +15,7 @@ contributors:
 
 # OpenCannabis Specification
 - Version `1.0`
-- Status: `RAW`
+- Status: `RETIRED`
 
 ### Status of this Memo
 

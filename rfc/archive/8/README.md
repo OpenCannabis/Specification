@@ -2,7 +2,7 @@
 domain: rfc.opencannabis.info
 shortname: 9/OCS-X
 name: OpenCannabis Proximity Extension
-status: raw
+status: retired
 editor: Randal Stevens <randy@bloombox.io>
 contributors:
 - Sam Gammon <sam@bloombox.io>
@@ -12,7 +12,7 @@ contributors:
 
 # OpenCannabis: Proximity Extension
 - Version `1.0`
-- Status: `RAW`
+- Status: `RETIRED`
 
 ### Status of this Memo
 
