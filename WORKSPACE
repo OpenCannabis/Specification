@@ -289,9 +289,9 @@ load("@rules_gapic//python:py_gapic_repositories.bzl", "py_gapic_repositories")
 
 py_gapic_repositories()
 
-load("@rules_python//python:pip.bzl", "pip_repositories")
+load("@rules_python//python:pip.bzl", "pip_install")
 
-pip_repositories()
+pip_install(requirements = "sdk/python/requirements.txt")
 
 _gapic_generator_python_version = "0.50.5"
 

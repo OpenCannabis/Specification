@@ -15,9 +15,6 @@ option go_package = "github.com/OpenCannabis/protocol/opencannabis/products";
 
 import "opencannabis/base/ProductKey.proto";
 
-import "opencannabis/content/MaterialsData.proto";
-import "opencannabis/content/ProductContent.proto";
-
 
 // Specifies a pre-rolled cannabis product, where a production process consumes cannabis plant material and produces
 // end-products that are already rolled into joints, marijuana cigarettes, blunts, and so on.
@@ -44,24 +41,15 @@ message Preroll {
     CONTAINS_TOBACCO = 5;
   }
 
-  // Product key that uniquely identifies this pre-rolled cannabis product.
-  opencannabis.base.ProductKey key = 1;
-
   // Specifies the flowers used to produce this product, if known.
-  opencannabis.base.ProductReference flower = 2;
+  opencannabis.base.ProductReference flower = 1;
 
   // Specifies the measured length of this prerolled item, if known.
-  double length = 3;
+  double length = 2;
 
   // Specifies the measured thickness of this prerolled item, if known.
-  double thickness = 4;
+  double thickness = 3;
 
   // Specifies flags that may be applied specifically to this prerolled item.
-  repeated Flag flags = 5;
-
-  // Specifies product content attached to this prerolled item.
-  opencannabis.content.ProductContent product = 6;
-
-  // Specifies handling and materials data associated with this prerolled item.
-  opencannabis.content.MaterialsData material = 7;
+  repeated Flag flags = 4;
 }

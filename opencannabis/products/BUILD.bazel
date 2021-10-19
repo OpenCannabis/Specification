@@ -7,31 +7,16 @@ load("//tools/defs:proto.bzl", "proto", "module")
 proto(
     name = "Apothecary",
     srcs = ["Apothecary.proto"],
-    deps = [
-        "//opencannabis/base:ProductKey",
-        "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent",
-    ],
 )
 
 proto(
     name = "Cartridge",
     srcs = ["Cartridge.proto"],
-    deps = [
-        "//opencannabis/base:ProductKey",
-        "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent",
-    ],
 )
 
 proto(
     name = "Edible",
     srcs = ["Edible.proto"],
-    deps = [
-        "//opencannabis/base:ProductKey",
-        "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent",
-    ],
 )
 
 proto(
@@ -39,8 +24,6 @@ proto(
     srcs = ["Extract.proto"],
     deps = [
         "//opencannabis/base:ProductKey",
-        "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent",
     ],
 )
 
@@ -50,18 +33,12 @@ proto(
     deps = [
         "//opencannabis/core:Datamodel",
         "//opencannabis/base:ProductKey",
-        "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent",
     ],
 )
 
 proto(
     name = "Merchandise",
     srcs = ["Merchandise.proto"],
-    deps = [
-        "//opencannabis/base:ProductKey",
-        "//opencannabis/content:ProductContent",
-    ],
 )
 
 proto(
@@ -69,8 +46,6 @@ proto(
     srcs = ["Plant.proto"],
     deps = [
         "//opencannabis/base:ProductKey",
-        "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent",
     ],
 )
 
@@ -79,8 +54,6 @@ proto(
     srcs = ["Preroll.proto"],
     deps = [
         "//opencannabis/base:ProductKey",
-        "//opencannabis/content:MaterialsData",
-        "//opencannabis/content:ProductContent",
     ],
 )
 

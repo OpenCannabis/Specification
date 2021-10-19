@@ -39,6 +39,7 @@ proto(
         "//opencannabis/structs:Shelf",
         "//opencannabis/structs:Species",
         "//opencannabis/structs:Genetics",
+        "//opencannabis/labtesting:TestResults",
         "//opencannabis/products/distribution:DistributionChannel"
     ],
 )
@@ -66,7 +67,6 @@ proto(
         "//opencannabis/structs:ProductFlags",
         "//opencannabis/temporal:Instant",
         "//opencannabis/structs/pricing:PricingDescriptor",
-        "//opencannabis/labtesting:TestResults",
         "//opencannabis/core:Datamodel"
     ],
 )

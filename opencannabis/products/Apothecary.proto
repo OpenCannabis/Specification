@@ -13,11 +13,6 @@ option java_multiple_files = false;
 option java_outer_classname = "ApothecaryProduct";
 option go_package = "github.com/OpenCannabis/protocol/opencannabis/products";
 
-import "opencannabis/base/ProductKey.proto";
-
-import "opencannabis/content/MaterialsData.proto";
-import "opencannabis/content/ProductContent.proto";
-
 
 // Specifies an apothecary item for sale. Apothecary items are described as drugstore-style items, like capsules, oils,
 // injectors, and other edge-case applications.
@@ -58,15 +53,6 @@ message Apothecary {
     LOTION = 10;
   }
 
-  // Product key uniquely identifying this apothecary item.
-  opencannabis.base.ProductKey key = 1;
-
   // Specific type of apothecary item being described.
-  Type type = 2;
-
-  // Product content about this apothecary item.
-  opencannabis.content.ProductContent product = 3;
-
-  // Materials and handling information about this apothecary item.
-  opencannabis.content.MaterialsData material = 4;
+  Type type = 1;
 }
