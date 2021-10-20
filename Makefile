@@ -212,20 +212,22 @@ sdk-java-publish:  ## Publish the OpenCannabis SDK for Java.
 	@echo "Finished publish cycle for Java SDK $(SDK_VERSION) (deploy profile: '$(SDK_DEPLOY_PROFILE)')."
 
 sdk-java-release:  ## Publish the OpenCannabis SDK for Java to all production repositories.
-	$(RULE)$(MAKE) sdk-java RELEASE=yes
-	@echo "\nPublishing to Artifact Registry..."
-	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=default;
-ifeq ($(SNAPSHOT),yes)
-	@echo "\n\nCAUTION: Deploying to Maven Snapshots. You have 10 seconds to cancel...\n\n";
-	@sleep 10;
-	@echo "\nDeploying to Maven Snapshots...";
-	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=snapshot;
-endif
 ifeq ($(UNGATED),yes)
 	@echo "\n\nCAUTION: Deploying to Maven Central. You have 10 seconds to cancel...\n\n";
 	@sleep 10;
 	@echo "\nDeploying to Maven Central...";
 	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=stage;
+else
+ifeq ($(SNAPSHOT),yes)
+	@echo "\n\nCAUTION: Deploying to Maven Snapshots. You have 10 seconds to cancel...\n\n";
+	@sleep 10;
+	@echo "\nDeploying to Maven Snapshots...";
+	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=snapshot;
+else
+	$(RULE)$(MAKE) sdk-java RELEASE=yes
+	@echo "\nPublishing to Artifact Registry (sandbox)..."
+	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=default;
+endif
 endif
 
 #		&& echo "Building Java SDK with Gradle..." \
