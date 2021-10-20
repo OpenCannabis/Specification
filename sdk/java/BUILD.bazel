@@ -47,7 +47,7 @@ alias(
 API_COMMONS_VERSION = "1.10.1"
 GRPC_COMMONS_VERSION = "2.3.2"
 
-REVISION = "beta1"
+REVISION = "r1beta1"
 PROTO_VERSION = "v2"
 LABSERVICES_VERSION = "v1"
 ARTIFACT_GROUP = "io.github.opencannabis"
