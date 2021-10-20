@@ -14,7 +14,7 @@ APP ?=
 
 UNGATED ?= no
 SDK_VERSION = "v2"
-SDK_REVISION = "r1"
+SDK_REVISION = "r2"
 SDK_DEPLOY_PROFILE = "default"
 
 ## Targets
