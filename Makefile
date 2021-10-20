@@ -215,8 +215,6 @@ sdk-java-release:  ## Publish the OpenCannabis SDK for Java to all production re
 	$(RULE)$(MAKE) sdk-java RELEASE=yes
 	@echo "\nPublishing to Artifact Registry..."
 	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=default;
-	@echo "\nPublishing to mirror: 'Cookies'..."
-	$(RULE)$(MAKE) sdk-java-publish SDK_DEPLOY_PROFILE=cookies;
 ifeq ($(SNAPSHOT),yes)
 	@echo "\n\nCAUTION: Deploying to Maven Snapshots. You have 10 seconds to cancel...\n\n";
 	@sleep 10;
