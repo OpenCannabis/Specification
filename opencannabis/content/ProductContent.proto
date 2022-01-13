@@ -73,6 +73,9 @@ message ProductContent {
   // Product flags attached to this content.
   repeated opencannabis.structs.ProductFlag flags = 8;
 
+  // Full body content for a given product, typically expressed in Markdown or HTML.
+  opencannabis.content.Content body = 9;
+
   // Timestamps for this product.
   ProductTimestamps ts = 99;
 }
