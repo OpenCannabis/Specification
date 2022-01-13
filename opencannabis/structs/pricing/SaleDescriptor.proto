@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.product.struct";
 option java_multiple_files = true;
 option java_outer_classname = "ProductDiscount";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/structs/pricing";
 
 import "opencannabis/temporal/Instant.proto";
 

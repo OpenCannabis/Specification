@@ -12,6 +12,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.product";
 option java_multiple_files = false;
 option java_outer_classname = "DistributionChannel";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/products/distribution";
 
 
 // Specifies kinds of channels that may be used or specified for product distribution policies.

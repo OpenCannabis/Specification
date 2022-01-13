@@ -1,0 +1,185 @@
+
+/**
+ * Laboratory testing services which implement the *Certificate of Authenticity Exchange* specification outlined in
+ * `OCP#7/OCS-L`, version `2.0`. Services defined here enable the exchange of COA data between organizations, in a fully
+ * typed and integrity-guaranteed way.
+ *
+ * Partner objects for these services can be found in `COA.proto` at the path `opencannabis.labtesting`. `7/OCS-L`
+ * defines the proper use of those objects with this service, and details obligations for client and server implementors
+ * which include flat encoding formats and API access procedures.
+ */
+syntax = "proto3";
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.services.labtesting.v1";
+option java_multiple_files = true;
+option java_outer_classname = "LabServicesV1";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/labtesting/v1";
+
+package opencannabis.labtesting.v1;
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/resource.proto";
+
+import "google/protobuf/empty.proto";
+
+
+option (google.api.resource_definition) = {
+  type: "labtesting.opencannabis.dev/LabResult"
+  pattern: "tenants/{org}/batches/{batch}/results/{result}"
+};
+
+
+
+//
+message LabResultResponse {
+  //
+}
+
+
+//
+message LabResultStatusResponse {
+  //
+}
+
+
+//
+message LabResultReference {
+  //
+  string sample_key = 1;
+
+  //
+  string tenant = 2;
+}
+
+
+//
+message LabResultEvent {
+  //
+  string partner = 1;
+
+  //
+  oneof result_scope {
+    //
+    string batch_key = 2;
+
+    //
+    string sample_key = 3;
+  }
+}
+
+
+//
+message LabResultIngestRequest {
+  //
+  string delivery_id = 1;
+
+  //
+  string partner = 2;
+
+  //
+  string target = 3;
+
+  //
+  string token = 4;
+}
+
+
+//
+message LabResultIngestResponse {
+  //
+}
+
+
+// The _Lab Results Fetch Service_ interface offers an implementation route for laboratories that wish to publish their
+// data in a pull-style interaction model, with data consumers (usually distributors or producers) fetching that data
+// on-demand or on a regular cadence.
+//
+// Proper use of this service is defined in `OCP#7/OCS-L`, version `2.0`.
+service LabResultsFetchServiceV1 {
+  option (google.api.default_host) = "labservices.opencannabis.dev";
+  option (google.api.oauth_scopes) =
+    "https://scope.opencannabis.dev/labservices/read,"
+    "https://scope.opencannabis.dev/labservices/consumer";
+
+  // Request the current status of a specific lab test result, with a known batch ID and sample ID, but before there is
+  // a known final result ID.
+  //
+  // Responding systems are expected to report the current status of the provided sample and batch information. If there
+  // is currently a result in progress or a completed result is available, the specific result ID should be returned to
+  // invoking code, which can then retrieve the lab result data via other pre-agreed means.
+  rpc LabResultStatus(LabResultReference) returns (LabResultStatusResponse) {
+    option (google.api.http) = {
+      get: "/v1/{sample_key=batches/*/samples/*}:status"
+      additional_bindings {
+        get: "/v1/tenants/{tenant}/{sample_key=batches/*/samples/*}:status"
+      }
+    };
+    option (google.api.method_signature) = "sample_key";
+    option (google.api.method_signature) = "tenant,sample_key";
+  }
+
+  // Request payload data for a lab test result, related to a known batch ID and sample ID, when there is a known final
+  // result ID.
+  //
+  // Responding systems are expected to return the freshest data possible at this endpoint, so it is implemented via
+  // `POST` when mapped to REST to avoid caching. Typically this method is dispatched by consumer systems (i.e. brands,
+  // manufacturers, distributors, and so forth) after a laboratory has notified the consumer of a new available lab test
+  // result, specifically via the `LabResultsIngestServiceV1.LabResultNotify` method or web hook.
+  rpc LabResultFetch(LabResultReference) returns (LabResultResponse) {
+    option (google.api.http) = {
+      post: "/v1/labresults/fetch"
+      additional_bindings {
+        get: "/v1/tenants/{tenant}/{sample_key=batches/*/samples/*}/labresults:status"
+      }
+    };
+    option (google.api.method_signature) = "tenant,sample_key";
+  }
+}
+
+
+// The _Lab Results Fetch Service_ interface offers an implementation route for manufacturers, distributors, and brands
+// that wish to receive published COA/test result data in a pull-style interaction model, with payloads published via
+// webhooks delivered proactively from the labs themselves.
+//
+// Proper use of this service is defined in `OCP#7/OCS-L`, version `2.0`.
+service LabResultsIngestServiceV1 {
+  option (google.api.default_host) = "labservices.opencannabis.dev";
+  option (google.api.oauth_scopes) =
+      "https://scope.opencannabis.dev/labservices/notify,"
+      "https://scope.opencannabis.dev/labservices/authority";
+
+  // Notify a lab customer (manufacturer, brand, or distributor) that lab results are available to be fetched.
+  //
+  // At this stage in the process, a lab has a final result ID associated with a sample ID and batch ID, and wishes to
+  // notify their trading partner that a given result is ready to be fetched at the consumer's earliest convenience.
+  // After delivery of this payload, the lab provider is expected to make the associated lab result payload avaialble
+  // over their API in strongly-consistent and idempotent manner.
+  rpc LabResultNotify(LabResultEvent) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/partners/{partner}/{sample_key=batches/*/samples/*}:notify"
+      body: "*"
+    };
+    option (google.api.method_signature) = "partner,sample_key";
+  }
+
+  // Notify a lab customer (manufacturer, brand, or distributor) that lab results are available to be downloaded.
+  //
+  // At this stage in the process, a lab has _one or more_ final result IDs associated with a sample ID and batch ID,
+  // and wishes to notify their trading partner that such a batch is ready to be downloaded in bulk form at the trading
+  // consumer's earliest convenience. After delivery of this payload, the consumer is expected to fetch a flattened CSV
+  // or ND-JSON file of spec-compliant test result payloads.
+  //
+  // To enforce idempotency, a `delivery_id` **MUST** be set by invoking implementations. If repeated requests are
+  // received for a window of reasonable time which carry the same `delivery_id`, they are guaranteed to be dropped as
+  // duplicate messages.
+  rpc LabResultIngest(LabResultIngestRequest) returns (LabResultIngestResponse) {
+    option (google.api.http) = {
+      post: "/v1/partners/{partner}/{delivery_id}:notify"
+      body: "*"
+    };
+    option (google.api.method_signature) = "partner,delivery_id";
+  }
+}

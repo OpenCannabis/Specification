@@ -8,9 +8,10 @@ package opencannabis.commerce;
 
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
-option java_package = "io.opencannabis.schema.currency";
+option java_package = "io.opencannabis.schema.commerce";
 option java_multiple_files = false;
 option java_outer_classname = "CommerceCurrency";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/commerce";
 
 
 // Specifies known or explicitly supported currency types.

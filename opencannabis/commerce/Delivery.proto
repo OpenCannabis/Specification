@@ -12,6 +12,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.commerce";
 option java_multiple_files = false;
 option java_outer_classname = "OrderDelivery";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/commerce";
 
 import "opencannabis/core/datamodel.proto";
 

@@ -10,13 +10,14 @@ option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.crypto";
 option java_multiple_files = true;
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/crypto";
 
 import "opencannabis/base/Compression.proto";
 
 import "opencannabis/content/Content.proto";
 
-import "opencannabis/crypto/primitives/Keys.proto";
-import "opencannabis/crypto/primitives/Integrity.proto";
+import "opencannabis/crypto/Keys.proto";
+import "opencannabis/crypto/Integrity.proto";
 
 
 // Carries a payload of arbitrary data, that is supposedly encrypted in some manner.

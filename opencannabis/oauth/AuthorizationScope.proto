@@ -10,6 +10,7 @@ option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.oauth";
 option java_multiple_files = true;
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/oauth";
 
 
 // Specifies a scope of authorization that may be granted, revoked, or otherwise addressed in some way by the

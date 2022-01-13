@@ -11,9 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.product";
 option java_multiple_files = false;
 option java_outer_classname = "MerchandiseProduct";
-
-import "opencannabis/base/ProductKey.proto";
-import "opencannabis/content/ProductContent.proto";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/products";
 
 
 // Flags that may be applied specifically to merchandise items.
@@ -65,15 +63,9 @@ message Merchandise {
     PAPERS = 9;
   }
 
-  // Product key uniquely identifying this merchandise item.
-  opencannabis.base.ProductKey key = 1;
-
   // Sub-category for this merchandise item, if known.
-  Type type = 2;
+  Type type = 1;
 
   // Flags for this merchandise item.
-  repeated MerchandiseFlag flags = 3;
-
-  // Content about this merchandise item.
-  opencannabis.content.ProductContent product = 4;
+  repeated MerchandiseFlag flags = 2;
 }

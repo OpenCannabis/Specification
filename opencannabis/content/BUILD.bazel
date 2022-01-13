@@ -7,6 +7,7 @@ load("//tools/defs:proto.bzl", "proto", "module")
 proto(
     name = "Name",
     srcs = ["Name.proto"],
+    deps = ["//opencannabis/core:OCP"],
 )
 
 proto(
@@ -33,10 +34,12 @@ proto(
     name = "MaterialsData",
     srcs = ["MaterialsData.proto"],
     deps = [
+        ":Content",
         "//opencannabis/structs:Grow",
         "//opencannabis/structs:Shelf",
         "//opencannabis/structs:Species",
         "//opencannabis/structs:Genetics",
+        "//opencannabis/labtesting:TestResults",
         "//opencannabis/products/distribution:DistributionChannel"
     ],
 )
@@ -48,7 +51,8 @@ proto(
         "//opencannabis/content:Name",
         "//opencannabis/content:Colors",
         "//opencannabis/content:Content",
-        "//opencannabis/media:MediaKey"
+        "//opencannabis/media:MediaKey",
+        "//opencannabis/core:OCP"
     ],
 )
 
@@ -63,7 +67,6 @@ proto(
         "//opencannabis/structs:ProductFlags",
         "//opencannabis/temporal:Instant",
         "//opencannabis/structs/pricing:PricingDescriptor",
-        "//opencannabis/structs/labtesting:TestResults",
         "//opencannabis/core:Datamodel"
     ],
 )

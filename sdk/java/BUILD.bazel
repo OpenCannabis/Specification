@@ -1,0 +1,187 @@
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+load(
+    "@com_github_johnynek_bazel_jar_jar//:jar_jar.bzl",
+    "jar_jar",
+)
+
+load(
+    "@bazel_common//tools/maven:pom_file.bzl",
+    "pom_file",
+)
+
+load(
+    "@bazel_tools//tools/build_defs/pkg:pkg.bzl",
+    "pkg_tar",
+)
+
+load(
+    "//sdk/java:util.bzl",
+    "pom_dep",
+    "pom_deps",
+)
+
+load(
+    "//config:versions.bzl",
+    "PROTOBUF_VERSION",
+    "GRPC_VERSION",
+)
+
+
+exports_files([
+    "README.md",
+    "ocp.properties",
+])
+
+
+## Top-level (Public) Aliases
+alias(
+    name = "library",
+    actual = "//opencannabis:OpenCannabis-java_proto",
+)
+
+
+API_COMMONS_VERSION = "1.10.1"
+GRPC_COMMONS_VERSION = "2.3.2"
+
+REVISION = "r1beta1"
+PROTO_VERSION = "v2"
+LABSERVICES_VERSION = "v1"
+ARTIFACT_GROUP = "io.github.opencannabis"
+
+
+################################################################################################
+#### Java binary targets
+################################################################################################
+
+java_binary(
+    name = "peer-dependencies",
+    create_executable = False,
+    runtime_deps = [
+        "@com_google_protobuf//:protobuf",
+        "@com_google_protobuf//:protobuf_lite",
+    ],
+    visibility = [
+        "//visibility:private",
+    ],
+)
+
+java_binary(
+    name = "entrypoint",
+    srcs = ["OpenCannabisSDK.java"],
+    create_executable = False,
+    deploy_env = [
+        ":peer-dependencies",
+    ],
+    deploy_manifest_lines = [
+        "OpenCannabis-MetaVersion: 1",
+    ],
+    deps = [
+        ":library",
+    ],
+    visibility = [
+        "//visibility:private",
+    ],
+)
+
+
+################################################################################################
+#### Fat JARs for distribution
+################################################################################################
+
+jar_jar(
+    name = "proto-opencannabis-base-v2",
+    input_jar = "entrypoint_deploy.jar",
+    rules = "jarjar.config",
+    visibility = [
+        "//visibility:private",
+    ],
+)
+
+
+################################################################################################
+#### Target: Protocol Base
+################################################################################################
+
+STANDARD_PROTO_DEPS = """
+    %s
+    %s
+    %s
+    %s
+""" % (
+    pom_dep(group = "com.google.protobuf", artifact = "protobuf-java", version = PROTOBUF_VERSION),
+    pom_dep(group = "com.google.protobuf", artifact = "protobuf-java-util", version = PROTOBUF_VERSION),
+    pom_dep(group = "com.google.api", artifact = "api-common", version = API_COMMONS_VERSION),
+    pom_dep(group = "com.google.api.grpc", artifact = "proto-google-common-protos", version = GRPC_COMMONS_VERSION),
+)
+
+JAVA_SDK_VERSION = "%s.2021%s" % (
+    PROTO_VERSION,
+    REVISION
+)
+
+POM_SUBSTITUTIONS = {
+    "PROTO_VERSION": PROTO_VERSION,
+    "GROUP": ARTIFACT_GROUP,
+    "VERSION": JAVA_SDK_VERSION,
+}
+
+
+# --- OpenCannabis Protocol: `proto-opencannabis-base-v2`
+# ----------------------------------------------------------------------------------------------
+
+pom_file(
+    name = "proto-opencannabis-base-v2-pom",
+    template_file = "pom-template.xml",
+    substitutions = dict(POM_SUBSTITUTIONS,
+        ARTIFACT = "protocol",
+        REPO_NAME = "protocol",
+        DEPS = STANDARD_PROTO_DEPS,
+        DESCRIPTION = "Baseline code-generated models for Java implementors of the OpenCannabis Protocol.",
+    ),
+    targets = [
+        ":proto-opencannabis-base-v2",
+    ],
+)
+
+pkg_tar(
+    name = "proto-opencannabis-base-v2.pkg",
+    extension = "tar.gz",
+    srcs = [
+        ":proto-opencannabis-base-v2",
+        ":proto-opencannabis-base-v2-pom",
+    ],
+)
+
+
+# --- OpenCannabis SDK: `labservices-v1`
+# ----------------------------------------------------------------------------------------------
+
+
+# --- SDK: Polyglot
+# ----------------------------------------------------------------------------------------------
+
+pkg_tar(
+    name = "java-sdk-v2",
+    srcs = [
+        ":proto-opencannabis-base-v2.pkg",
+    ]
+)
+
+
+################################################################################################
+#### Package Aliases
+################################################################################################
+
+alias(
+    name = "labservices",
+    actual = "//opencannabis/labtesting/v1:java-client",
+)
+
+alias(
+    name = "java",
+    actual = "java-sdk-v2",
+)

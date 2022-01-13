@@ -11,12 +11,9 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.product";
 option java_multiple_files = false;
 option java_outer_classname = "FlowerProduct";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/products";
 
 import "opencannabis/core/datamodel.proto";
-import "opencannabis/base/ProductKey.proto";
-
-import "opencannabis/content/MaterialsData.proto";
-import "opencannabis/content/ProductContent.proto";
 
 
 // Specifies the model for a traditional 'flower'-style product, which involves the sale or consumption of the flower
@@ -32,29 +29,14 @@ message Flower {
     SHAKE = 1;
 
     // The flower from this entry is composed of small nugs.
-    SMALL_NUGS = 2;
+    SMALLS = 2;
 
     // The flower from this entry is composed only of premium nugs.
-    PREMIUM_NUGS = 3;
+    BIGS = 3;
   }
 
-  // Key that uniquely identifies this flower product.
-  opencannabis.base.ProductKey key = 1 [
-    (core.field).summary = "Key that uniquely identifies a product."
-  ];
-
-  // Content about this product.
-  opencannabis.content.ProductContent product = 2 [
-    (core.field).summary = "Specifies product-level information or collateral data."
-  ];
-
-  // Materials and handling information about this product.
-  opencannabis.content.MaterialsData material = 3 [
-    (core.field).summary = "Specifies information about the material that constitutes a product."
-  ];
-
   // Specifies the specialized type of flower.
-  Type type = 4 [
+  Type type = 1 [
     (core.field).summary = "Specifies the specialized type of flower (TRIMMED, SHAKE, SMALL_NUGS, PREMIUM_NUGS)."
   ];
 }

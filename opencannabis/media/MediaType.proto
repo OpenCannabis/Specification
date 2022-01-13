@@ -11,19 +11,21 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.media";
 option java_multiple_files = false;
 option java_outer_classname = "MediaItemType";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/labtesting";
 
 import "opencannabis/core/datamodel.proto";
+import "opencannabis/core/ocp.proto";
 
 
 // Specifies the type of media being attached or described.
 message MediaType {
   // Enumerates, in generic terms, the kinds of media that can be attached or described.
   enum Kind {
-    // Web link, or URI.
-    LINK = 0;
-
     // Image or photograph.
-    IMAGE = 1;
+    IMAGE = 0;
+
+    // Web link, or URI.
+    LINK = 1;
 
     // Document or text data.
     DOCUMENT = 2;
@@ -100,24 +102,28 @@ message MediaType {
 
   // Specifies the generic kind of media being described or attached.
   Kind kind = 1 [
-    (core.field).summary = "Specifies the generic kind of media being described or attached."
+    (core.field).summary = "Specifies the generic kind of media being described or attached.",
+    (core.ocp).key_path = "kind"
   ];
 
   // Specifies the content type for the media item.
   oneof content {
     // Specifies content type for an image-based media item.
     ImageKind image_type = 101 [
-      (core.field).summary = "Specifies content for an image-based media item."
+      (core.field).summary = "Specifies content for an image-based media item.",
+      (core.ocp).key_path = "imageType"
     ];
 
     // Specifies content type for a document-based media item.
     DocumentKind document_type = 201 [
-      (core.field).summary = "Specifies content for a document-based media item."
+      (core.field).summary = "Specifies content for a document-based media item.",
+      (core.ocp).key_path = "documentType"
     ];
 
     // Specifies content type for a video-based media item.
     VideoKind video_type = 301 [
-      (core.field).summary = "Specifies content for a video-based media item."
+      (core.field).summary = "Specifies content for a video-based media item.",
+      (core.ocp).key_path = "videoType"
     ];
   }
 }

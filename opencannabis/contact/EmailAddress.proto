@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.contact";
 option java_multiple_files = false;
 option java_outer_classname = "ContactEmail";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/contact";
 
 import "opencannabis/core/datamodel.proto";
 

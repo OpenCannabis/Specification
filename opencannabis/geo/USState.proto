@@ -10,6 +10,7 @@ option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.geo.usa";
 option java_multiple_files = true;
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/geo";
 
 
 // Enumerates United States member states and territories by their full name and abbreviation.
@@ -49,7 +50,7 @@ enum USState {
 
   // State of Delaware.
   DE = 8;
-  Delaware = 8;
+  DELAWARE = 8;
 
   // Washington, District of Columbia (DC).
   DC = 9;

@@ -46,7 +46,6 @@ module(
         ":Shelf",
         ":Species",
         ":Version",
-        "//opencannabis/structs/labtesting",
         "//opencannabis/structs/pricing",
     ],
 )

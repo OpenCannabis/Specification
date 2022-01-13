@@ -13,16 +13,57 @@ run --incompatible_restrict_string_escapes=false
 run --incompatible_strict_action_env
 run --workspace_status_command=./tools/bazel_stamp_vars.sh
 
+info --java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
+info --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
+build --java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
+build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
+build --protocopt=--experimental_allow_proto3_optional
+
 build --strategy=sandboxed
+build --enable_platform_specific_config
 build --incompatible_restrict_string_escapes=false
 build --watchfs
 build --symlink_prefix=dist/
 build --nolegacy_external_runfiles
 build --incompatible_strict_action_env
+build --strict_java_deps=strict
+build --use_ijars
 build --interface_shared_objects
+build --experimental_strict_action_env
 build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_vanilla
 build --workspace_status_command=./tools/bazel_stamp_vars.sh
+build --bes_backend=grpcs://cloud.buildbuddy.io
+build --remote_cache=grpcs://cloud.buildbuddy.io
+build --build_metadata=REPO_URL=https://github.com/CookiesCo/OpenCannabis.git
+build --bes_results_url=https://app.buildbuddy.io/invocation/
+build --remote_timeout=3600
+build --remote_header=x-buildbuddy-api-key=6R3w0oRMdKhN3cobqlIl
+build --worker_sandboxing
+build --spawn_strategy=worker,sandboxed
 build --strategy=Buf=sandboxed
+build --strategy=Javac=worker
+build --strategy=KotlinCompile=worker
+build --strategy=TypeScriptCompile=worker
+build --disk_cache=~/.cache/bazel/disk
+build --repository_cache=~/.cache/bazel/repo
+build --strict_proto_deps=strict
+build --strict_java_deps=strict
+build --strict_system_includes
+build --fission=fastbuild,dbg
+
+build:rbe --remote_timeout=3600
+build:rbe --remote_executor=grpcs://cloud.buildbuddy.io
+build:rbe --disk_cache=
+build:rbe --crosstool_top=@buildbuddy_toolchain//:toolchain
+
+## iOS-related settings
+build --experimental_use_llvm_covmap
+build --apple_platform_type=ios
+build --ios_simulator_version=14.2
+build --ios_simulator_device="iPhone 12 Pro"
+build --apple_generate_dsym=true
+build --apple_bitcode=embedded
+build --enable_apple_binary_native_protos=true
 
 ##
 # Development
@@ -31,8 +72,8 @@ build --strategy=Buf=sandboxed
 build --worker_sandboxing
 build --define=lib_release_tag=latest
 build --disk_cache=~/.cache/bazel-disk-cache
+build --sandbox_fake_hostname
 build:adc --google_default_credentials=true
-build:dev --compilation_mode=dbg
 build:dev --disk_cache=~/.cache/bazel-disk-cache
 
 ##
@@ -73,6 +114,7 @@ query:ci --repository_cache=~/.cache/bazel/repo
 build:release --compilation_mode=opt
 build:release --copt=-Wframe-larger-than=16384
 build:release --copt=-O3
+build:release --objc_enable_binary_stripping
 run:release --compilation_mode=opt
 run:release --copt=-Wframe-larger-than=16384
 run:release --copt=-O3

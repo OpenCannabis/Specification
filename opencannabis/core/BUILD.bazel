@@ -21,5 +21,8 @@ proto(
 
 module(
     name = "core",
-    deps = [":Datamodel"],
+    deps = [
+        ":OCP",
+        ":Datamodel",
+    ],
 )

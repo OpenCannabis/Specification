@@ -11,13 +11,16 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.content";
 option java_multiple_files = false;
 option java_outer_classname = "NameContent";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/content";
+
+import "opencannabis/core/ocp.proto";
 
 
 // Displayable content name.
 message Name {
   // Primary name.
-  string primary = 1;
+  string primary = 1 [(core.ocp).key_path = "primary"];
 
   // Display name, if different from the 'primary name'.
-  string display = 2;  
+  string display = 2 [(core.ocp).key_path = "display"];
 }

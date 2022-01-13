@@ -11,13 +11,125 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.content";
 option java_multiple_files = false;
 option java_outer_classname = "MaterialsContent";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/content";
+
+import "opencannabis/content/Content.proto";
 
 import "opencannabis/structs/Grow.proto";
 import "opencannabis/structs/Shelf.proto";
 import "opencannabis/structs/Species.proto";
 import "opencannabis/structs/Genetics.proto";
 
+import "opencannabis/labtesting/TestResults.proto";
+
 import "opencannabis/products/distribution/DistributionChannel.proto";
+
+
+// Enumerates symptomatic/experiential feeling results from subjective product testing. Feeling states are not designed
+// to be scientific or interpreted as medical advice.
+enum Feeling {
+  // No feeling preference or value.
+  NO_FEELING_PREFERENCE = 0;
+
+  // "Grounding" feeling.
+  GROUNDING = 1;
+
+  // "Sleepy" feeling.
+  SLEEP = 2;
+
+  // "Calming" feeling.
+  CALMING = 3;
+
+  // "Stimulating" feeling.
+  STIMULATING = 4;
+
+  // "Funny" feeling.
+  FUNNY = 5;
+
+  // "Focus" feeling.
+  FOCUS = 6;
+
+  // "Passion" feeling.
+  PASSION = 7;
+}
+
+
+// Enumerates taste or aroma notes, either based on subjective product testing or quantitative/empirical terpene
+// compound testing.
+enum TasteNote {
+  // No particular taste or aroma preference or value.
+  NO_TASTE_PREFERENCE = 0;
+
+  // "Sweet" taste/aroma note.
+  SWEET = 1;
+
+  // "Sour" taste/aroma note.
+  SOUR = 2;
+
+  // "Spice" taste/aroma note.
+  SPICE = 3;
+
+  // "Smooth" taste/aroma note.
+  SMOOTH = 4;
+
+  // "Citrus" taste/aroma note.
+  CITRUS = 5;
+
+  // "Pine" taste/aroma note.
+  PINE = 6;
+
+  // "Fruit" taste/aroma note.
+  FRUIT = 7;
+
+  // "Tropics" taste/aroma note.
+  TROPICS = 8;
+
+  // "Floral" taste/aroma note.
+  FLORAL = 9;
+
+  // "Herbal" taste/aroma note.
+  HERB = 10;
+
+  // "Earthy" taste/aroma note.
+  EARTH = 11;
+}
+
+
+// Generic potency estimate enumeration, either based on subjective product testing or calculated against some metric
+// for the user's tolerance level.
+enum PotencyEstimate {
+  // Light potency.
+  LIGHT = 0;
+
+  // Medium potency.
+  MEDIUM = 1;
+
+  // Heavy potency.
+  HEAVY = 2;
+
+  // Top/super potency.
+  SUPER = 3;
+}
+
+
+// Specifies the structure of "subjective testing" results, wherein a consumer or user has tried the product and
+// evaluated its subjective effects.
+message SubjectiveTesting {
+  // Subjective description of using this product.
+  content.Content description = 1;
+
+  // Subjective description of the taste of this product.
+  content.Content taste = 2;
+
+  // Subjective potency estimate for this product.
+  PotencyEstimate potency = 3;
+
+  // Subjective feeling tags for this product.
+  repeated Feeling feeling = 4;
+
+  // Subjective taste or aroma notes for this product.
+  repeated TasteNote aroma = 5;
+}
 
 
 // Specifies materials-related data about a product that contains cannabis.
@@ -36,4 +148,11 @@ message MaterialsData {
 
   // Specifies distribution policy for this particular subject material.
   repeated opencannabis.products.distribution.DistributionPolicy channel = 5;
+
+  // Describes subjective test results, including tasting notes, feelings, etc.
+  SubjectiveTesting subjective_tests = 6;
+
+  // Quantitative/qualitative tests performed by a certified lab.
+  opencannabis.labtesting.TestResults lab_tests = 7;
 }
+

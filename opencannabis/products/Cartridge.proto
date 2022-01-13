@@ -11,14 +11,10 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.product";
 option java_multiple_files = false;
 option java_outer_classname = "CartridgeProduct";
-
-import "opencannabis/base/ProductKey.proto";
-
-import "opencannabis/content/MaterialsData.proto";
-import "opencannabis/content/ProductContent.proto";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/products";
 
 
-// Specifies a vaporizor or cartridge-style product, for instance, vaporizor pens and table units. Vaporizers are
+// Specifies a vaporizer or cartridge-style product, for instance, vaporizer pens and table units. Vaporizers are
 // composed of two elements: a battery, or the bottom power unit, and a cartridge, or the top fuel unit, that contains
 // cannabinoids and is disposable or refillable.
 message Cartridge {
@@ -43,15 +39,6 @@ message Cartridge {
     E_LIQUID = 5;
   }
 
-  // Product key uniquely identifying this cartridge-style product.
-  opencannabis.base.ProductKey key = 1;
-
   // Type of cartridge product being described.
-  Type type = 2;
-
-  // Product content about this cartridge item.
-  opencannabis.content.ProductContent product = 3;
-
-  // Materials and handling information about this cartridge product.
-  opencannabis.content.MaterialsData material = 4;
+  Type type = 1;
 }

@@ -1,0 +1,203 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>GROUP</groupId>
+    <artifactId>ARTIFACT</artifactId>
+    <version>VERSION</version>
+    <inceptionYear>2016</inceptionYear>
+    <description>DESCRIPTION</description>
+
+    <organization>
+        <name>OpenCannabis Institute</name>
+        <url>https://opencannabis.dev</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>sgammon</id>
+            <name>Sam Gammon</name>
+            <organization>Cookies</organization>
+            <organizationUrl>https://cookies.co</organizationUrl>
+            <timezone>America/Los_Angeles</timezone>
+        </developer>
+    </developers>
+
+    <properties>
+        <sdk.revision>VERSION</sdk.revision>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <opencannabis.model.version>PROTO_VERSION</opencannabis.model.version>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>3-Clause BSD License</name>
+            <url>https://opensource.org/licenses/BSD-3-Clause</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/OpenCannabis/REPO_NAME</url>
+        <connection>scm:git:https://github.com/OpenCannabis/REPO_NAME.git</connection>
+    </scm>
+
+    <issueManagement>
+        <url>https://github.com/OpenCannabis/REPO_NAME/issues</url>
+    </issueManagement>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>com.google.cloud.artifactregistry</groupId>
+                <artifactId>artifactregistry-maven-wagon</artifactId>
+                <version>2.1.1</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>DEPS {generated_bzl_deps}
+    </dependencies>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>artifact-registry</id>
+            <url>artifactregistry://us-maven.pkg.dev/opencannabis-sdk/java</url>
+        </snapshotRepository>
+        <repository>
+            <id>artifact-registry</id>
+            <url>artifactregistry://us-maven.pkg.dev/opencannabis-sdk/java</url>
+        </repository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>github</id>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub: OpenCannabis Protocol</name>
+                    <url>https://maven.pkg.github.com/OpenCannabis/protocol</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>cookies</id>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>Cookies: OpenCannabis Mirror</name>
+                    <url>artifactregistry://us-maven.pkg.dev/cookies-co/sdk-java</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>ossrh</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <name>Sonatype: Snapshots</name>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <name>Sonatype: Public</name>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.3</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <failOnError>false</failOnError>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <repositories>
+        <repository>
+            <id>artifact-registry</id>
+            <url>artifactregistry://us-maven.pkg.dev/opencannabis-sdk/java</url>
+            <name>OpenCannabis Artifact Registry: Java SDK</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>google-maven</id>
+            <url>https://maven.google.com/</url>
+            <name>Google Maven</name>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>

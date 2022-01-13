@@ -5,13 +5,14 @@
  */
 syntax = "proto3";
 
-package opencannabis.taxes;
+package opencannabis.accounting;
 
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.accounting";
 option java_multiple_files = false;
 option java_outer_classname = "AccountingTaxes";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/accounting";
 
 import "opencannabis/geo/Province.proto";
 import "opencannabis/geo/Country.proto";

@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.content";
 option java_multiple_files = false;
 option java_outer_classname = "BrandContent";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/content";
 
 import "opencannabis/content/Colors.proto";
 import "opencannabis/content/Name.proto";
@@ -42,11 +43,14 @@ message Brand {
   // Naming information for this brand.
   opencannabis.content.Name name = 1;
 
-  // Parent/owning brand, if applicable.
-  opencannabis.content.Brand parent = 2;
+  // Deprecated: Self-referencing brand parent.
+  reserved 2;
 
   // Summary information or content about this brand.
   opencannabis.content.Content summary = 3;
+
+  // Parent/owning brand, if applicable.
+  string parent = 4;
 
   // Media items attached to this brand.
   repeated BrandAsset media = 20;

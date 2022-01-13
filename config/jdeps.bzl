@@ -24,10 +24,10 @@ def java_repositories():
     """ Prep Java repositories. """
 
     gust_java_repositories(
+        maven_install_json = "//:maven_install.json",
         app_artifacts = [
             # Server
             "com.google.code.gson:gson:%s" % GSON_VERSION,
             "org.apache.commons:commons-csv:%s" % COMMONS_CSV_VERSION,
         ]
     )
-

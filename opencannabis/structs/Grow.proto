@@ -8,9 +8,10 @@ package opencannabis.structs;
 
 option optimize_for = SPEED;
 option objc_class_prefix = "OCS";
-option java_package = "io.opencannabis.schema.product.struct";
+option java_package = "io.opencannabis.schema.struct";
 option java_multiple_files = true;
 option java_outer_classname = "MaterialGrow";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/structs";
 
 
 // Enumerates common/known types or styles of cultivation that might produce a flower for sale, or resale after

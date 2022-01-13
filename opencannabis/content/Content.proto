@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.content";
 option java_multiple_files = false;
 option java_outer_classname = "GenericContent";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/content";
 
 import "opencannabis/base/Language.proto";
 import "opencannabis/base/Compression.proto";

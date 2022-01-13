@@ -12,6 +12,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.base";
 option java_multiple_files = false;
 option java_outer_classname = "BaseCompression";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/base";
 
 
 // Specifies enabled/disabled state and compression type, and is usually attached to arbitrary data or metadata.

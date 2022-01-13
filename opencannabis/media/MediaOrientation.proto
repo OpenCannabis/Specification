@@ -11,6 +11,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.media";
 option java_multiple_files = false;
 option java_outer_classname = "MediaItemOrientation";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/labtesting";
 
 
 // Orientation status of a piece of media. Provided by camera operations on mobile devices,

@@ -17,6 +17,9 @@ proto(
 proto(
     name = "ProductKind",
     srcs = ["ProductKind.proto"],
+    deps = [
+        "//opencannabis/core:OCP",
+    ],
 )
 
 proto(
@@ -26,6 +29,7 @@ proto(
         ":ProductKind",
         "//opencannabis/content:Name",
         "//opencannabis/core:Datamodel",
+        "//opencannabis/core:OCP"
     ],
 )
 

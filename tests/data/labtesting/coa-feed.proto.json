@@ -1,0 +1,50 @@
+{
+  "lab": {
+    "key": {"oid": 1234, "domain": "labco.com"},
+    "name": "Lab Co."
+  },
+  "coordinates": {
+    "zone": "Z123",
+    "lot": "L1234",
+    "batch": "BATCH12345",
+    "region": "USA-CA",
+    "sampleId": "ABC1234",
+    "sampleName": "LPC75 Pre-Roll",
+    "certificateId": "COA12345"
+  },
+  "product": {
+    "id": "C12345",
+    "kind": "FLOWER"
+  },
+  "stamp": {
+    "lastUpdated": {"timestamp": 1624325828123},
+    "sealed": {"timestamp": 1624325828125},
+    "issued": {"timestamp": 1624325828127},
+    "performed": {"timestamp": 1624325828144},
+    "completed": {"timestamp": 1624325828199}
+  },
+  "certificate": {
+    "uri":  "https://labco.com/coa-download/COA12345.pdf",
+    "type": {"kind": "DOCUMENT", "documentType": "PDF"}
+  },
+  "process": {
+    "method": "GCMS",
+    "type": "PERCENTAGE",
+    "error": {"type": "RELATIVE", "value": 1.2}
+  },
+  "cannabinoids": {
+    "measurements": {
+      "THC": {"value": 34.51237},
+      "CBD": {"value": 12.28116},
+      "THC_A": {"value": 2.21291},
+      "THC_V": {"value":  1.84027},
+      "CBN": {"value": 0.82171}
+    }
+  },
+  "terpenes": {
+    "CAMPHENE": {"value":  0.48736},
+    "LIMONENE": {"value":  0.39108},
+    "MYRCENE": {"value":  0.28177},
+    "ALPHA_PINENE": {"value": 0.12122}
+  }
+}

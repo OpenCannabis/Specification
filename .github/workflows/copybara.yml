@@ -1,0 +1,188 @@
+name: "copybara"
+
+on: push
+
+jobs:
+  copybara-validate-site:
+    name: "Validate: Site"
+    runs-on: ubuntu-latest
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          workflow: site
+          command: validate
+
+  copybara-validate-protocol:
+    name: "Validate: Protocol"
+    runs-on: ubuntu-latest
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          workflow: site
+          command: validate
+
+  copybara-validate-platform:
+    name: "Validate: Platform"
+    runs-on: ubuntu-latest
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          workflow: platform
+          command: validate
+
+  copybara-migrate-site:
+    name: "Sync: Site"
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          workflow: site
+          command: validate
+
+      # 3: Publish to site as PR.
+      - name: Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          options: --force --ignore-noop
+          workflow: site
+          command: migrate
+
+  copybara-migrate-protocol:
+    name: "Sync: Protocol"
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          workflow: protocol
+          command: validate
+
+      # 3: Publish to protocol as PR.
+      - name: Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          options: --force --ignore-noop
+          workflow: protocol
+          command: migrate
+
+  copybara-migrate-platform:
+    name: "Sync: Platform"
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
+
+      # 2: Validate migration via Copybara.
+      - name: Validate Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          workflow: platform
+          command: validate
+
+      # 3: Publish to protocol as PR.
+      - name: Migration
+        uses: CookiesCo/copybara-action@6f80ab115fab20b00d6019229675e22fccef3115
+        with:
+          git_name: Cookiebot
+          git_email: techteam+github@cookiescalifornia.com
+          git_credentials: ${{ secrets.BOT_API_CREDS }}
+          ssh_key: ${{ secrets.BOT_SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.BOT_KNOWN_HOSTS }}
+          gpg_key: ${{ secrets.BOT_GPG_KEY }}
+          gpg_key_id: ${{ secrets.BOT_GPG_KEY_ID }}
+          image: us.gcr.io/elide-ai/tools/copybara:latest
+          options: --force --ignore-noop
+          workflow: platform
+          command: migrate
+

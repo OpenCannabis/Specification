@@ -1,0 +1,282 @@
+
+/**
+ * Empirical laboratory product testing structures and definitions. Provides support for cannabinoid testing, terpene
+ * testing, pesticide testing, moisture ratings, and subjective testing.
+ */
+syntax = "proto3";
+
+package opencannabis.labtesting;
+
+option optimize_for = SPEED;
+option objc_class_prefix = "OCS";
+option java_package = "io.opencannabis.schema.labtesting";
+option java_multiple_files = true;
+option java_outer_classname = "LabTesting";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/labtesting";
+
+import "opencannabis/core/ocp.proto";
+
+import "opencannabis/temporal/Instant.proto";
+
+import "opencannabis/labtesting/Terpenes.proto";
+import "opencannabis/labtesting/Cannabinoids.proto";
+import "opencannabis/labtesting/TestValue.proto";
+
+
+// Specific test methods used to quantify or qualify certain properties or components of cannabis.
+enum TestMethod {
+  // 'Unspecified' test method, indicating that we don't know what method was used to test with, or it was left
+  // unspecified. This is the default value.
+  UNSPECIFIED_METHOD = 0;
+
+  // Gas Chromatography / Mass Spectrometry is used to identify specific compounds found within a sample.
+  GCMS = 1;
+
+  // Liquid Chromatography / Mass Spectrometry is used to identify specific compounds found within a sample.
+  // Recommended for the most volatile compounds.
+  LCMS = 2;
+
+  // Classic PCR is a qualitative and semi-quantitative genetic test that identifies the presence or absence of
+  // specific genes.
+  CLASSIC_PCR = 3;
+
+  // Quantitative PCR is a genetic test that quantifies the amount of specific genes within a sample.
+  Q_PCR = 4;
+
+  // ELISA, or enzyme-linked immunosorbent assay, is an antibody based test that is used to detect and quantify
+  // specific substances within the sample.
+  ELISA = 5;
+}
+
+
+// Describes the process that was performed to arrive at a given test result, including the testing method, default
+// test type, and default test error or variance. Most use contexts for this record involve setting defaults which may
+// be overridden by individual tests.
+message TestProcess {
+  // Method employed for testing. Establishes a default for all test results, and can be overridden on an individual
+  // test level.
+  TestMethod method = 1;
+
+  // Type of value produced by this testing process. Establishes a default for all test results, and can be overridden
+  // on an individual test level.
+  TestValueType type = 2;
+
+  // Describes the range or breadth of error capable from a given test process or method, as it relates to a specific
+  // test result or body of results. Establishes a default for all test results, and can be overridden on an individual
+  // test level.
+  TestError error = 3;
+}
+
+
+// Test results for contaminants which indicate presence/absence of a compound along with a value (if available)
+message Contaminants {
+  // Pesticide-specific test results. Indicates a pesticide reading, by chemical compound name, and a reading value.
+  Pesticides pesticides = 1;
+
+  // Heavy metal specific test results. Indicates a heavy metal reading, by chemical compound name, along with a 
+  // reading value.
+  Metals metals = 2;
+
+  // Mold and mildew specific test results. Indicates a mold or mildew reading, by species name, along with a reading
+  // value.
+  MoldMildew mold_mildew = 3;
+
+  // Place to store other contaminants that may be found in cannabis, including, but not limited to: glass, sand,
+  // detergents, etc.
+  OtherContaminants other_contaminants = 4;
+}
+
+
+// Structure for a test suite - which contains the item being tested for, the method used to produce the results,
+// the value of the results, and any comments.
+message TestSuite {
+  // Method used to obtain the test result.
+  TestMethod method = 1;
+
+  // Result of the test.
+  TestResults results = 2;
+
+  // String containing any comments about the test.
+  string comments = 3;
+}
+
+
+// Describes notable timestamps for a given test run and related set of test results.
+message TestTimestamps {
+  // Last-updated value for these lab test results. Updated each time the record is updated.
+  opencannabis.temporal.Instant last_updated = 1 [(core.ocp).key_path = "lastUpdated"];
+
+  // Precise moment that these results were considered 'sealed' and returned. Once this timestamp is set, a given set of
+  // test results (unique by their coordinates) is considered immutable.
+  opencannabis.temporal.Instant sealed = 2 [(core.ocp).key_path = "sealed"];
+
+  // Describes the timestamp indicating when test results were initially issued.
+  opencannabis.temporal.Instant issued = 3 [(core.ocp).key_path = "issued"];
+
+  // Describes the timestamp indicating when the test was actually physically performed.
+  opencannabis.temporal.Instant performed = 4 [(core.ocp).key_path = "performed"];
+
+  // Describes the timestamp indicating when the test was actually physically completed.
+  opencannabis.temporal.Instant completed = 5 [(core.ocp).key_path = "completed"];
+}
+
+
+// Lab testing results for a given product. Includes cannabinoid, terpene, pesticide, moisture, and subjective testing
+// properties. Only cannabinoid testing is considered required.
+message TestResults {
+  // Boolean flag indicating whether results are available for lab testing at all.
+  bool available = 1;
+
+  // Media attached to a set of lab results. This might include images taken during testing, documents (such as PDFs)
+  // specifying test results, and so on.
+  repeated TestMedia media = 2;
+
+  // Describes timestamps which relate to this test run or related set of test results.
+  TestTimestamps timestamps = 3;
+
+  // Coordinate, or ID values, for this set of test results. When specified at the top-level of a set of lab tests,
+  // indicates the coordinates for the active set of test results.
+  TestCoordinates coordinates = 4;
+
+  // Standard cannabinoid testing, with reading results at least for THC and CBD, and optionally additional cannabinoid
+  // compounds.
+  Cannabinoids cannabinoids = 30;
+
+  // Testing for terpene volatiles, which might indicate aroma or flavor notes.
+  Terpenes terpenes = 31;
+
+  // Contaminants that may be present within the sample.
+  Contaminants contaminants = 32;
+
+  // Moisture rating and test results.
+  Moisture moisture = 33;
+
+  // Raw test result data, stored under a master set of test results. Only one level of nesting is allowed.
+  repeated TestResults data = 34;
+}
+
+
+// Specifies coordinate values for a given lab testing result. This consists of 'zones' (i.e. floors, greenhouses), 
+// made up of 'batches' (i.e. rooms, sections), containing 'lots' (i.e. rows, trays) of individual plants or products.
+message TestCoordinates {
+  // Specifies the 'zone' value for a set of test results. This is usually used as/by a floor or greenhouse ID.
+  string zone = 1 [(core.ocp).key_path = "zone"];
+
+  // Specifies the 'lot' value for a set of test results. This is usually used as/by a room or section ID.
+  string lot = 2 [(core.ocp).key_path = "lot"];
+
+  // Specifies the 'batch' value for a set of test results. This is usually used as/by a row or tray ID for individual
+  // plants or test sample products.
+  string batch = 3 [(core.ocp).key_path = "batch"];
+
+  // Assigned region code, as a three-character ISO notation, plus a region enumeration instance.
+  string region = 4 [(core.ocp).key_path = "region"];
+
+  // Unique ID given to the sample that was tested. This may represent individual plants or products, grouped lots or
+  // batches, or even random selections from entire zones.
+  string sample_id = 5 [(core.ocp).key_path = "sampleId"];
+
+  // Assigned name for the sample, which generally includes the strain name.
+  string sample_name = 6 [(core.ocp).key_path = "sampleName"];
+
+  // Assigned ID for the certificate of authenticity which corresponds with this set of results.
+  string certificate_id = 7 [(core.ocp).key_path = "coaId"];
+}
+
+
+// Specifies test results with regard to cannabinoid compounds, enumerated in `Cannabinoid`. THC and CBD testing is
+// elevated to a dedicated spot in test results due to its notability as a consumer decision-making signal.
+message Cannabinoids {
+  // Individual payload for a cannabinoid test result.
+  message Result {
+    // Cannabinoid this result is expressing results for.
+    Cannabinoid cannabinoid = 1;
+
+    // Measurement value for this individual result.
+    TestValue measurement = 3 [(core.ocp).key_path = "test"];
+  }
+
+  // THC testing value.
+  TestValue thc = 1 [(core.ocp).key_path = "thc"];
+
+  // CBD testing value.
+  TestValue cbd = 2 [(core.ocp).key_path = "cbd"];
+
+  // Individual results payloads for other cannabinoids.
+  repeated Result results = 3;
+
+  // Mapped measurement values, where each key is a member of the `Cannabinoid` enumeration instance. Each value is an
+  // individual test result which relates to the cannabinoid selected as a key.
+  map<string, TestValue> measurements = 4 [(core.ocp).key_path = "[`opencannabis.labtesting.Cannabinoid`]"];
+
+  // Overall THC to CBD ratio, calculated if underlying data is available.
+  CannabinoidRatio ratio = 5 [(core.ocp).key_path = "ratio"];
+}
+
+
+// Specifies results of pesticide testing.
+message Pesticides {
+  // Flag indicating the product is pesticide free.
+  bool pesticide_free = 1;
+
+  // Measurements for specific, named, pesticides.
+  map<string, TestValue> measurements = 2;
+}
+
+
+// Specifies results of heavy metal testing.
+message Metals {
+  // Flag indicating the product is heavy-metal-free.
+  bool metal_free = 1;
+
+  // Measurements for specific, named, heavy metal values.
+  map<string, TestValue> measurements = 2;
+}
+
+
+// Specifies results of mold/mildew testing.
+message MoldMildew {
+  // Flag indicating the product is mold/mildew free.
+  bool mold_mildew_free = 1;
+
+  // Measurements for specific, named, mold/mildew values.
+  map<string, TestValue> measurements = 2;
+}
+
+
+// Specifies generic results for other types of contaminant testing.
+message OtherContaminants {
+  // Measurements for generic, labeled, contaminant values.
+  map<string, TestValue> measurements = 1;
+}
+
+
+// Specifies test result structure for product moisture level testing.
+message Moisture {
+  // Measurement for the moisture level of the subject product.
+  TestValue measurement = 1;
+}
+
+
+// Specifies the structure of terpene testing. Includes space for a full set of terpene test result values, and
+// corresponding values (computed) for estimated feelings and tasting notes.
+message Terpenes {
+  // Specifies the structure of an individual terpene testing result.
+  message Result {
+    // Terpene this test result is for.
+    Terpene terpene = 1;
+
+    // Measured value of the terpene in question for the subject product.
+    TestValue measurement = 2 [(core.ocp).key_path = "value"];
+  }
+
+  // Flag indicating whether terpene testing is available yet or not.
+  bool available = 1 [(core.ocp).key_path = "available"];
+
+  // Individual terpene testing results.
+  repeated Result terpene = 10;
+
+  // Mapped measurement values, where each key is a member of the `Terpene` enumeration instance. Each value is an
+  // individual test result which relates to the terpene compound selected as a key.
+  map<string, Result> measurements = 11 [(core.ocp).key_path = "[`opencannabis.labtesting.Terpene`]"];
+}

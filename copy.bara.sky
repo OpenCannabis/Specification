@@ -1,12 +1,53 @@
 
+cookiesRepo = "git@github.com:CookiesCo/OpenCannabis.git"
+cookiesBranch = "master"
+cookiesLatest = "dev"
+
+platformRepo = "git@github.com:CookiesCo/platform.git"
+platformBase = "dev"
+platformBranch = "satellite/opencannabis"
+platformHttp = "https://github.com/CookiesCo/platform.git"
+
 sourceRepo = "git@github.com:OpenCannabis/Specification.git"
-sourceBranch = "fix/core"
+sourceBranch = "master"
+upstreamBranch = "ocp/sync"
 
 protocolRepo = "git@github.com:OpenCannabis/Protocol.git"
 protocolBranch = "ocp/upstream"
 
+siteRepo = "git@github.com:OpenCannabis/Site.git"
+siteBranch = "ocp/upstream"
+
 pythonRepo = "git@github.com:OpenCannabis/Python.git"
 pythonBranch = "ocp/upstream"
+
+
+core.workflow(
+    name = "upstream",
+    origin = git.origin(
+        url = cookiesRepo,
+        ref = cookiesBranch,
+    ),
+    destination = git.destination(
+        url = sourceRepo,
+        fetch = sourceBranch,
+        push = upstreamBranch,
+    ),
+    origin_files = glob(["**/*.*"]),
+    destination_files = glob(["**/*.*"]),
+    authoring = authoring.pass_thru(
+        "Cookiebot <techteam+github@cookiescalifornia.com>"),
+    transformations = [
+        core.replace(
+            before = "${x}",
+            after = "",
+            multiline = True,
+            regex_groups = {
+                "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
+            },
+        ),
+    ],
+)
 
 core.workflow(
     name = "protocol",
@@ -81,8 +122,8 @@ core.workflow(
         core.move("WORKSPACE.disabled", "WORKSPACE"),
         core.replace(
             before = "//sdk/python/",
-	    after = "//",
-	),
+	        after = "//",
+	    ),
         core.replace(
             before = "//sdk/python:",
             after = "//:",
@@ -99,6 +140,108 @@ core.workflow(
             regex_groups = {
                 "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
             },
+        ),
+    ],
+)
+
+core.workflow(
+    name = "site",
+    origin = git.origin(
+        url = cookiesRepo,
+        ref = cookiesBranch,
+    ),
+    destination = git.destination(
+        url = siteRepo,
+        fetch = "master",
+        push = siteBranch,
+    ),
+    origin_files = glob([
+        "site/**/*.*",
+    ]),
+    destination_files = glob([
+        "**/*.*",
+    ]),
+    authoring = authoring.pass_thru(
+        "Cookiebot <techteam+github@cookiescalifornia.com>"),
+    transformations = [
+        core.move("site/", ""),
+        core.replace(
+            before = "${x}",
+            after = "",
+            multiline = True,
+            regex_groups = {
+                "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
+            },
+        ),
+    ],
+)
+
+core.workflow(
+    name = "platform",
+    origin = git.origin(
+        url = cookiesRepo,
+        ref = cookiesLatest,
+    ),
+    destination = git.github_pr_destination(
+        url = platformHttp,
+        pr_branch = platformBranch,
+        destination_ref = platformBase,
+        title = "🏛️ OpenCannabis Update",
+        update_description = True,
+        body = "Update `platform` with the latest definitions from the [OpenCannabis Spec](https://github.com/CookiesCo/OpenCannabis).",
+        integrates = [],
+    ),
+    origin_files = glob([
+        "buf.yaml",
+        "buf.lock",
+        "OpenCannabis.buf.bin",
+        "opencannabis/*.*",
+        "opencannabis/**/*.*",
+    ], exclude = [
+        "opencannabis/core/BUILD.bazel",
+    ]),
+    destination_files = glob([
+        "opencannabis/*.*",
+        "opencannabis/**/*.*",
+    ], exclude = [
+        "opencannabis/core/BUILD.bazel",
+    ]),
+    authoring = authoring.allowed(
+        default = "Cookiebot <engineering@cookiescalifornia.com>",
+        allowlist = [
+            "sam.g@cookies.co",
+            "sam.g@cookiescalifornia.com",
+            "noah@cookies.co",
+            "noah@cookiescalifornia.com",
+            "jordan.t@cookies.co",
+            "jordan.t@cookiescalifornia.com",
+            "marvin@cookies.co",
+            "marvin@cookiescalifornia.com",
+            "engineering@cookiescalifornia.com",
+        ],
+    ),
+    transformations = [
+        metadata.save_author(),
+        metadata.expose_label("COPYBARA_INTEGRATE_REVIEW"),
+        metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = " #"),
+        core.replace(
+            before = "${x}",
+            after = "",
+            multiline = True,
+            regex_groups = {
+                "x": "(?m)^.*BEGIN-INTERNAL[\\w\\W]*?END-INTERNAL.*$\\n",
+            },
+        ),
+        core.move(before = "buf.yaml", after = "opencannabis/buf.yaml"),
+        core.move(before = "buf.lock", after = "opencannabis/buf.lock"),
+        core.move(before = "OpenCannabis.buf.bin", after = "opencannabis/OpenCannabis.buf.bin"),
+        core.move(
+            before = "opencannabis/core/datamodel.proto",
+            after = "opencannabis/core/stub/datamodel.proto",
+        ),
+        core.replace(
+            before = "import \"opencannabis/core/datamodel.proto\";",
+            after = "import \"gust/core/datamodel.proto\";",
         ),
     ],
 )

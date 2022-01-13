@@ -12,6 +12,7 @@ option objc_class_prefix = "OCS";
 option java_package = "io.opencannabis.schema.commerce";
 option java_multiple_files = false;
 option java_outer_classname = "CommercialPurchase";
+option go_package = "github.com/OpenCannabis/protocol/opencannabis/commerce";
 
 import "opencannabis/core/datamodel.proto";
 
@@ -20,7 +21,7 @@ import "opencannabis/accounting/Taxes.proto";
 import "opencannabis/commerce/Item.proto";
 import "opencannabis/commerce/Currency.proto";
 import "opencannabis/commerce/Discounts.proto";
-import "opencannabis/commerce/payments/Payment.proto";
+import "opencannabis/commerce/Payment.proto";
 
 import "opencannabis/inventory/InventoryProduct.proto";
 
@@ -122,7 +123,7 @@ message BillOfCharges {
   BillStatus status = 1;
 
   // Tax entries applied to this item or ticket.
-  repeated opencannabis.taxes.Tax tax = 2;
+  repeated opencannabis.accounting.Tax tax = 2;
 
   // Discount entries applied to this item or ticket.
   repeated opencannabis.commerce.Discount discount = 3;
