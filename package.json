@@ -55,6 +55,7 @@
     "labels": [
       "dependencies"
     ],
+    "masterIssue": true,
     "dependencyDashboard": true,
     "dependencyDashboardAutoclose": false,
     "ignoreDeps": [
