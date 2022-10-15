@@ -1,7 +1,6 @@
 version: v1
 name: buf.build/ocpx/protocol
 deps:
-  - buf.build/elide/elide:v2
   - buf.build/elide/safe-html-types:main
   - buf.build/googleapis/googleapis
 build:

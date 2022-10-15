@@ -80,28 +80,29 @@ pkg_tar(
     srcs = ["//opencannabis/%s:%s-doc" % (n, n) for n in MODULES if n not in DOC_SKIP],
 )
 
-buf_image(
-    name = "image_bin",
-    out = "OpenCannabis.buf.bin",
-    config = "//:buf.yaml",
-    protos = [
-        ":OpenCannabis",
-    ],
-)
+#buf_image(
+#    name = "image_bin",
+#    out = "OpenCannabis.buf.bin",
+#    config = "//:buf.yaml",
+#    protos = [
+#        ":OpenCannabis",
+#    ],
+#)
 
-buf_image(
-    name = "image_json",
-    out = "OpenCannabis.buf.json",
-    config = "//:buf.yaml",
-    protos = [
-        ":OpenCannabis",
-    ],
-    extra_args = [
-        "--log-level=debug",
-    ],
-)
+#buf_image(
+#    name = "image_json",
+#    out = "OpenCannabis.buf.json",
+#    config = "//:buf.yaml",
+#    protos = [
+#        ":OpenCannabis",
+#    ],
+#    extra_args = [
+#        "--log-level=debug",
+#    ],
+#)
 
-alias(
-    name = "image",
-    actual = ":image_bin",
-)
+#alias(
+#    name = "image",
+#    actual = ":image_bin",
+#)
+

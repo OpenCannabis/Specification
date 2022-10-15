@@ -46,6 +46,22 @@ http_archive(
 )
 
 http_archive(
+    name = "com_github_grpc_grpc_web",
+    strip_prefix = "grpc-web-b0ea9c7c45d6f9ea5338fc61a81b47f589a91259",
+    sha256 = "a7ae33e32b95049f11373b62019b742464576a17c602fa6b2457926749d58a1c",
+    urls = ["https://github.com/grpc/grpc-web/archive/b0ea9c7c45d6f9ea5338fc61a81b47f589a91259.tar.gz"],
+)
+
+http_archive(
+    name = "io_bazel_rules_go",
+    sha256 = "099a9fb96a376ccbbb7d291ed4ecbdfd42f6bc822ab77ae6f1b5cb9e914e94fa",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.35.0/rules_go-v0.35.0.zip",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.35.0/rules_go-v0.35.0.zip",
+    ],
+)
+
+http_archive(
     name = "io_grpc_proto",
     sha256 = "f081eba5884bf09051d27664aede4fc22bbaa77da477735d745bcef17bd088f1",
     strip_prefix = "grpc-proto-ec886024c2f7b7f597ba89d5b7d60c3f94627b17",
@@ -94,7 +110,6 @@ buildbuddy_deps()
 load("@io_buildbuddy_buildbuddy_toolchain//:rules.bzl", "buildbuddy")
 buildbuddy(name = "buildbuddy_toolchain")
 
-
 load("@gust//defs:build.bzl", "install_dependencies")
 load("@//config:build.bzl", app_dependencies = "install_dependencies")
 load("@gust//defs:config.bzl", "CHROMIUM", "FIREFOX", "SAUCE", "GRAALVM_VERSION", "GRAALVM_JDK_VERSION", "K8S_VERSION")
@@ -117,7 +132,7 @@ switched_rules_by_language(
     java = True,
     nodejs = False,
     php = False,
-    python = True,
+    python = False,
     ruby = False,
 )
 
@@ -149,6 +164,15 @@ rules_proto_dependencies()
 
 rules_proto_toolchains()
 
+#
+# Go
+#
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
+go_rules_dependencies()
+go_register_toolchains(version = "1.19.1")
+gazelle_dependencies()
 
 #
 # Extensions
@@ -168,8 +192,8 @@ http_archive(
 ## NodeJS
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "8a7c981217239085f78acc9898a1f7ba99af887c1996ceb3b4504655383a2c3c",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/4.0.0/rules_nodejs-4.0.0.tar.gz"],
+    sha256 = "c911b5bd8aee8b0498cc387cacdb5f917098ce477fb4182db07b0ef8a9e045c0",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/4.7.1/rules_nodejs-4.7.1.tar.gz"],
 )
 
 load(
@@ -386,14 +410,6 @@ stardoc_repositories()
 load("@build_stack_rules_proto//swift:deps.bzl", "swift_proto_library")
 swift_proto_library()
 
-## Go
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
-
-go_rules_dependencies()
-go_register_toolchains()
-gazelle_dependencies()
-
 ## Protoc-Gen-Doc
 load("@protoc_gen_doc//defs:deps.bzl", protoc_gen_doc_dependencies="go_dependencies")
 protoc_gen_doc_dependencies()
@@ -426,11 +442,11 @@ npm_bazel_labs_dependencies()
 ## JarJar
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-git_repository(
+http_archive(
     name = "com_github_johnynek_bazel_jar_jar",
-    shallow_since = "1594234634 -1000",
-    commit = "171f268569384c57c19474b04aebe574d85fde0d",
-    remote = "git://github.com/johnynek/bazel_jar_jar.git",
+    sha256 = "97c5f862482a05f385bd8f9d28a9bbf684b0cf3fae93112ee96f3fb04d34b193",
+    strip_prefix = "bazel_jar_jar-171f268569384c57c19474b04aebe574d85fde0d",
+    urls = ["https://github.com/OpenCannabis/bazel_jar_jar/archive/171f268569384c57c19474b04aebe574d85fde0d.tar.gz"],
 )
 
 load(
@@ -438,3 +454,4 @@ load(
     "jar_jar_repositories",
 )
 jar_jar_repositories()
+

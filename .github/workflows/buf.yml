@@ -11,14 +11,12 @@ jobs:
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
 
       # 2: Setup Buf.
-      - uses: bufbuild/buf-setup-action@v0.3.1
-        with:
-          version: '0.54.1'
-
-      # 3: Run linter.
-      - uses: bufbuild/buf-lint-action@v0.3.0
+      - uses: bufbuild/buf-setup-action@v1.8.0
         with:
           github_token: ${{ github.token }}
+
+      # 3: Run linter.
+      - uses: bufbuild/buf-lint-action@v1
 
   proto-breaking:
     runs-on: ubuntu-latest
@@ -28,16 +26,37 @@ jobs:
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
 
       # 2: Setup Buf.
-      - uses: bufbuild/buf-setup-action@v0.3.1
+      - uses: bufbuild/buf-setup-action@v1.8.0
         with:
-          version: '0.54.1'
+          github_token: ${{ github.token }}
 
       # 3: Run break detector.
-      - uses: bufbuild/buf-breaking-action@v0.3.0
+      - uses: elide-tools/buf-breaking-action@46946d7bae1edc0758ffecb6087176e7590c6488
         env:
           BUF_INPUT_HTTPS_USERNAME: ${{ github.actor }}
           BUF_INPUT_HTTPS_PASSWORD: ${{ github.token }}
         with:
-          against: 'https://github.com/CookiesCo/OpenCannabis.git#branch=dev'
+          against: 'https://github.com/OpenCannabis/Specification.git#branch=dev'
+          buf_token: ${{ secrets.BUF_TOKEN }}
+          buf_input_https_username: ${{ github.actor }}
+          buf_input_https_password: ${{ github.token }}
+
+  proto-push:
+    runs-on: ubuntu-latest
+    name: "Buf: Push"
+    needs: [proto-lint, proto-breaking]
+    steps:
+      # 1: Pull code.
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
+
+      # 2: Setup Buf.
+      - uses: bufbuild/buf-setup-action@v1.8.0
+        with:
           github_token: ${{ github.token }}
+
+      # 3: Push to BSR.
+      - name: 'Model: Push to BSR'
+        uses: bufbuild/buf-push-action@v1
+        with:
+          buf_token: ${{ secrets.BUF_TOKEN }}
 
