@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
 
       # 2: Setup Buf.
-      - uses: bufbuild/buf-setup-action@v1.8.0
+      - uses: bufbuild/buf-setup-action@ebfad693a1cf43c5a8fc187a3f6ffc9d4b5dea8f # v1.8.0
         with:
           github_token: ${{ github.token }}
 
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
 
       # 2: Setup Buf.
-      - uses: bufbuild/buf-setup-action@v1.8.0
+      - uses: bufbuild/buf-setup-action@ebfad693a1cf43c5a8fc187a3f6ffc9d4b5dea8f # v1.8.0
         with:
           github_token: ${{ github.token }}
 
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
 
       # 2: Setup Buf.
-      - uses: bufbuild/buf-setup-action@v1.8.0
+      - uses: bufbuild/buf-setup-action@ebfad693a1cf43c5a8fc187a3f6ffc9d4b5dea8f # v1.8.0
         with:
           github_token: ${{ github.token }}
 
