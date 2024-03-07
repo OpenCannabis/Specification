@@ -63,9 +63,9 @@ http_archive(
 
 http_archive(
     name = "io_grpc_proto",
-    sha256 = "f081eba5884bf09051d27664aede4fc22bbaa77da477735d745bcef17bd088f1",
-    strip_prefix = "grpc-proto-ec886024c2f7b7f597ba89d5b7d60c3f94627b17",
-    urls = ["https://github.com/grpc/grpc-proto/archive/ec886024c2f7b7f597ba89d5b7d60c3f94627b17.tar.gz"],
+    sha256 = "e60b558cd2589f3ca34b986ee4c86199654d8e4003012f2130a816c7ee562ce4",
+    strip_prefix = "grpc-proto-4f245d272a28a680606c0739753506880cf33b5f",
+    urls = ["https://github.com/grpc/grpc-proto/archive/4f245d272a28a680606c0739753506880cf33b5f.tar.gz"],
 )
 
 http_archive(
