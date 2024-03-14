@@ -90,9 +90,9 @@ http_archive(
 
 http_archive(
     name = "io_buildbuddy_buildbuddy_toolchain",
-    sha256 = "a97a87d72417dc4ddd5b434ed4eef6a09fcf7b1a3e87087e3814f50a7c5762d8",
-    strip_prefix = "buildbuddy-toolchain-b2f5e7e3b126c6d7cf243227147478c0959bfc95",
-    urls = ["https://github.com/buildbuddy-io/buildbuddy-toolchain/archive/b2f5e7e3b126c6d7cf243227147478c0959bfc95.tar.gz"],
+    sha256 = "9a085ec1abdc43e82d69042a0e4c81a29df18f95a292d2a818cc9a8ec7356b8b",
+    strip_prefix = "buildbuddy-toolchain-397181ba536cb86d1cf08b54f46483299404bd31",
+    urls = ["https://github.com/buildbuddy-io/buildbuddy-toolchain/archive/397181ba536cb86d1cf08b54f46483299404bd31.tar.gz"],
 )
 
 (local_repository(
