@@ -33,9 +33,9 @@ http_archive(
 
 http_archive(
     name = "com_google_googleapis",
-    sha256 = "113e285e443ad73f70b6fda89aae93abb987b30d8ccb3f80cdef31ee3a42444a",
-    strip_prefix = "googleapis-aa15f328736501d01fac1d599655c392b5b12a3c",
-    urls = ["https://github.com/googleapis/googleapis/archive/aa15f328736501d01fac1d599655c392b5b12a3c.tar.gz"],
+    sha256 = "f2f96521fe70ef3f6dc4d3981260061834d2af9d3139abaf4b2e97fc19dcfc82",
+    strip_prefix = "googleapis-d10780874de182326e198aaf25f575bdb88d0d2f",
+    urls = ["https://github.com/googleapis/googleapis/archive/d10780874de182326e198aaf25f575bdb88d0d2f.tar.gz"],
 )
 
 http_archive(
